@@ -1,0 +1,30 @@
+[28-Jan-2024 12:28:47 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bashoroon'@'localhost' (using password: YES) in /home/httpschy/public_html/admin/classes/class.php:21
+Stack trace:
+#0 /home/httpschy/public_html/admin/classes/class.php(21): mysqli->__construct('localhost', 'bashoroon', 'foyetola', 'local_db')
+#1 /home/httpschy/public_html/admin/classes/class.php(10): Chyfley->connectDatabase()
+#2 /home/httpschy/public_html/admin/add-gallery.php(5): Chyfley->__construct()
+#3 {main}
+  thrown in /home/httpschy/public_html/admin/classes/class.php on line 21
+[31-Jan-2024 13:42:18 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/httpschy/public_html/admin/add-event.php:1) in /home/httpschy/public_html/admin/classes/class.php on line 314
+[03-Feb-2024 07:44:55 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/httpschy/public_html/admin/head.php:1) in /home/httpschy/public_html/admin/classes/class.php on line 94
+[03-Feb-2024 07:48:01 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/httpschy/public_html/admin/head.php:1) in /home/httpschy/public_html/admin/classes/class.php on line 94
+[03-Feb-2024 07:50:13 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/httpschy/public_html/admin/head.php:1) in /home/httpschy/public_html/admin/classes/class.php on line 94
+[03-Feb-2024 07:52:48 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/httpschy/public_html/admin/head.php:1) in /home/httpschy/public_html/admin/classes/class.php on line 94
+[03-Feb-2024 07:54:44 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/httpschy/public_html/admin/head.php:1) in /home/httpschy/public_html/admin/classes/class.php on line 94
+[03-Feb-2024 07:57:34 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/httpschy/public_html/admin/head.php:1) in /home/httpschy/public_html/admin/classes/class.php on line 94
+[03-Feb-2024 08:01:54 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/httpschy/public_html/admin/head.php:1) in /home/httpschy/public_html/admin/classes/class.php on line 94
+[03-Feb-2024 10:37:09 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/httpschy/public_html/admin/add-blog.php:1) in /home/httpschy/public_html/admin/classes/class.php on line 560
+[03-Feb-2024 10:45:55 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/httpschy/public_html/admin/add-event.php:1) in /home/httpschy/public_html/admin/classes/class.php on line 314
+[03-Feb-2024 15:44:51 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/httpschy/public_html/admin/add-event.php:1) in /home/httpschy/public_html/admin/classes/class.php on line 314
+[03-Feb-2024 17:49:25 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/httpschy/public_html/admin/add-blog.php:1) in /home/httpschy/public_html/admin/classes/class.php on line 560
+[05-Feb-2024 20:25:07 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/httpschy/public_html/admin/head.php:1) in /home/httpschy/public_html/admin/classes/class.php on line 502
+[05-Feb-2024 20:25:52 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/httpschy/public_html/admin/head.php:1) in /home/httpschy/public_html/admin/classes/class.php on line 502
+[05-Feb-2024 20:31:11 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/httpschy/public_html/admin/add-event.php:1) in /home/httpschy/public_html/admin/classes/class.php on line 396
+[05-Feb-2024 20:31:28 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/httpschy/public_html/admin/add-event.php:1) in /home/httpschy/public_html/admin/classes/class.php on line 396
+[05-Feb-2024 20:33:07 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/httpschy/public_html/admin/add-event.php:1) in /home/httpschy/public_html/admin/classes/class.php on line 314
+[05-Feb-2024 20:42:46 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/httpschy/public_html/admin/add-event.php:1) in /home/httpschy/public_html/admin/classes/class.php on line 313
+[05-Feb-2024 20:44:32 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/httpschy/public_html/admin/add-event.php:1) in /home/httpschy/public_html/admin/classes/class.php on line 314
+[05-Feb-2024 21:02:12 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/httpschy/public_html/admin/add-event.php:1) in /home/httpschy/public_html/admin/classes/class.php on line 396
+[05-Feb-2024 21:04:16 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/httpschy/public_html/admin/add-event.php:1) in /home/httpschy/public_html/admin/classes/class.php on line 314
+[05-Feb-2024 21:08:31 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/httpschy/public_html/admin/add-event.php:1) in /home/httpschy/public_html/admin/classes/class.php on line 314
+[05-Feb-2024 21:10:14 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/httpschy/public_html/admin/add-event.php:1) in /home/httpschy/public_html/admin/classes/class.php on line 314
