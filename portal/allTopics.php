@@ -49,7 +49,7 @@ $subject = $_GET['subject'];
                             
                                           <?php $sqlTopic= $conn->query("select * from enote where session='$session' and term='$term' and class='$class' and subject='$subject'");
                                while ($topic = mysqli_fetch_array($sqlTopic)){?>
-                                                    <div> <a href="viewEditEnote.php?noteid=<?php print $topic['id'];?>"><?php print $topic['topic'];?></a></div><?php }?>
+                                                    <div> <a href="<?php print $topic['pdf_path'];?>" target="_blank"><?php print $topic['topic'];?></a></div><?php }?>
                                                     
                                                 
                                                     
