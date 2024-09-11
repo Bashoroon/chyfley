@@ -50,7 +50,7 @@
                                 <?php
                                 date_default_timezone_set("Africa/Lagos");
                                 $today = date("Y-m-d H:i:s");
-                                $sqlQues = $conn->query("select * from questionbank where session='$session' and term='$term' and class='$class' group by subject");
+                                $sqlQues = $conn->query("select * from questionbank where session='$session' and term='$term' and class='$class' and exam_type='".$_GET['examType']."' group by subject");
                                 while ($ques = mysqli_fetch_array($sqlQues)) {
                                     $status = $ques['status'];
                                     $startDate = $ques['startDate'];
@@ -59,14 +59,14 @@
                                 <div>
                                     <?php print $ques['subject']; ?>
                                     <?php if ($status == 'opened' & $today > $startDate & $today < $endDate) { ?>
-                                        <a href="viewExamQues.php?session=<?php print $ques['session']; ?>&term=<?php print $ques['term']; ?>&class=<?php print $ques['class']; ?>&subject=<?php print $ques['subject']; ?>" target="_blank">
+                                        <a href="viewExamQues.php?session=<?php print $ques['session']; ?>&term=<?php print $ques['term']; ?>&class=<?php print $ques['class']; ?>&subject=<?php print $ques['subject']; ?>&examType=<?php print $ques['exam_type']; ?>" target="_blank">
                                             <button class="btn btn-success">VIEW QUESTIONS</button>
                                         </a>
                                     <?php } elseif ($status == 'pending') { ?>
                                         <button disabled="disabled" class="btn btn-danger">PENDING</button>
                                     <?php } ?>
                                      <?php  if ($status == 'correction') { ?>
-                                   <a href="cbtCorrection.php?session=<?php print $ques['session']; ?>&term=<?php print $ques['term']; ?>&class=<?php print $ques['class']; ?>&subject=<?php print $ques['subject']; ?>" target="_blank">
+                                   <a href="cbtCorrection.php?session=<?php print $ques['session']; ?>&term=<?php print $ques['term']; ?>&class=<?php print $ques['class']; ?>&subject=<?php print $ques['subject']; ?>&examType=<?php print $ques['exam_type']; ?>" target="_blank">
                                             <button class="btn btn-primary">VIEW CORRECTION</button>
                                         </a>
                                 <?php } ?>
@@ -144,10 +144,10 @@
             $('form').parsley();
         });
     </script>
-    <?php include '../portal/footer.php'; ?>
+    <?php include 'footer.php'; ?>
 
 </body>
-<?php include '../portal/modal.php'; ?>
+<?php include 'modal.php'; ?>
 
 </html>
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
+

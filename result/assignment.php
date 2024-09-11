@@ -1,21 +1,25 @@
+<?php include 'db.php';
+error_reporting(E_ALL);
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
-<?php include 'db.php';
-?>
+
 <head>
-    <?php include 'header.php';
+    <?php require 'header.php'; ?>
+</head>
+<?php
 
 $findUserName= $conn->query("select * from studentusers where admissionNo ='$user'");
 
 $usernName= mysqli_fetch_array($findUserName);
     ?>
-   </head>
 
 <body>
 
     
-
+<?php require 'nav.php'; ?>
     <div class="wrapper">
         <div class="container-fluid">
             <!-- Page-Title -->
@@ -90,8 +94,8 @@ $usernName= mysqli_fetch_array($findUserName);
                            
                                 <input type="" disabled="disabled" name="name" value="<?php print $usernName['surname'];?> <?php print $usernName['firstName'];?> <?php print $usernName['lastName'];?>" class="form-control" placeholder="input your name" >
                                 <input type="hidden"  name="name" value="<?php print $usernName['surname'];?> <?php print $usernName['firstName'];?> <?php print $usernName['lastName'];?>" class="form-control" placeholder="input your name" >
-                                <textarea id="elm1" name="message" ></textarea>
-                                <button type="submit" name="submit">Submit</button>
+                                <textarea id="elm1" name="message" ></textarea><br>
+                                <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                           
                         </div>
                     </div>
@@ -111,8 +115,8 @@ $usernName= mysqli_fetch_array($findUserName);
     <!-- end wrapper -->
 
     <!-- Footer -->
-   <?php include '../excel/footer.php';?>
-    <script src="../excel/plugins/tinymce/tinymce.min.js"></script>
+   <?php include 'footer.php';?>
+    <script src="../portal/plugins/tinymce/tinymce.min.js"></script>
     <script>
         $(document).ready(function () {
             if($("#elm1").length > 0){

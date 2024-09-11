@@ -133,8 +133,8 @@ error_reporting(E_ERROR);
         <!-- end container-fluid -->
     </div>
     <!-- end wrapper -->
- <?php require '../portal/footer.php';?>
-   <?php require '../portal/modal.php';?>
+ <?php require 'footer.php';?>
+   <?php require 'modal.php';?>
     <!-- Footer -->
  
 

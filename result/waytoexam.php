@@ -45,7 +45,7 @@ error_reporting(E_ALL);
                             <div class="row">
                                 
                                    
-                                <div class="col-4">
+                            <div class="col-lg-3 col-12 col-md-12 col-sm-12 ">
                                     <div class="form-group">
                                         <label class="control-label">Session</label>
                                      <select id="demo1" readonly type="text" required="required" value="" class="form-control" name="session">
@@ -60,7 +60,7 @@ error_reporting(E_ALL);
 
                                     </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-lg-3 col-12 col-md-12 col-sm-12 ">
                                     <div class="form-group">
                                         <label class="control-label">Class</label>
                                         <select id="demo1" type="text" readonly required="required" value="" class="form-control" name="class">
@@ -76,7 +76,7 @@ error_reporting(E_ALL);
                                 </div>
 
                                 
-                         <div class="col-4">
+                                <div class="col-lg-3 col-12 col-md-12 col-sm-12 ">
                              <div class="form-group">
                                  <label class="control-label">Term</label>
                                  <select id="demo1" type="text" required="required" value="" class="form-control" name="term">
@@ -91,6 +91,19 @@ error_reporting(E_ALL);
                           
                          </div>
                      </div>
+                     <div class="col-lg-3 col-12 col-md-12 col-sm-12 ">
+                            <div class="form-group">
+                                 <label class="control-label">Exam type</label>
+                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="examType">
+                                 <option value="">Select a exam type</option>
+                                    
+                                    <option value="First">First Test</option>
+                                    <option value="Second">Second Test</option>
+                                    <option value="Exam">Exam</option>
+                                 </select>
+
+                             </div>
+                            </div>
 
                             </div>
                             <button type="submit" class="btn btn-primary" style="float: right;">Go to Exam Room</button>

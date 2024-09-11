@@ -14,6 +14,6 @@ $sqlPromote=  $conn->query("insert into promotedstudent(session, class, admissio
 
 }
 }
-header("location: promote-student.php?session=$session&class=$class");
+header("location: promote-student.php?session=$session&class=$class&load-student");
  
 ?>

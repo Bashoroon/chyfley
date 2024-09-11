@@ -1,21 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<?php include 'db.php';?>
-<head>
-    <?php include 'header.php';?>
-
-</head>
+<?php include 'call_php_function.php';
+include 'header.php'; ?>
 
 <body>
 
-  <?php include 'navigationMenu.php';?>
+    <?php include 'navigationMenu.php'; ?>
 
     <div class="wrapper">
         <div class="container-fluid">
             <!-- Page-Title -->
             <div class="page-title-box">
                 <div class="row align-items-center">
-                   
+
                 </div>
                 <!-- end row -->
             </div>
@@ -30,27 +25,42 @@
 
                             <table id="teacher-detail" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
-                                <tr>
-                                    <th>Full Name</th>
-                                    <th>Username</th>
-                                    <th>Password</th>
-                                    <th>Role</th>
-                                    <th>delete</th>
-                                    
-                                </tr>
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>Full Name</th>
+                                        <th>Username</th>
+                                        <th>Password</th>
+                                        <th>Role</th>
+                                        <th>Action</th>
+
+                                    </tr>
                                 </thead>
 
-<?php $selectTeacher = $conn->query ("select * from users where status='1'");?>
+                                
                                 <tbody>
-                               <?php while ($teacher = mysqli_fetch_array($selectTeacher)){;?>
-                                <tr>
-                                    <td><?php print $teacher['name'];?></td>
-                                    <td><?php print $teacher['username'];?></td>
-                                    <td><?php print $teacher['password'];?></td>
-                                    <td><?php print $teacher['role'];?></td>
-                                   <td><button class="bg-danger"><a href="deleteTeacher.php?id=<?php print $teacher['id']; ?>" onclick="return confirmation()">Delete</a></button><button ><a href="modifyTeacher.php?id=<?php print $teacher['id']; ?>">Edit</a></button></td>
-                                </tr>
-                               <?php }?>
+                                    <?php 
+                                        $no = 1;
+                                    foreach ($staffs as $staff) {?>
+                                        
+                                        <tr>
+                                            <td><?php print $no++;?></td>
+                                            <td><?php print $staff['name']; ?></td>
+                                            <td><?php print $staff['username']; ?></td>
+                                            <td><?php print $staff['password']; ?></td>
+                                            <td><?php print $staff['role']; ?></td>
+                                            <td>
+                                                <div class="btn-group mso-mb-2">
+                                                    <a href="modifyTeacher.php?id=<?php print $staff['id']; ?>"> <button type="button" title="Edit profile" class="btn btn-primary waves-light waves-effect"><i class="fa fa-edit"></i></button></a>
+                                                    <?php if ($role == "Admin") { ?>
+                                                        <form action="" method="POST">
+                                                            <input type="hidden" name="id" value="<?php print $staff['id']; ?>">
+                                                            <button type="submit" class="btn btn-primary waves-light waves-effect delete" title="Delete" name="delete-staff" onclick="return confirmation()"><i class="far fa-trash-alt"></i></button>
+                                                        </form>
+                                                    <?php } ?>
+                                                </div>
+                                              
+                                        </tr>
+                                    <?php } ?>
                                 </tbody>
                             </table>
 
@@ -59,7 +69,7 @@
                 </div> <!-- end col -->
             </div> <!-- end row -->
 
-           
+
 
         </div>
         <!-- end container-fluid -->
@@ -67,13 +77,13 @@
     <!-- end wrapper -->
 
     <!-- Footer -->
-   <?php include 'footer.php';
-   include 'modal.php';
-   ?>
+    <?php include 'footer.php';
+    include 'modal.php';
+    ?>
 </body>
 <script type="text/javascript">
     function confirmation() {
-      return confirm('Are you sure you want to do this?');
+        return confirm('Are you sure you want to do this?');
     }
 </script>
 

@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "bashoroon"; // Replace with your actual MySQL username
 $password = "foyetola"; // Replace with your actual MySQL password
-$db = "local_db";
+$db = "tenderst_db";
 $conn = mysqli_connect($servername, $username, $password, $db);
 
 // Check connection

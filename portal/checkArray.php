@@ -16,13 +16,15 @@ function check($complete, $incomplete) {
 $incomplete = ['c', 'b'];
 $complete = ['a', 'b', 'd'];
 
-var_dump(check($complete, $incomplete));
+//var_dump(check($complete, $incomplete));
 
 
 
 function sortByLastCharater($sentence){
 
     $break = explode(" ", $sentence);
+
+    $result = [];
 
     foreach ($break as $aword ) {
     //    print $aword. '</br>';
@@ -31,14 +33,14 @@ function sortByLastCharater($sentence){
     $lowerChar = strtolower($aword);
        $lastchar = substr($lowerChar, -1);
        
+       $result[$lastchar][] = $aword;
        // convert t
-       print_r($lastchar. '</br>');
-      
+      // print_r($result. '</br>');
 
-     
-       
 
     }
+    ksort($result);
+    print_r($result). '<br>';
 
     // You are tasked  with creating function sortByLastCharater which take a string agreement and returns the array of the words in that strings, sorted aphabetically by the final character in eacch word. You should be sure to convert the word into lowercase to ensure accurate sorting. However, the return array should show the actual capitailization that appeared on the original string. if two words have the same letter, the array should show them in order they appear. Must be done in php
 
@@ -47,7 +49,7 @@ function sortByLastCharater($sentence){
      
 }
 
-echo sortByLastCharater('I am a man');
+//echo sortByLastCharater('I am a man');
 
 
 
@@ -63,7 +65,7 @@ function addNumber($n) {
     return ' = '.$total;
    
 }
-echo addNumber(4). '<br><br>';
+//echo addNumber(4). '<br><br>';
 
 //multiplication
 
@@ -72,15 +74,32 @@ function multiplication($n, $x)  {
     for ($i=1; $i <= $x; $i++) { 
        $answer = $n * $i. '<br>';
 
-       print $n. ' * ' .$i. ' = ' .$answer;
+       $result = $n. ' * ' .$i. ' = ' .$answer;
+
+       print $result;
        
     }
     
+   
 }
 
-echo multiplication(4, 12);
+//echo multiplication(4, 12);
+
+function division( $b, $a = null ) : bool {
+   
+    $answer = "";
+    if (division($b) === '0') {  
+        $answer .= $a / $b;
+        return true; 
+        
+    }
+   
+    return false;
 
 
+
+}
+var_dump(division(2, 0));
 // Almighty Formular
 
 function almighty($a, $b, $c) {
@@ -107,10 +126,10 @@ function almighty($a, $b, $c) {
    $x = $xFourthEquation; 
    $y = $yFourthEquation;
 
-   print $x. ' and ' .$y;  // final to both root; 
+   return $x. ' and ' .$y;  // final to both root; 
 
 }
-echo almighty(1,-4,4). '<br>';
+//echo almighty(1,-4,-13). '<br>';
 
 function grading($grades) {
     foreach ($grades as $grade){
@@ -145,7 +164,7 @@ function grading($grades) {
     
 }
 $grades = [75, 70, 65, 69, 64, 60, 55, 59, 54, 50, 30];
-echo grading($grades);
+//echo grading($grades);
 // store the scores of student in a variable
 
 // if scores is greater than or equal to 75, Print A
@@ -159,6 +178,96 @@ echo grading($grades);
 
 
 
-// 
+// 1. Initialize an empty array to store the reversed elements.
+$originalArrays = [1, 2, 3, 4, 7];
+$newArr = array();
+
+// 2. Loop through the original array from the last element to the first element.
+  for ($i= count($originalArrays) - 1; $i >= 0 ; $i--) { 
+      // print $i;
+       $newArr[] = $originalArrays[$i];
+// 3. In each iteration, add the current element to the beginning of the new array.
+
+// 4. After the loop finishes, the new array will contain the elements of the original array in reverse order.
+  }
+  //print_r($newArr);
+  //print_r($originalArrays);
+
+   // Create a function that has two parameters.  The first parameter store the original value
+    // the second parameter store the division by 2 
+    function even($values, $dividedBy){
+    // loop through the original value($value)
+    foreach($values as $value){
+    // in each iteration divide by 2($dividedBy)
+    $division = $value / $dividedBy;
+    // hold the value/answer of the division by two
+    // check if the value has no decimal.
+    if(strpos($division, ".") == false){
+       // print only those with no value 
+        print $value. ' = ' .$value / $dividedBy. '<br>';
+    }
+        
+    }
+}
+//echo even([1,3,4,6,7,8], 2);
+
+// $originalArray = [1, 3, 4, 6, 7, 8, 20];
+// $evenIndicesArray = array();
+
+// for ($i = 0; $i < count($originalArray); $i++) {
+//     print $originalArray;
+//     if ($i % 2 !== 0) {
+//         $evenIndicesArray[] = $originalArray[$i];
+//     }
+// }
+// print_r($evenIndicesArray);
+
+function subarray($parentArray, $subarray){
+    $newArr = array();
+    // Firstly loop through the original array
+    for ($i=0; $i < count($parentArray) ; $i++) { 
+    // Second loop the subarray in between the original array 
+      for ($j=0; $j < count($subarray) ; $j++) { 
+        // Now compare the elements in the two arrays
+        if ($subarray[$j] == $parentArray[$i]) {
+        // Then print those elements that are the same in the two arrays
+           // print $subarray[$j]. ' = ' .$parentArray[$i]. ' -> ' .$i. '<br>';
+           $newArr[]  = $i;
+           
+        }
+        
+      }
+    }
+    return $newArr;
+}
+//$parentArray = ['lawal','king','good','best'];
+//$subarray =['best','lawal'];
+//print_r(subarray($parentArray, $subarray));
+
+function display_testing_contributors() {
+    // Check if the ACF function exists
+    if( function_exists('get_field') ) {
+        // Get the relationship field
+        $testing_contributor = get_field('testing_contributor');
+
+        // Check if there are contributors
+        if( $testing_contributor ) {
+            $output = '<div class="testing-contributor"><h3>Testing Contributors</h3><ul>';
+
+            foreach( $testing_contributor as $contributor ) {
+                // Get contributor's name and link
+                $contributor_name = get_the_title($contributor->ID);
+                $contributor_link = get_permalink($contributor->ID);
+
+                $output .= '<li><a href="' . esc_url($contributor_link) . '">' . esc_html($contributor_name) . '</a></li>';
+            }
+
+            $output .= '</ul></div>';
+            return $output;
+        }
+    }
+    return '';
+}
+add_shortcode('testing_contributors', 'display_testing_contributors');
 
 ?>

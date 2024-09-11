@@ -1,16 +1,6 @@
+<?php include 'call_php_function.php';
+ include 'header.php';?>
 
-<?php include 'db.php';?>
-<?php session_start();
-  $user = $_SESSION['username'];
-   
-  
-if (!isset($_SESSION['username'])){;
-   header('location:login.php');   
-}?><!DOCTYPE html>
-<html lang="en">
-<head>
-   <?php include 'header.php';?>
-</head>
 
 <body>
 

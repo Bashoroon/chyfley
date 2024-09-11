@@ -1,4 +1,5 @@
-<?php include 'header.php'; ?>
+<?php include 'call_php_function.php';
+ include 'header.php';?>
 <style type="text/css">
     textarea {
         -webkit-user-select: none;

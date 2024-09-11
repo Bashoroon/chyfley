@@ -1,35 +1,84 @@
-<?php include 'header.php';?>
+<?php include 'call_php_function.php';
+include 'header.php';
+?>
 <body>
 
 <?php include 'navigationMenu.php';
 
  ?>
     <!-- header-bg -->
-<?php 
-$session = $_GET['session'];
-$class = $_GET['class'];
-$term = $_GET['term'];
-?>
     <div class="wrapper">
         <div class="container-fluid">
             <!-- Page-Title -->
+             <?php if (isset($_GET['session'])) {?>
             <div class="page-title-box">
                 <div class="row align-items-center">
                     <div class="col-sm-6">
-                        <h4 class="page-title"><?php print $class;?> STUDENTS</h4>
+                        <h4 class="page-title"><?php print $_GET['class'];?> STUDENTS</h4>
                     </div>
 
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-right">
-                            <h5 class="breadcrumb-item"><a href="javascript:void(0);"><?php print $session;?></a></h5>
+                            <h5 class="breadcrumb-item"><a href="javascript:void(0);"><?php print $_GET['session'];?></a></h5>
                            
                         </ol>
                     </div>
                 </div>
                 <!-- end row -->
             </div>
+            <?php }?>
 
-                              
+            <form  action="clearance.php" method="GET">
+               
+               <div class="row">
+               <div class="col-lg-4 col-12 col-md-12 col-sm-12 col-xm-12">
+                       <div class="form-group">
+                           <label class="control-label">Session</label>
+                           <select id="sessionSelect" type="text" required="required" value="" class="form-control" name="session">
+                               <option value="">Select a session</option>
+                               <?php foreach($sessions as $session){?>
+                                   <option value="<?php print $session['session']; ?>"><?php print $session['session']; ?></option>
+                               <?php } ?>
+                           </select>
+
+                       </div>
+                   </div>
+               
+              
+                   <div class="col-lg-4 col-12 col-md-12 col-sm-12 col-xm-12">
+                       <div class="form-group">
+                           <label class="control-label">Class</label>
+                           <select id="classSelect" type="text" required="required" a value="" class="form-control" name="class">
+                               <option value="">Select a class</option>
+                               <?php foreach($classes as $class){?>
+                                   <option value="<?php print $class['class']; ?>"><?php print $class['class']; ?></option>
+                               <?php } ?>
+                           </select>
+
+                       </div>
+                   </div>
+                   <div class="col-lg-4 col-12 col-md-12 col-sm-12 col-xm-12">
+                         <div class="form-group">
+                             <label class="control-label">Term</label>
+                                  <select id="demo1" type="text" required="required" value="" class="form-control" name="term">
+                                        <option value="">Select a term</option>
+
+                                        <option value="First">First Term</option>
+                                        <option value="Second">Second Term</option>
+                                        <option value="Third">Third Term</option>
+
+                                    </select>
+
+                            </div>
+                    </div>
+               </div>
+               <div class="row">
+                   <div class="col-12">
+                       <button class="btn btn-primary" name= "load-student" style="float: right;" id="submit" class="btn-submit">Load Student</button>
+
+                   </div>
+               </div>
+            </form>     
 
             <div class="row">
                 <div class="col-12">
@@ -56,40 +105,36 @@ $term = $_GET['term'];
                                     <?php
                                     if (isset($_GET['session']) and isset($_GET['class'])) {
 
-
-                                        $sqlstudentz = $conn->query("SELECT * FROM promotedstudent WHERE session = '$session' AND class = '$class' and deleteStatus != 1");
-
                                     ?>
 
                                         <tbody>
                                             <form action="processClearance.php" method="POST">
                                                 <?php
-                                                while ($studentz = mysqli_fetch_array($sqlstudentz)) {
-                                                    $admissionNo = $studentz['admissionNo'];
-
+                                               $no = 1;
+                                                foreach( $students as $student){
+                                                
                                                     // Check if the student is in the clearance table
-                                                    $sqlStudentFound = $conn->query("SELECT * FROM clearance WHERE session = '$session' AND class = '$class' AND term = '$term' AND admissionNo = '$admissionNo'");
+                                                    $sqlStudentFound = $conn->query("SELECT * FROM clearance WHERE session = '".$student['session']."' AND class = '".$student['class']."' AND term = '".$_GET['term']."' AND admissionNo = '".$student['admissionNo']."'");
                                                     $foundStudent = mysqli_num_rows($sqlStudentFound);
 
                                                     // If the student is not found in the clearance table, display them
                                                     if ($foundStudent == 0) {
-                                                        $sqlName = $conn->query("SELECT * FROM studentusers WHERE admissionNo = '$admissionNo'");
-                                                        $name = mysqli_fetch_array($sqlName); ?>
+                                                        $studentName = $studentController->student_name($student['admissionNo']); ?>
                                                         <tr>
 
 
 
                                                             <td>
-                                                                <?php print $studentz['admissionNo']; ?>
+                                                                <?php print $student['admissionNo']; ?>
                                                             </td>
                                                             <td>
-                                                                <?php print $name['surname']; ?> <span>
-                                                                    <?php print $name['firstName']; ?>
+                                                                <?php print $studentName['surname']; ?> <span>
+                                                                    <?php print $studentName['firstName']; ?>
                                                                 </span> <span>
-                                                                    <?php print $name['lastName']; ?>
+                                                                    <?php print $studentName['lastName']; ?>
                                                                 </span>
                                                             </td>
-                                                            <td><input type="checkbox" name="id[]" value="<?php print $studentz['admissionNo']; ?>">
+                                                            <td><input type="checkbox" name="id[]" value="<?php print $student['admissionNo']; ?>">
                                                             </td>
 
 
@@ -101,7 +146,9 @@ $term = $_GET['term'];
 
                                             <?php }
                                                 }
-                                            } ?>
+                                            } else{
+                                                print "<h6 style='color:red;'>Please choose session and class to clear students</h6>";
+                                            } ?> 
 
                                         </tbody>
                                 </table>
@@ -110,9 +157,9 @@ $term = $_GET['term'];
                     </div>
                 </div> <!-- end col -->
             </div> <!-- end row -->  
-            <input type="hidden" value="<?php print $session;?>" name="session">
-             <input type="hidden" value="<?php print $term;?>" name="term">
-              <input type="hidden" value="<?php print $class;?>" name="class">
+            <input type="hidden" value="<?php print $_GET['session'];?>" name="session">
+             <input type="hidden" value="<?php print $_GET['term'];?>" name="term">
+              <input type="hidden" value="<?php print $_GET['class'];?>" name="class">
              
                               </div>        
                                <button style="margin-left: 300px;" class="btn btn-primary" type="submit">Clear Student</button>

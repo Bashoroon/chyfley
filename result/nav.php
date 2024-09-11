@@ -31,11 +31,11 @@
                                 <div class="dropdown notification-list nav-pro-img">
                                     <a class="dropdown-toggle nav-link arrow-none nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                                            <input type="hidden" name="id" value="<?php print $_SESSION['admissionNo'];?>">
-                                        <?php if($student['passport'] == ""){?><img src="../portal/passport/images.jfif"  alt="" class="rounded-circle"><?php }else{?><img srcset="../portal/passport/<?php print $student['passport'];?>"  alt=""  class="rounded-circle"><?php } ?>
+                                        <?php if($student['passport'] == ""){?><img src="https://portal.chyfleyschools.com.ng/passport/images.jfif"  alt="" class="rounded-circle"><?php }else{?><img srcset="https://portal.chyfleyschools.com.ng/passport/<?php print $student['passport'];?>"  alt=""  class="rounded-circle"><?php } ?>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                         <!-- item-->
-                                        <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle"></i> Profile</a>
+                                        <a class="dropdown-item" href="myProfile.php"><i class="mdi mdi-account-circle"></i> Profile</a>
                                        
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item text-danger" href="logout.php"><i class="mdi mdi-power text-danger"></i> Logout</a>
@@ -89,9 +89,9 @@
                                         <ul>
                                            <!-- <li><a href=""class=" waves-effect waves-light" data-toggle="modal" data-target=".uploadbroadsheet">Broad Sheet </a></li>
                                              <li><a href=""class=" waves-effect waves-light" data-toggle="modal" data-target=".uploadresultsheet">Result Sheet </a></li><!-->
-                                             <li><a href="" class=" waves-effect waves-light " data-toggle="modal" data-target=".checkresult">Check Result</a></li>
+                                             <li><a href="myReportSheet.php" class=" waves-effect waves-light " >Check Result</a></li>
                                               <li><a href="assignment.php" class=" waves-effect waves-light ">Check Assignment</a></li>
-                                              <li><a href="" class=" waves-effect waves-light " data-toggle="modal" data-target=".checkQuestion">Examination/CBT</a></li>
+                                              <li><a href="waytoexam.php" class=" waves-effect waves-light " >Examination/CBT</a></li>
                                               <li><a href="" class=" waves-effect waves-light " data-toggle="modal" data-target=".lesson">Take a Lesson</a></li>
                                                <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".comment">My bills</a></li>
                                               

@@ -1,4 +1,5 @@
-<?php include 'header.php';?>
+<?php include 'call_php_function.php';
+include 'header.php'; ?>
 <style type="text/css">
   table.minimalistBlack {
     border: 3px solid #000000;
@@ -106,7 +107,7 @@ $sqlSelectz = $conn->query ("select * from studentscores where admissionNo ='$ad
 
   while($results = mysqli_fetch_array($sqlSelectz)){
        $chartSubject  .= "'".substr($results["subject"], 0, 6)."', ";
-       $chartScore  .=  $results["test"] + $results["exam"].", ";
+       $chartScore  .=  $results["test"] + $results['test_two'] + $results["exam"].", ";
       
   }?>
         
@@ -195,7 +196,7 @@ $sqlSelectz = $conn->query ("select * from studentscores where admissionNo ='$ad
     $sqlStudentName =  $conn->query("SELECT * from studentusers where admissionNo = '$admissionNo'");
  
                    $student = mysqli_fetch_array($sqlStudentName);
- $sqlTotalTest = $conn->query("SELECT  sum(test) as totalTest from studentscores where session = '$session' and term = '$term' and admissionNo='$admissionNo' ");
+ $sqlTotalTest = $conn->query("SELECT  sum(test+test_two) as totalTest from studentscores where session = '$session' and term = '$term' and admissionNo='$admissionNo' ");
 
                                                       $sqlTotalExam = $conn->query("SELECT  sum(exam) as totalExam from studentscores  where session = '$session' and term = '$term' and class='$class'  and admissionNo='$admissionNo' ");
 
@@ -292,9 +293,9 @@ $principalSignature = mysqli_fetch_array($sqlPrincipalSignature);
                             <tr>
 
                               <td style="width: 15%;"><?php print $result['subject'];?></td>
-                              <td style="width: 1%;"><?php print $result['test'];?></td>
+                              <td style="width: 1%;"><?php print $result['test'] + $result['test_two'];?></td>
                               <td style="width: 1%;"><?php print $result['exam'];?></td>
-                              <td style="width: 1%;"><?php print $result['test'] + $result['exam'] ;?></td>
+                              <td style="width: 1%;"><?php print $result['test'] + $result['test_two'] + $result['exam'] ;?></td>
 
                               <?php if ($grade >= 70): ?>
                               <td style="width: 1%;">A</td>
@@ -333,7 +334,7 @@ $principalSignature = mysqli_fetch_array($sqlPrincipalSignature);
                             </tr>
                             <?php
 
-                                                      $sqlTotalTest = $conn->query("SELECT  sum(test) as totaltest from studentscores  where session = '$session' and term = '$term' and class='$class'  and admissionNo='$admissionNo' ");
+                                                      $sqlTotalTest = $conn->query("SELECT  sum(test+test_two) as totaltest from studentscores  where session = '$session' and term = '$term' and class='$class'  and admissionNo='$admissionNo' ");
                                                        $sqlTotalExam = $conn->query("SELECT  sum(exam) as totalexam from studentscores  where session = '$session' and term = '$term' and class='$class'  and admissionNo='$admissionNo' ");
                                                        $totalTest = mysqli_fetch_assoc($sqlTotalTest);
                                                          $totalExam = mysqli_fetch_assoc($sqlTotalExam);
@@ -381,7 +382,7 @@ $principalSignature = mysqli_fetch_array($sqlPrincipalSignature);
                                                 $poor = "A poor performance";
                                           ?>
                                           <?php if($term !== "Third"){?>
-                          <div class="col-8"> <b>Principal's Comment:</b> <i style=""><?php if ($percentage >= 70){ print $excellent;}elseif($percentage >= 60  ){ print $very_good;}elseif ($percentage >= 50 ) { print $average;}elseif ($percentage >= 40 ) {print $fair;}elseif ($percentage >= 30 ) { print $poor;}?></i></div><?php }else{?>   <div class="col-8"> <b>Principal's Comment:</b> <i style=""><?php if ($percentage >= 70){ print $excellent. " ". "Promoted to next class";}elseif($percentage >= 60){ print $very_good. " ". "Promoted to next class $jss2";}elseif ($percentage >= 50) { print $average. " ". "Promoted to next class";}elseif ($percentage >= 40) {print $fair. " ". "Promoted to next class";}elseif ($percentage >= 30) { print $poor;}?></i></div> <?php }?>
+                          <div class="col-8"> <b>Principal's Comment:</b> <i style=""><?php if ($percentage >= 70){ print $excellent;}elseif($percentage >= 60  ){ print $very_good;}elseif ($percentage >= 50 ) { print $average;}elseif ($percentage >= 40 ) {print $fair;}elseif ($percentage >= 30 ) { print $poor;}?></i></div><?php }else{?>   <div class="col-8"> <b>Principal's Comment:</b> <i style=""><?php if ($percentage >= 70){ print $excellent. " ". "Promoted to next class";}elseif($percentage >= 60){ print $very_good. " ". "Promoted to next class $jss2";}elseif ($percentage >= 50) { print $average. " ". "Promoted to next class";}elseif ($percentage >= 40) {print $fair. " ". "Promoted to next class";}elseif ($percentage >= 30 || $percentage < 30) { print $poor;}?></i></div> <?php }?>
                           <div class=" col-4"><b> Principal's Signature:</b> <?php echo "<img src='signature_images/".$principalSignature['signature']."' style='width: 30px;' >";?></div>
                         </div>
 

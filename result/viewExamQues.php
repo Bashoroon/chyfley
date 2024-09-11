@@ -85,31 +85,144 @@ error_reporting(0);
     .step.finish {
         background-color: #04AA6D;
     }
+
+
+    .wrapper-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f4f8;
+        }
+
+        .card-pages {
+            border-radius: 15px;
+            overflow: hidden;
+            border: none;
+            max-width: 450px;
+            background-color: #fff;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .card-body {
+            padding: 2.5rem 2rem;
+        }
+
+        .text-center img {
+            width: 70px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .congratulation .icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80px;
+            height: 80px;
+            background-color: #ffc107;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+        }
+
+        .congratulation .icon .material-icons {
+            font-size: 48px;
+            color: #fff;
+        }
+
+        .congratulation h2 {
+            font-size: 30px;
+            color: #dc3545;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .congratulation p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .btn-custom {
+            background-color: #dc3545;
+            border: none;
+            color: #fff;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 25px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-custom:hover {
+            background-color: #c82333;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
+        }
+
+        .btn-custom a {
+            color: #fff;
+            text-decoration: none;
+        }
 </style>
-<?php $sqlCheckIfDoneBefore = $conn->query("SELECT * FROM cbtscores WHERE session='" . $_GET['session'] . "' AND term='" . $_GET['term'] . "' AND class= '" . $_GET['class'] . "' AND subject='" . $_GET['subject'] . "' and admissionNo= '$user' ");
-$done = mysqli_num_rows($sqlCheckIfDoneBefore);
-if ($done > 0) { ?>
+<?php $sqlCheckIfDoneBefore = $conn->query("SELECT * FROM cbtscores WHERE session='" . $_GET['session'] . "' AND term='" . $_GET['term'] . "' AND class= '" . $_GET['class'] . "' AND subject='" . $_GET['subject'] . "' AND admissionNo= '$user'");
+$found = mysqli_num_rows($sqlCheckIfDoneBefore);
+$done = mysqli_fetch_array($sqlCheckIfDoneBefore);
+$exam_type = $_GET['examType'];
+$test = '';
+$second = '';
+$exam = '';
+if($exam_type == 'First'){
+    $test = $done['test'];
+}elseif($exam_type == 'Second'){
+    $second = $done['test_two'];
+}else{
+    $exam = $done['exam'];
+}
 
-    <div class="wrapper-page">
-        <div class="card card-pages shadow-none">
-            <div class="card-body">
-                <div class="text-center m-t-0 m-b-15">
-                    <a href="login.php" class="logo logo-admin"><img src="assets/images/report_logo.png" alt="CHYLEY LOGO" height="60"></a>
+
+
+
+if (!empty($test) || !empty($second) || !empty($exam)) { ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oops!</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+<div class="wrapper-page">
+    <div class="card card-pages shadow-none">
+        <div class="card-body">
+            <div class="text-center m-t-0 m-b-15">
+                <a href="login.php" class="logo logo-admin">
+                    <img src="../assets/img/favicon.png" alt="CHYLEY LOGO" height="60">
+                </a>
+            </div>
+            <div class="congratulation">
+                <div class="icon">
+                    <span class="material-icons">error_outline</span>
                 </div>
-                <center>
-                    <div class="congratulation">
-                        <div class="icon">
-                            <span class="material-icons"></span>
-                        </div>
-                        <h2>OOPS!</h2>
-                        <p>This Exam has been completed by you! Kindly contact the admin for reseat </p>
-                        <button class=" btn btn-danger"> <a href="logout.php" class="">Log out</a></button>
-                    </div>
-                </center>
-
-
+                <h2>OOPS!</h2>
+                <p>This exam has been completed by you! Kindly contact the admin for a reseat.</p>
+                <button class="btn btn-custom">
+                    <a href="logout.php">Log out</a>
+                </button>
             </div>
         </div>
+    </div>
+</div>
+
+</body>
+</html>
+
 
     </div>
 <?php } else { ?>
@@ -120,7 +233,7 @@ if ($done > 0) { ?>
         $currentpage = isset($_GET['page']) ? $_GET['page'] : 1; // Get the current page number from the query string
         $offset = ($currentpage - 1) * $recordsPerPage; // Calculate the offset for the SQL query
 
-        $sqlQuestions = $conn->query("SELECT * FROM questionbank WHERE session='" . $_GET['session'] . "' AND term='" . $_GET['term'] . "' AND class= '" . $_GET['class'] . "' AND subject='" . $_GET['subject'] . "'");
+        $sqlQuestions = $conn->query("SELECT * FROM questionbank WHERE session='" . $_GET['session'] . "' AND term='" . $_GET['term'] . "' AND class= '" . $_GET['class'] . "' AND subject='" . $_GET['subject'] . "' AND exam_type='".$_GET['examType']."' ");
         $totalRecords = mysqli_num_rows($sqlQuestions);
         $totalPages = ceil($totalRecords / $recordsPerPage);
 
@@ -143,72 +256,57 @@ if ($done > 0) { ?>
                 <!-- One "tab" for each step in the form: -->
            
               
-    <?php
-    $questionIndex = 0; // Initialize question index
-    while ($questions = mysqli_fetch_array($sqlQuestions)) {
-        $startDate = $questions['startDate'];
-        $endDate = $questions['endDate'];
-        $duration = $questions['duration'];
-        $sqlCheck = $conn->query("SELECT * FROM studentanswers WHERE quesid='" . $questions['quesid'] . "' AND session='" . $_GET['session'] . "' AND term='" . $_GET['term'] . "' AND class= '" . $_GET['class'] . "' AND subject='" . $_GET['subject'] . "' and admissionNo= '$user' ");
-        $checked = mysqli_fetch_array($sqlCheck);
-        $questionIndex++; // Increment question index
+                    <?php
+$questionIndex = 0;
+$no = 1;
+while ($questions = mysqli_fetch_array($sqlQuestions)) {
+    $sqlCheck = $conn->prepare("SELECT * FROM studentanswers WHERE quesid=? AND session=? AND term=? AND class=? AND subject=? AND exam_type=? AND admissionNo=?");
+    $sqlCheck->bind_param("sssssss", $questions['quesid'], $_GET['session'], $_GET['term'], $_GET['class'], $_GET['subject'], $_GET['examType'], $user);
+    $sqlCheck->execute();
+    $checked = $sqlCheck->get_result()->fetch_assoc();
+    $questionIndex++;
     ?>
-        <div class="tab">
-            <div class="text-center">
-                <img src="assets/images/exam_logo.png" height="auto" width="80%" alt="" >
-            </div>
-
-            <div class="text-center">
-                <?php if ($student['passport'] == "") { ?><img src="../portal/passport/images.jfif" alt="" class="img-responsive" style="border-radius: 50%; width: 20vw;"><?php } else { ?><img srcset="../portal/passport/<?php print $student['passport']; ?>" alt="" class="img-responsive" style="border-radius: 50%; width: 20vw;"><?php } ?>
-                <h5 class="text-dark"><?php print $student['surname']; ?> <?php print $student['firstName']; ?> <?php print $student['lastName']; ?><h5>
-                        <h6 class="text-dark"> <?php print $student['admissionNo']; ?></h6>
-                        <?php print $founded['class']; ?>
-            </div>
-
-             <div class="mt-3">
-                            <h3><?php print $_GET['subject']; ?></h3>
-                        </div>
-                        <div class="question"><?php echo $questions['question']; ?></div>
-                        <input type="hidden" id="quesid<?php echo $questionIndex; ?>" value="<?php echo $questions['quesid']; ?>" name="quesid">
-                        <input type="hidden" id="answer<?php echo $questionIndex; ?>" value="<?php echo $questions['answer']; ?>" name="answer">
-                        <div class="form-check">
-                            <input class="form-check-input" value="A" type="radio" name="studentAns<?php echo $questionIndex; ?>" id="studentAns1<?php echo $questionIndex; ?>" <?php if ($checked['studentAnswer'] == "A") {
-                                                                                                                                                                                    echo 'checked';
-                                                                                                                                                                                } ?>>
-                            <label class="form-check-label" for="studentAns1<?php echo $questionIndex; ?>">
-                                <?php echo $questions['optionA']; ?>
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" value="B" type="radio" name="studentAns<?php echo $questionIndex; ?>" id="studentAns2<?php echo $questionIndex; ?>" <?php if ($checked['studentAnswer'] == "B") {
-                                                                                                                                                                                    echo 'checked';
-                                                                                                                                                                                } ?>>
-                            <label class="form-check-label" for="studentAns2<?php echo $questionIndex; ?>">
-                                <?php echo $questions['optionB']; ?>
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" value="C" type="radio" name="studentAns<?php echo $questionIndex; ?>" id="studentAns3<?php echo $questionIndex; ?>" <?php if ($checked['studentAnswer'] == "C") {
-                                                                                                                                                                                    echo 'checked';
-                                                                                                                                                                                } ?>>
-                            <label class="form-check-label" for="studentAns3<?php echo $questionIndex; ?>">
-                                <?php echo $questions['optionC']; ?>
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" value="D" type="radio" name="studentAns<?php echo $questionIndex; ?>" id="studentAns4<?php echo $questionIndex; ?>" <?php if ($checked['studentAnswer'] == "D") {
-                                                                                                                                                                                    echo 'checked';
-                                                                                                                                                                                } ?>>
-                            <label class="form-check-label" for="studentAns4<?php echo $questionIndex; ?>">
-                                <?php echo $questions['optionD']; ?>
-                            </label>
-                        </div>
-                        
-                        
-
+    <div class="tab" style="display: none;">
+        <!-- Display student and question details -->
+        <div class="text-centser">
+            <img src="assets/images/exam_logo.png" height="auto" wsidth="80%" alt="">
         </div>
-    <?php } ?>
+        <div class="text-center">
+            <?php if (empty($student['passport'])) { ?>
+                <img src="../portal/passport/images.jfif" alt="" class="img-responsive" style="border-radius: 50%; width: 20vw;">
+            <?php } else { ?>
+                <img src="../portal/passport/<?php echo htmlspecialchars($student['passport']); ?>" alt="" class="img-responsive" style="border-radius: 50%; width: 20vw;">
+            <?php } ?>
+            <h5 class="text-dark"><?php echo htmlspecialchars($student['surname'] . ' ' . $student['firstName'] . ' ' . $student['lastName']); ?></h5>
+            <h6 class="text-dark"><?php echo htmlspecialchars($student['admissionNo']); ?></h6>
+            <?php echo htmlspecialchars($founded['class']); ?>
+        </div>
+
+        <!-- Display the question -->
+        <div class="mt-3">
+            <h3><?php echo htmlspecialchars($_GET['subject']); ?></h3>
+        </div>
+        <div class="question"><?php echo 'Q'.$no++. '. ' .$questions['question']; ?></div>
+
+        <input type="hidden" id="quesid<?php echo $questionIndex; ?>" value="<?php echo $questions['quesid']; ?>" name="quesid">
+        <input type="hidden" id="answer<?php echo $questionIndex; ?>" value="<?php echo $questions['answer']; ?>" name="answer">
+        
+        
+        <!-- Display options -->
+        <?php foreach (['A', 'B', 'C', 'D'] as $option) { ?>
+            <div class="form-check">
+                <input class="form-check-input" value="<?php echo $option; ?>" type="radio" name="studentAns<?php echo $questionIndex; ?>" id="studentAns<?php echo $option . $questionIndex; ?>" <?php echo ($checked['studentAnswer'] == $option) ? 'checked' : ''; ?>>
+                <label class="form-check-label" for="studentAns<?php echo $option . $questionIndex; ?>">
+                    <?php echo $questions['option' . $option] ?>
+                </label>
+            </div>
+            
+        <?php } ?>
+    </div>
     <div id="result"></div>
+<?php } ?>
+
+    
 <br><br>
     <div style="overflow:auto;">
         <div style="float:left;">
@@ -218,7 +316,7 @@ if ($done > 0) { ?>
                         <ul class="pagination justify-content-center flex-wrap">
                             <button class="btn btn-primary" type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
                             <?php
-                            $sqlQuestions = $conn->query("SELECT * FROM questionbank WHERE session='" . $_GET['session'] . "' AND term='" . $_GET['term'] . "' AND class='" . $_GET['class'] . "' AND subject='" . $_GET['subject'] . "'");
+                            $sqlQuestions = $conn->query("SELECT * FROM questionbank WHERE session='" . $_GET['session'] . "' AND term='" . $_GET['term'] . "' AND class='" . $_GET['class'] . "' AND subject='" . $_GET['subject'] . "' AND exam_type='".$_GET['examType']."'");
                             $pageNumber = 1;
                             $currentTab = 0;
                             while ($questions = mysqli_fetch_array($sqlQuestions)) {
@@ -245,6 +343,8 @@ if ($done > 0) { ?>
                             <input type="hidden" id="subject" value="<?php print $_GET['subject']; ?>" name="subject">
                             <input type="hidden" name="admissionNo" id="admissionNo" value="<?php print $user; ?>">
                             <input type="hidden" name="session" id="session" value="<?php print $_GET['session']; ?>">
+                            <input type="hidden" name="examType" id="examType" value="<?php print $_GET['examType']; ?>">
+                           
                               <div class="text-center mt-3">
         <button type="submit" class="btn btn-success">Submit All Answers</button>
     </div>
@@ -257,7 +357,7 @@ if ($done > 0) { ?>
     <!-- Circles which indicate the steps of the form: -->
 
 
-    <?php include '../portal/footer.php'; ?>
+    <?php include 'footer.php'; ?>
 
 
     <script>
@@ -326,51 +426,103 @@ if ($done > 0) { ?>
         }
     </script>
     <script>
-        $(document).ready(function() {
-            $("input[name^='studentAns']").change(function() {
-                var questionIndex = $(this).attr("name").replace("studentAns", "");
-                
-                var session = $("#session").val();
-                var term = $("#term").val();
-                var clazz = $("#clazz").val();
-                var subject = $("#subject").val();
-                var admissionNo = $("#admissionNo").val();
-                var quesid = $("#quesid" + questionIndex).val();
-                var answer = $("#answer" + questionIndex).val();
-                var studentAns = $("input[name='studentAns" + questionIndex + "']:checked").val();
-          
-                // Send data to the server using AJAX
-                $.ajax({
-                    url: "processStudentAns.php",
-                    type: "POST",
-                    data: {
-                        session: session,
-                        term: term,
-                        clazz: clazz,
-                        subject: subject,
-                        admissionNo: admissionNo,
-                        quesid: quesid,
-                        studentAns: studentAns,
-                        answer: answer
-                    },
-                    
-                    beforeSend: function() {
-                    // Show loading indicator before sending the request
-                    $("#result").html("<p>Loading...</p>");
-                    
-                },
-                    
-                    success: function(response) {
-                        // Display the response from the server
-                        $("#result").html(response);
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-               // Display an error message
-               $("#result").html("Error in connection.Please check your connection: " + textStatus);
-           }
-                });
-            });
+       document.addEventListener('DOMContentLoaded', function() {
+    let currentTab = 0;
+    showTab(currentTab);
+
+    function showTab(n) {
+        const tabs = document.getElementsByClassName("tab");
+        Array.from(tabs).forEach((tab, index) => {
+            tab.style.display = index === n ? "block" : "none";
         });
+
+        document.getElementById("prevBtn").style.display = n === 0 ? "none" : "inline";
+        document.getElementById("nextBtn").style.display = n === tabs.length - 1 ? "none" : "inline";
+        fixStepIndicator(n);
+    }
+
+    function nextPrev(n) {
+        const tabs = document.getElementsByClassName("tab");
+        if (n === 1 && !validateForm()) return false;
+        tabs[currentTab].style.display = "none";
+        currentTab += n;
+        if (currentTab >= tabs.length) {
+            document.getElementById("regForm").submit();
+            return false;
+        }
+        showTab(currentTab);
+    }
+
+    function fixStepIndicator(n) {
+        const steps = document.getElementsByClassName("step");
+        Array.from(steps).forEach(step => step.className = step.className.replace(" active", ""));
+        steps[n].className += " active";
+    }
+
+    function validateForm() {
+        // Validation logic
+        return true;
+    }
+
+    // Debounce function to limit the rate of AJAX calls
+    function debounce(func, delay) {
+        let debounceTimer;
+        return function() {
+            const context = this;
+            const args = arguments;
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => func.apply(context, args), delay);
+        }
+    }
+
+    // Handle change event for answer selection with debouncing
+    $(document).ready(function() {
+    $("input[name^='studentAns']").change(function() {
+        var questionIndex = $(this).attr("name").replace("studentAns", "");
+
+        var session = $("#session").val();
+        var term = $("#term").val();
+        var clazz = $("#clazz").val();
+        var subject = $("#subject").val();
+        var admissionNo = $("#admissionNo").val();
+        var quesid = $("#quesid" + questionIndex).val();
+        var answer = $("#answer" + questionIndex).val();
+        var studentAns = $("input[name='studentAns" + questionIndex + "']:checked").val();
+        var examType = $("#examType").val(); // Add this line to get the examType value
+
+        // Send data to the server using AJAX
+        $.ajax({
+            url: "processStudentAns.php",
+            type: "POST",
+            data: {
+                session: session,
+                term: term,
+                clazz: clazz,
+                subject: subject,
+                admissionNo: admissionNo,
+                quesid: quesid,
+                studentAns: studentAns,
+                answer: answer,
+                examType: examType // Add this line to include examType in the data sent
+            },
+            beforeSend: function() {
+                // Show loading indicator before sending the request
+                $("#result").html("<p>Loading...</p>");
+            },
+            success: function(response) {
+                // Display the response from the server
+                $("#result").html(response);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // Display an error message
+                $("#result").html("Error in connection. Please check your connection: " + textStatus);
+            }
+        });
+    });
+});
+
+});
+
     </script>
 
     <script>

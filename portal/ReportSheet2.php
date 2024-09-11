@@ -1,4 +1,5 @@
-<?php include 'header.php'; ?>
+<?php include 'call_php_function.php';
+include 'header.php';  ?>
 <style type="text/css">
     table.minimalistBlack {
         border: 3px solid #000000;
@@ -115,9 +116,9 @@
                                                     $select2 = mysqli_fetch_array($sqlSelect2);
                                                     $select3 = mysqli_fetch_array($sqlSelect3);
                                                     $chartSubject  .= "'" . substr($results["subject"], 0, 6) . "', ";
-                                                    $chartScore  .=  $select1["test"] + $select1["exam"] . ", ";
-                                                    $chartScore2  .=  $select2["test"] + $select2["exam"] . ", ";
-                                                    $chartScore3  .=  $select3["test"] + $select3["exam"] . ", ";
+                                                    $chartScore  .=  $select1["test"] + $select1["test_two"] + $select1["exam"] . ", ";
+                                                    $chartScore2  .=  $select2["test"] + $select2["test_two"] + $select2["exam"] . ", ";
+                                                    $chartScore3  .=  $select3["test"] + $select3["test_two"]  + $select3["exam"] . ", ";
                                                 } ?>Report Sheet</h4>
                     </div>
                     <div class="col-sm-6" id="non-printable">
@@ -219,11 +220,11 @@
 
                                                         $student = mysqli_fetch_array($sqlStudentName);
                                                         $sqlTotalTest = $conn->query("SELECT  sum(test) as totalTest from studentscores where session = '$session' and term = '$term' and admissionNo='$admissionNo' ");
-                                                        $sqlTotalTestExamFirst = $conn->query("SELECT  sum(test+exam) as totalTestExamFirst from studentscores where session = '$session' and term = 'First' and class = '$class' and admissionNo='$admissionNo' ");
+                                                        $sqlTotalTestExamFirst = $conn->query("SELECT  sum(test+test_two+exam) as totalTestExamFirst from studentscores where session = '$session' and term = 'First' and class = '$class' and admissionNo='$admissionNo' ");
 
-                                                        $sqlTotalTestExamSecond = $conn->query("SELECT  sum(test+exam) as totalTestExamSecond from studentscores  where session = '$session' and term = 'Second' and class = '$class' and admissionNo='$admissionNo' ");
+                                                        $sqlTotalTestExamSecond = $conn->query("SELECT  sum(test+test_two+exam) as totalTestExamSecond from studentscores  where session = '$session' and term = 'Second' and class = '$class' and admissionNo='$admissionNo' ");
 
-                                                        $sqlTotalTestExamThird = $conn->query("SELECT  sum(test+exam) as totalTestExamThird from studentscores  where session = '$session' and term = 'Third' and class = '$class' and admissionNo='$admissionNo' ");
+                                                        $sqlTotalTestExamThird = $conn->query("SELECT  sum(test+test_two+exam) as totalTestExamThird from studentscores  where session = '$session' and term = 'Third' and class = '$class' and admissionNo='$admissionNo' ");
 
                                                         $sqlOfferFirst = $conn->query("SELECT * from studentscores where session = '$session' and term = 'First' and class = '$class' and  admissionNo='$admissionNo'");
                                                         $sqlOfferSecond = $conn->query("SELECT * from studentscores where session = '$session' and term = 'Second' and class = '$class' and  admissionNo='$admissionNo'");
@@ -405,17 +406,17 @@
                                                             $sqlStudentScoreThird =  $conn->query("SELECT * from studentscores where session = '$session' and term='Third' and class = '$class' and admissionNo= '$admissionNo' and subject='" . $rowz['subject'] . "'");
                                                             $studentScoreThird = mysqli_fetch_array($sqlStudentScoreThird);
 
-                                                            $firstTermScore = $result['test'] + $result['exam'];
-                                                            $secondTermScore = $studentScoreSecond['test'] + $studentScoreSecond['exam'];
-                                                            $thirdTermScore = $studentScoreThird['test'] + $studentScoreThird['exam'];
-                                                            $grade = $result['test'] + $result['exam'] + $secondTermScore + $thirdTermScore;
+                                                            $firstTermScore = $result['test'] + $result['test_two'] + $result['exam'];
+                                                            $secondTermScore = $studentScoreSecond['test'] + $studentScoreSecond['test'] + $studentScoreSecond['exam'];
+                                                            $thirdTermScore = $studentScoreThird['test'] + $studentScoreThird['test_two'] + $studentScoreThird['exam'];
+                                                            $grade = $result['test'] + $result['test_two'] + $result['exam'] + $secondTermScore + $thirdTermScore;
 
                                                         ?>
                                                             <tr>
 
                                                                 <td style="width: 15%;"><?php print $result['subject']; ?></td>
                                                                 <?php if ($term == 'First') { ?>
-                                                                    <td style="width: 1%;"><?php print $result['test']; ?></td>
+                                                                    <td style="width: 1%;"><?php print $result['test'] + $result['test_two']; ?></td>
                                                                     <td style="width: 1%;"><?php print $result['exam']; ?></td>
 
                                                                 <?php } elseif ($term == 'Second') { ?>
@@ -475,16 +476,16 @@
                                                             </tr>
                                                             <?php
 
-                                                            $sqlTotalTest = $conn->query("SELECT  sum(test) as totaltest from studentscores  where session = '$session' and term = 'First' and class='$class'  and admissionNo='$admissionNo' ");
+                                                            $sqlTotalTest = $conn->query("SELECT  sum(test+test_two) as totaltest from studentscores  where session = '$session' and term = 'First' and class='$class'  and admissionNo='$admissionNo' ");
                                                             $sqlTotalExam = $conn->query("SELECT  sum(exam) as totalexam from studentscores  where session = '$session' and term = 'First' and class='$class'  and admissionNo='$admissionNo' ");
                                                             $totalTest = mysqli_fetch_assoc($sqlTotalTest);
                                                             $totalExam = mysqli_fetch_assoc($sqlTotalExam);
 
 
-                                                            $sqlTotalTestExamSecondz = $conn->query("SELECT  sum(test+exam) as totalTestExamSecond from studentscores  where session = '$session' and term = 'Second' and class='$class'  and admissionNo='$admissionNo' ");
+                                                            $sqlTotalTestExamSecondz = $conn->query("SELECT  sum(test+test_two+exam) as totalTestExamSecond from studentscores  where session = '$session' and term = 'Second' and class='$class'  and admissionNo='$admissionNo' ");
                                                             $totalTestExamSecondz = mysqli_fetch_assoc($sqlTotalTestExamSecondz);
 
-                                                            $sqlTotalTestExamThirdz = $conn->query("SELECT  sum(test+exam) as totalTestExamThird from studentscores  where session = '$session' and term = 'Third' and class='$class'  and admissionNo='$admissionNo' ");
+                                                            $sqlTotalTestExamThirdz = $conn->query("SELECT  sum(test+test_two+exam) as totalTestExamThird from studentscores  where session = '$session' and term = 'Third' and class='$class'  and admissionNo='$admissionNo' ");
                                                             $totalTestExamThirdz = mysqli_fetch_assoc($sqlTotalTestExamThirdz);
 
 

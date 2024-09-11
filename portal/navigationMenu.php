@@ -37,7 +37,7 @@
                                     <a class="dropdown-item" href="editMyProfile.php?id=<?php print $nameFound['id']; ?>"><i class="mdi mdi-account-circle"></i> Profile</a>
 
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-danger" href="logout.php"><i class="mdi mdi-power text-danger"></i> Logout</a>
+                                    <a class="dropdown-item text-danger" href="login.php?logout"><i class="mdi mdi-power text-danger"></i> Logout</a>
                                 </div>
                             </div>
                         </li>
@@ -81,15 +81,16 @@
                             </li>
 
                             <li class="has-submenu">
-                                <a href="#"><i class="icon-pencil-ruler"></i>Examination/Test<i class="mdi mdi-chevron-down mdi-drop"></i></a>
+                                <a href="#"><i class="icon-pencil-ruler"></i>Records<i class="mdi mdi-chevron-down mdi-drop"></i></a>
                                 <ul class="submenu megamenu">
                                     <li>
                                         <ul>
                                           
-                                            <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".inputScore">Input Score </a></li>
-                                            <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".checkbroadsheet2"> View Broad Sheet </a></li>
-                                            <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".checkscoresheet">Score Sheet </a></li>
-                                            <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".addComment">Add Teacher's Comment</a></li>
+                                        <li><a href="inputScore.php" class=" waves-effect waves-light" >Record Score </a></li>
+                                    <li><a href="broadSheet2.php" class=" waves-effect waves-light" > View Broad Sheet </a></li>
+                                    <li><a href="score-sheet.php" class=" waves-effect waves-light">Score Sheet </a></li>
+                                    <li><a href="comment-attendance.php" class=" waves-effect waves-light" >Comment/Student Att</a></li>
+                                    <li><a href="view-student-report.php" class=" waves-effect waves-light" >View Student Report</a></li>
 
 
 
@@ -109,10 +110,10 @@
                                         <ul>
                                             <li> <a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-smC">Add Class</a></li>
                                             <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-smS">Add Session</a></li>
-                                            <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-smT">Add Term</a></li>
                                             <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".addSubject">Add Subject</a></li>
+                                            <li><a href="allSubjects.php" class=" waves-effect waves-light">View Subject</a></li>
                                             <li><a href="teachers-detail.php">View All Teachers</a></li>
-                                            <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".attendance">School Attendance</a></li>
+                                            <li><a href="schoolAttendance.php" class=" waves-effect waves-light" >School Attendance</a></li>
                                             <li><a href="bulkSms.php">Bulk Sms</a></li>
 
                                         </ul>
@@ -128,13 +129,13 @@
                                         <ul>
 
 
-                                            <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".view-student">View Student By Class</a></li>
-                                            <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".promote">Promote Student</a></li>
-                                            <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".clearance">Clearance</a></li>
-                                            <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".student-report">View Student Report</a></li>
-                                            <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".cleared-student">View Cleared Student </a></li>
-                                            <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".teachers_signature">Append Principal's Signature</a></li>
-                                            <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".comment">Comment/Student Att</a></li>
+                                            <li><a href="studentDetails.php" class=" waves-effect waves-light" >View Student By Class</a></li>
+                                            <li><a href="promote-student.php" class=" waves-effect waves-light">Promote Student</a></li>
+                                            <li><a href="clearance.php" class=" waves-effect waves-light" >Clearance</a></li>
+                                            <li><a href="view-student-report.php" class=" waves-effect waves-light" >View Student Report</a></li>
+                                            <li><a href="clearedStudent.php" class=" waves-effect waves-light" >View Cleared Student </a></li>
+                                            <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".teachers_signature">Affix Principal's Signature</a></li>
+                                            <li><a href="comment-attendance.php" class=" waves-effect waves-light">Comment/Student Att</a></li>
 
 
 
@@ -155,8 +156,9 @@
                                             <li><a href="assignment.php">Add Assignment</a></li>
 
                                             <li><a href="" target="_blank" class=" waves-effect waves-light " data-toggle="modal" data-target=".examQuestion">Add CBT Question</a></li>
-                                            <li><a href="" class=" waves-effect waves-light " data-toggle="modal" data-target=".examstatus">Change Examination Status</a></li>
-                                            <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".cbtscores">CBT Scores</a></li>
+                                               <li><a href="previewQues.php"  class=" waves-effect waves-light " >Preview Question</a></li>
+                                            <li><a href="examination-status.php" class=" waves-effect waves-light ">Change Exam Status</a></li>
+                                            <li><a href="cbtscores.php" class=" waves-effect waves-light" >CBT Scores</a></li>
 
 
                                         </ul>
@@ -174,16 +176,16 @@
                     </li>
 
                     <li class="has-submenu">
-                        <a href="#"><i class="icon-pencil-ruler"></i>Examination/Test<i class="mdi mdi-chevron-down mdi-drop"></i></a>
+                        <a href="#"><i class="icon-pencil-ruler"></i>Records<i class="mdi mdi-chevron-down mdi-drop"></i></a>
                         <ul class="submenu megamenu">
                             <li>
                                 <ul>
 
-                                    <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".inputScore">Input Score </a></li>
-                                    <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".checkbroadsheet2"> View Broad Sheet </a></li>
-                                    <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".checkscoresheet">Score Sheet </a></li>
-                                    <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".comment">Comment/Student Att</a></li>
-                                    <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".student-report">View Student Report</a></li>
+                                    <li><a href="inputScore.php" class=" waves-effect waves-light" >Record Score </a></li>
+                                    <li><a href="broadSheet2.php" class=" waves-effect waves-light" > View Broad Sheet </a></li>
+                                    <li><a href="score-sheet.php" class=" waves-effect waves-light">Score Sheet </a></li>
+                                    <li><a href="comment-attendance.php" class=" waves-effect waves-light" >Comment/Student Att</a></li>
+                                    <li><a href="view-student-report.php" class=" waves-effect waves-light" >View Student Report</a></li>
 
                                 </ul>
                             </li>
@@ -198,11 +200,11 @@
                                 <ul>
 
                                     <li><a href="E-note.php" class=" waves-effect waves-light">Add E-Note </a></li>
-                                    <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".viewEnote">Vi1ew E-Note By Class </a></li>
+                                    <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".viewEnote">E-Note By Class </a></li>
                                     <li><a href="assignment.php">Add Assignment</a></li>
 
-                                    <li><a href="" target="_blank" class=" waves-effect waves-light " data-toggle="modal" data-target=".examQuestion">Add CBT Question</a></li>
-                                    <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".cbtscores">CBT Scores</a></li>
+                                    <li><a href="addQues.php"  class=" waves-effect waves-light ">Add CBT Question</a></li>
+                                    <li><a href="cbtscores.php" class=" waves-effect waves-light" >CBT Scores</a></li>
 
 
 
@@ -248,7 +250,7 @@
                                 <ul>
 
                                     <li><a href="E-note.php" class=" waves-effect waves-light">Add E-Note </a></li>
-                                    <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".viewEnote">View E-Note By Class </a></li>
+                                    <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".viewEnote">E-Note By Class </a></li>
                                     
                                     <li><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".cbtscores">CBT Scores</a></li>
 

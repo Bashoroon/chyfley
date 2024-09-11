@@ -1,22 +1,3 @@
-<?php
-session_start();
-include 'db.php';
-if (!isset($_SESSION['username'])) {
-    echo '<script type="text/javascript">
-          window.location = "login.php"
-      </script>';
-}
-
-
-$username = $_SESSION['username'];
-$sqlFind = $conn->query("select * from users where username='$username'");
-$nameFound = mysqli_fetch_array($sqlFind);
-$role = $nameFound['role'];
-
-$subjectTeacher = explode(',', $nameFound['subject']);
-$classTeacher = explode(',', $nameFound['class']);
-
-?>
 <!DOCTYPE html>
 <html lang="en">
  <head>
@@ -42,9 +23,27 @@ $classTeacher = explode(',', $nameFound['class']);
     <link href="assets/css/metismenu.min.css" rel="stylesheet" type="text/css">
     <link href="assets/css/icons.css" rel="stylesheet" type="text/css">
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
-    
+    <style>
+      .alert-custom {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1050;
+            display: none;
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        }
 
+        .alert-slide-in {
+            transform: translateX(100%); /* Start off-screen */
+            opacity: 0; /* Hidden initially */
+        }
 
+        .alert-show {
+            transform: translateX(0); /* Slide into view */
+            opacity: 1; /* Fully visible */
+        }
+    </style>
+    <!-- This alert can be placed anywhere in your code, it will always appear at the top right corner -->
 
 </head>
 

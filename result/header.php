@@ -25,17 +25,17 @@ $user = $_SESSION['admissionNo'];
 	<meta name="keywords" content="CHYFLEY SCHOOLS - Poised to Making Giant Strides">
     
     <!-- Favicon -->
-    <link rel="icon" href="../assets/img/favicon.png" type="image/x-icon">
+    <link rel="icon" href="https://portal.chyfleyschools.com.ng/images/chyf_logo.png" type="image/x-icon">
       <!-- DataTables -->
-    <link href="../portal/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    <link href="../portal/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://portal.chyfleyschools.com.ng/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://portal.chyfleyschools.com.ng/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
     <!-- Responsive datatable examples -->
-    <link href="../portal/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://portal.chyfleyschools.com.ng/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
 
     <!--Morris Chart CSS -->
-    <link rel="stylesheet" href="../portal/plugins/morris/morris.css">
+    <link rel="stylesheet" href="https://portal.chyfleyschools.com.ng/plugins/morris/morris.css">
 
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="assets/css/metismenu.min.css" rel="stylesheet" type="text/css">

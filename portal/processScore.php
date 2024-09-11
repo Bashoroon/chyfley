@@ -4,6 +4,7 @@ $session = $_POST['session'];
 $term  = $_POST['term'];
 $class = $_POST['class'];
 $subject = $_POST['subject'];
+
 foreach ($_POST['admissionNo'] as $key => $value) {
 	$admissionNo = $_POST['admissionNo'][$key];
 		$test = $_POST['test'][$key];
@@ -14,7 +15,7 @@ foreach ($_POST['admissionNo'] as $key => $value) {
 
 echo ("<script LANGUAGE='JavaScript'>
           window.alert('students scores succesfully Added');
-           window.location.href='inputScore.php?session=$session&term=$term&class=$class&subject=$subject';
+           window.location.href='inputScore.php?session=$session&class=$class&term=$term&subject=$subject&load-student';
       
        </script>");
 

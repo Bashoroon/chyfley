@@ -200,10 +200,10 @@
             $('form').parsley();
         });
     </script>
-<?php include '../portal/footer.php';?>
+<?php include 'footer.php';?>
 
 </body>
-  <?php include '../portal/modal.php';?>
+  <?php include 'modal.php';?>
 
 
 </html>

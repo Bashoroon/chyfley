@@ -32,7 +32,7 @@
                                             <input type="hidden" name="id" value="<?php print $_SESSION['admissionNo'];?>">
                                             <div class="form-group">
                                                 <div class="edit-profile-photo">
-                                                 <center><?php if($student['passport'] == ""){?><img src="../portal/passport/images.jfif"  alt="" class="img-responsive" style="border-radius: 50%; width: 20vw;"><?php }else{?><img srcset="../portal/passport/<?php print $student['passport'];?>"  alt="" class="img-responsive" style="border-radius: 50%; width: 20vw;"><?php } ?> </center>
+                                                 <center><?php if($student['passport'] == ""){?><img src="https://portal.chyfleyschools.com.ng/passport/images.jfif"  alt="" class="img-responsive" style="border-radius: 50%; width: 20vw;"><?php }else{?><img srcset="https://portal.chyfleyschools.com.ng/passport/<?php print $student['passport'];?>"  alt="" class="img-responsive" style="border-radius: 50%; width: 20vw;"><?php } ?> </center>
                                                    
                                                 </div>
                                              <center> <h5 class="text-white"><?php print $student['surname'];?> <?php print $student['firstName']; ?> <?php print  $student['lastName']; ?> (<?php print $student['admissionNo'];?>)</h5></center>
@@ -52,7 +52,8 @@
                  $sessionz = $myResult['session'];
                    $termz = $myResult['term'];
                 $sqlMyResultTerm = $conn->query("select * from studentscores where session='".$myResult['session']."' and admissionNo='$user' group by term ");
-                   while ($myResultTerm = mysqli_fetch_array($sqlMyResultTerm)){   ?>
+                   while ($myResultTerm = mysqli_fetch_array($sqlMyResultTerm)){
+                    if($myResult) {  ?>
                 <div class="col-sm-6 col-xl-3">
                    <div class="card">
                         <div class="card-heading p-4">
@@ -71,7 +72,9 @@
                     </div>
               
             </div>
- <?php } }?>
+ <?php }else{
+    echo '<h6 style="color:red;"> No result. Check back later or contact your admin</h6>';
+ } } }?>
          
 
             <!-- END ROW -->
@@ -82,8 +85,8 @@
     <!-- end wrapper -->
 
     <!-- Footer -->
-   <?php require '../portal/footer.php';?>
-   <?php require '../portal/modal.php';?>
+   <?php require 'footer.php';?>
+   <?php require 'modal.php';?>
 
 </body>
 

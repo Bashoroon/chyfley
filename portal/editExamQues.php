@@ -1,44 +1,35 @@
-<?php include 'header.php';?>
-    
+<?php include 'call_php_function.php';
+include 'header.php'; ?>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 
-</head>
-<style type="text/css">
-      textarea {
--webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: -moz-none;
-    -o-user-select: none;
-    user-select: none;
- overflsow: auto;
-   
-  
-    }
-</style>
 <body>
-<?php 
-$session = $_GET['session'];
-$term = $_GET['term'];
-$class = $_GET['class'];
-$subject = $_GET['subject'];
-?>
- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
 
-  
-                        <!-- Navigation Menu-->
-                      <?php include 'navigationMenu.php';?>
-                        <!-- Navigation Menu-->
 
+
+    <!-- Navigation Bar-->
+
+    <?php require_once 'navigationMenu.php'; ?>
+    <!-- End Navigation Bar-->
 
     <div class="wrapper">
-        <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <center> <img src="images/exam_logo.png" style="width: 80%; height: auto;" alt="CHYFLEY LOGO"></center>
+                </div>
+            </div>
+
             <!-- Page-Title -->
             <div class="page-title-box">
                 <div class="row align-items-center">
                     <div class="col-sm-6">
                         <h4 class="page-title"></h4>
                     </div>
-                    
+
                 </div>
                 <!-- end row -->
             </div>
@@ -47,141 +38,133 @@ $subject = $_GET['subject'];
                 <div class="col-lg-12">
                     <div class="card m-b-30">
                         <div class="card-body">
-                              
-                            <?php $sqlNote= $conn->query("select * from examquestions where session='$session' and term='$term' and class='$class' and subject ='$subject'  ");
-                                $note = mysqli_fetch_array($sqlNote);?>
-                            <h4 class="mt-0 header-title">E-note for <?php print $note['class'];?>, <?php print $note['session'];?>, <?php print $note['term'];?> Term</h4> <h3 class="mt-0 header-title"><?php print $note['subject'];?> </h3>
+                            <h4><?php if (!isset($_GET['id'])) {
+                                    print $_GET['session'] . ' ' . $_GET['term'] . ' ' . $_GET['class'] . ' ' . $_GET['subject'];
+                                } ?></h4>
+                            <?php if (isset($_GET['s'])) {
+                                echo "<h5>E-note added successfully<h5>";
+                            } ?>
+                            <h4 class="mt-0 header-title"></h4>
                             <p class="sub-title"></p>
-                           
-                           <h4 class="mt-0 header-title">Examiation</h4>
-                                
-                             
-                                        <div class="card m-b-30">
-                                            <div class="card-body">
-                                                <h4 class="mt-0 header-title">Question</h4>
-                                                
-                             <form  action="updateExamQues.php" method="POST" id="newAdd2s">
-                                     
-                                
-                                              <input type="hidden" name="session" value="<?php print $note['session'];?>">
-                                              <input type="hidden" name="term" value="<?php print $note['term'];?>">
-                                             <input type="hidden" name="class" value="<?php print $note['quesid'];?>">
-                                              <input type="hidden" name="subject" value="<?php print $note['subject'];?>">
-                                             
-                                               
-                                             
+                            <?php $sqlNote = $conn->query("select * from questionbank where quesid='" . $_GET['id'] . "' ");
+                            $ques = mysqli_fetch_array($sqlNote); ?>
+                            <form action="updateExamQues.php" method="POST">
+                                <?php if (!isset($_GET['id'])) { ?>
+                                    <input type="hidden" name="session" id="inputsession" class="form-control" value="<?php print $_GET['session']; ?>">
+                                    <input type="hidden" name="term" id="inputterm" class="form-control" value="<?php print $_GET['term']; ?>">
+                                    <input type="hidden" name="class" id="inputclass" class="form-control" value="<?php print $_GET['class']; ?>">
+                                    <input type="hidden" name="subject" id="inputsubject" class="form-control" value="<?php print $_GET['subject']; ?>">
+                                    <input type="hidden" name="exam_type" id="inputsubject" class="form-control" value="<?php print $_GET['examType']; ?>">
 
-                                                    <textsarea class=" summsernote"  name="question" ><?php print $note['questions'];?></textarea>
-                                                    
-                                                
-
-                                            </div>
+                                    <?php } ?>`
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h4 class="mt-0 header-title">Question</h4>
+                                            <textarea class="question" name="ques"><?php if (isset($_GET['id'])) {
+                                                                                        print $ques['question'];
+                                                                                    } ?></textarea>
                                         </div>
-                                
-                              
-                                <div class="form-group">
-                                    <div>
-                                        <button type="submit" class="btn btn-primary waves-effect waves-light">
-                                            update
-                                        </button>
-                                        <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                                            Cancel
-                                        </button>
                                     </div>
-                                </div>
+                                    <input type="hidden" name="quesid" id="inputsubject" class="form-control" value="<?php print $ques['quesid']; ?>">
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h4 class="mt-0 header-title">Option A</h4>
+                                            <textarea class="optionA" name="optionA"> <?php if (isset($_GET['id'])) {
+                                                                                            print $ques['optionA'];
+                                                                                        } ?></textarea>
+                                        </div>
+                                        <div class="col-6">
+                                            <h4 class="mt-0 header-title">Option B</h4>
+                                            <textarea class="optionB" name="optionB"><?php if (isset($_GET['id'])) {
+                                                                                            print $ques['optionB'];
+                                                                                        } ?></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h4 class="mt-0 header-title">Option C</h4>
+                                            <textarea class="optionC" name="optionC"><?php if (isset($_GET['id'])) {
+                                                                                            print $ques['optionC'];
+                                                                                        } ?></textarea>
+                                        </div>
+                                        <div class="col-6">
+                                            <h4 class="mt-0 header-title">Option D</h4>
+                                            <textarea class="optionD" name="optionD"><?php if (isset($_GET['id'])) {
+                                                                                            print $ques['optionD'];
+                                                                                        } ?></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h4 class="mt-0 header-title">Option E</h4>
+                                            <textarea class="optionE" name="optionE"><?php if (isset($_GET['id'])) {
+                                                                                            print $ques['optionE'];
+                                                                                        } ?></textarea>
+                                        </div>
+                                        <div class="col-6">
+                                            <h4 class="mt-0 header-title">Answer</h4>
+                                            <textarea class="form-control" name="answer"><?php if (isset($_GET['id'])) {
+                                                                                                print $ques['answer'];
+                                                                                            } ?></textarea>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="form-group">
+                                        <div>
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light">
+                                                Submit
+                                            </button>
+                                            <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </div>
                             </form>
-
                         </div>
-                    </div>
-                </div> <!-- end col -->
 
-                      
-                    </div>
-                </div> <!-- end col -->
-               </div> <!-- end row -->  
-            </div> <!-- end row -->
+                        <?php if (!isset($_GET['id'])) { ?>
+                            <h5>or</h5>
 
+                            <form action="uploadMS.php" method="POST" name="frmExcelImport" id="frmExcelImport" enctype="multipart/form-data">
+
+
+                                <input type="hidden" name="session" id="inputsession" class="form-control" value="<?php print $_GET['session']; ?>">
+                                <input type="hidden" name="term" id="inputterm" class="form-control" value="<?php print $_GET['term']; ?>">
+                                <input type="hidden" name="class" id="inputclass" class="form-control" value="<?php print $_GET['class']; ?>">
+                                <input type="hidden" name="subject" id="inputsubject" class="form-control" value="<?php print $_GET['subject']; ?>">
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <input type="file" name="file" id="file" accept=".xls,.xlsx" required="required">
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light">
+                                            Submit
+                                        </button>
+                            </form>
+                    </div>
+                <?php } ?>
+                </div>
+
+            </div>
         </div>
-        <!-- end container-fluid -->
+    </div> <!-- end col -->
+    </div> <!-- end row -->
+    </div> <!-- end row -->
+
+    </div>
+    <!-- end container-fluid -->
     </div>
     <!-- end wrapper -->
 
     <!-- Footer -->
-    <script>
-        $(document).ready(function() {
-            $('form').parsley();
-        });
-    </script>
-<?php include 'footer.php';?>
+    <?php include 'footer.php'; ?>
 
 </body>
- <?php include 'modal.php';?>
+<?php include 'modal.php'; ?>
+
 
 
 </html>
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
-
-
-<script>
-
-     $('document').ready(function()
-            {
-
-    $('.summernote').summernote({
-        height: 200,
-  toolbar: [
-    // [groupName, [list of button]]
-     ['style', ['bold', 'italic', 'underline', 'clear']],
-    ['insert', ['link', 'picture', 'video']],
-    ['font', ['strikethrough', 'superscript', 'subscript']],
-    ['fontsize', ['fontsize']],
-    ['color', ['color']],
-    ['table', ['table']],
-    
-    ['view', ['fullscreen', 'codeview', 'help']],
-    ['para', ['ul', 'ol', 'paragraph']],
-    ['height', ['height']]
-  ],
-  callbacks: {
-onImageUpload: function(image) {
-editor = $(this);
-uploadImageContent(image[0], editor);
-}
-}
-});
-     
-       
-    });
-     $jq(document).ready(function(){
-        $jq('#newAdd2').ajaxForm( {
-        target: '#preview2', 
-        success: function() { 
-        $jq("#preview2").show();
-        $jq("#preview2").animate({
-        height: '60px',
-        width: 'auto'
-    });
-     }
-    });
- });
-
-     function uploadImageContent(image, editor) {
-var data = new FormData();
-data.append('image', image);
-$.ajax({
-url: 'uimage.php',
-cache: false,
-contentType: false,
-processData: false,
-data: data,
-type: 'post',
-success: function(url) {
-var image = $('<img>').attr('src', url);
-$(editor).summernote('insertNode', image[0]);
-},
-error: function(data) {
-console.log(data);
-}
-});
-}
-  </script>

@@ -4,9 +4,8 @@ include 'db.php';
 $session = $_POST['session'];
 $term = $_POST['term'];
 $class = $_POST['class'];
-$startDate = $_POST['startDate'];
-$endDate = $_POST['endDate'];
 $subject = $_POST['subject'];
+$exam_type = $_POST['examType'];
 
 $quesid = uniqid();
 
@@ -49,7 +48,7 @@ if ($ext == ".csv") {
     
     // Insert data into the database outside the loop
     foreach ($questionsData as $data) {
-        $sqlAddExamQues = $conn->query("INSERT INTO questionbank (session, term, class, startDate, endDate, subject, question, optionA, optionB, optionC, optionD, optionE, answer, quesidd) VALUES ('$session', '$term', '$class', '$startDate', '$endDate', '$subject', '$data[0]', '$data[1]', '$data[2]', '$data[3]', '$data[4]', '$data[5]', '$data[6]', '$quesid')") or die(mysqli_error($conn));
+        $sqlAddExamQues = $conn->query("INSERT INTO questionbank (session, term, class, subject, question, optionA, optionB, optionC, optionD, optionE, answer, exam_type) VALUES ('$session', '$term', '$class', '$subject', '$data[0]', '$data[1]', '$data[2]', '$data[3]', '$data[4]', '$data[5]', '$data[6]', '$exam_type')") or die(mysqli_error($conn));
     }
     echo ("<script LANGUAGE='JavaScript'>
           window.alert('Your questions have been submitted ');

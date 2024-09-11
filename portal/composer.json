@@ -1,0 +1,10 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Controllers\\": "src/controllers/"
+        }
+    },
+    "require": {
+        "phpoffice/phpword": "^1.3"
+    }
+}

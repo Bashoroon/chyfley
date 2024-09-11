@@ -1,4 +1,4 @@
-<form action="processClass.php" method="post">
+<form action="" method="post">
      <div class="modal fade bs-example-modal-smC" tabindex="-1" role="dialog" id="mySmallModalLabel" aria-labelledby="mySmallModalLabel" aria-hidden="true">
          <div class="modal-dialog modal-sm">
              <div class="modal-content">
@@ -19,7 +19,7 @@
                      </div>
                      <div class="row">
                          <div class="col-12">
-                             <button class="btn btn-primary" type="submit" style="float: right;">Add Class</button>
+                             <button class="btn btn-primary" name="add-class" type="submit" style="float: right;">Add Class</button>
                          </div>
                      </div>
 
@@ -31,84 +31,79 @@
  </form>
 
 
- <form action="processAddComment.php" method="post" id="processAddComment">
-     <div class="modal fade addComment" tabindex="-1" role="dialog" id="mySmallModalLabel" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <h5 class="modal-title mt-0" id="mySmallModalLabel">Add Teacher's Comment</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                     </button>
-                 </div>
-                 <h6>
-                     <center>
-                         <div id="screen" class="alert alert-success"></div>
-                     </center>
-                 </h6>
-                 <div class="modal-body">
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Teacher's Comment</label>
-                                 <input type="text" required="required" autocomplete="off" id="teacherscomment" class="form-control" name="teacherscomment">
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <button class="btn btn-primary" type="submit" style="float: right;" onclick="return clickButton()">Add comment</button>
-                         </div>
-                     </div>
+ 
 
-                 </div>
-             </div><!-- /.modal-content -->
-         </div><!-- /.modal-dialog -->
-     </div><!-- /.modal -->
-     </div>
- </form>
+<!-- subject -->
 
 
-
- <form action="processSubject.php" method="post" id="processSubject">
-     <div class="modal fade addSubject" tabindex="-1" role="dialog" id="mySmallModalLabel" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-sm">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <h5 class="modal-title mt-0" id="mySmallModalLabel">Add Subject</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                     </button>
-                 </div>
-                 <h6>
-                     <center>
-                         <div id="showsubject" class="alert alert-success"></div>
-                     </center>
-                 </h6>
-                 <div class="modal-body">
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Subject</label>
-                                 <input id="demo1" type="text" required="required" autocomplete="off" value="" class="form-control" name="subject">
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <button class="btn btn-primary" type="submit" style="float: right;">Add Subject</button>
-                         </div>
-                     </div>
-
-                 </div>
-             </div><!-- /.modal-content -->
-         </div><!-- /.modal-dialog -->
-     </div><!-- /.modal -->
-     </div>
- </form>
+ <!-- add subject -->
+<form method="post" id="processSubject">
+    <div class="modal fade addSubject" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mt-0" id="mySmallModalLabel">Add Subject</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label">Subject</label>
+                                <input name="subject" required="required" type="text" class="form-control">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button class="btn btn-primary" name="add-subject" type="submit" style="float: right;">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</form>
 
 
- <form action="processSession.php" method="post">
+<!-- Edit subject -->
+<form method="post" id="updateSubject">
+    <div class="modal fade editSubject" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mt-0" id="mySmallModalLabel">Edit Subject</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label">Subject</label>
+                                <input name="subject" required="required" type="text" class="form-control">
+                                <input name="id" required="required" type="hidden"  class="form-control">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button class="btn btn-primary" name="update-subject" type="submit" style="float: right;">Update Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</form>
+
+
+ <form  method="post">
      <div class="modal fade bs-example-modal-smS" tabindex="-1" role="dialog" id="mySmallModalLabel" aria-labelledby="mySmallModalLabel" aria-hidden="true">
          <div class="modal-dialog modal-sm">
              <div class="modal-content">
@@ -129,7 +124,7 @@
                      </div>
                      <div class="row">
                          <div class="col-12">
-                             <button class="btn btn-primary" type="submit" style="float: right;">Add</button>
+                             <button class="btn btn-primary" name="add-session" type="submit" style="float: right;">Add</button>
                          </div>
                      </div>
 
@@ -137,120 +132,6 @@
              </div><!-- /.modal-content -->
          </div><!-- /.modal-dialog -->
      </div><!-- /.modal -->
-     </div>
- </form>
-
-
- <form action="processTerm.php" method="post">
-     <div class="modal fade bs-example-modal-smT" tabindex="-1" role="dialog" id="mySmallModalLabel" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-sm">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <h5 class="modal-title mt-0" id="mySmallModalLabel">Add Term</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                     </button>
-                 </div>
-                 <div class="modal-body">
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Term</label>
-                                 <input id="demo1" type="text" required="required" autocomplete="off" value="" class="form-control" name="term">
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <button class="btn btn-primary" type="submit" style="float: right;">Add</button>
-                         </div>
-                     </div>
-
-                 </div>
-             </div><!-- /.modal-content -->
-         </div><!-- /.modal-dialog -->
-     </div><!-- /.modal -->
-     </div>
- </form>
-
-
-
-
-
-
-
-
-
-
- <form action="view-student.php" method="post">
-     <div class="modal fade view-student" tabindex="-1" role="dialog" id="mySmallModalLabel" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <h5 class="modal-title mt-0">View Student</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                     </button>
-                 </div>
-                 <div class="modal-body">
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Session</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="session">
-                                     <option value="">Select a session</option>
-                                     <?php $sqlsession = $conn->query("select * from session");
-                                        while ($session = mysqli_fetch_array($sqlsession)) {; ?>
-
-                                         <option value="<?php print $session['session']; ?>"><?php print $session['session']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Class</label>
-                                 <select id="demo1" type="text" required="required" a value="" class="form-control" name="class">
-                                     <option value="">Select a class</option>
-                                     <?php
-                                        if ($nameFound['class'] !== "") {
-                                            $sqlclass = $conn->query("select class from users where username='$username'");
-                                            while ($nameFound = mysqli_fetch_array($sqlclass)) {
-                                                $classes = explode(',', $nameFound['class']);
-                                                foreach ($classes as $class) {
-                                        ?>
-                                                 <option value="<?php echo $class; ?>"><?php echo $class; ?></option>
-                                             <?php
-                                                }
-                                            }
-                                        } else {
-                                            $sqlclass = $conn->query("select * from class");
-                                            while ($class = mysqli_fetch_array($sqlclass)) {
-                                                ?>
-                                             <option value="<?php echo $class['class']; ?>"><?php echo $class['class']; ?></option>
-                                     <?php
-                                            }
-                                        }
-                                        ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <button class="btn btn-primary" style="float: right;" id="submit" class="btn-submit">Check</button>
-
-                         </div>
-                     </div>
-                 </div>
-             </div><!-- /.modal-content -->
-         </div><!-- /.modal-dialog -->
-     </div><!-- /.modal -->
-
      </div>
  </form>
 
@@ -303,137 +184,18 @@
 
 
 
- <form action="inputScore.php" method="">
-     <div class="modal fade inputScore" tabindex="-1" role="dialog" id="mySmallModalLabel" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <h5 class="modal-title mt-0">Input Score</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                     </button>
-                 </div>
-                 <div class="modal-body">
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Session</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="session">
-                                     <option value="">Select a session</option>
-                                     <?php $sqlsession = $conn->query("select * from session");
-                                        while ($session = mysqli_fetch_array($sqlsession)) {; ?>
-
-                                         <option value="<?php print $session['session']; ?>"><?php print $session['session']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Term</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="term">
-                                     <option value="">Select a term</option>
-                                     <?php $sqlterm = $conn->query("select * from term");
-                                        while ($term = mysqli_fetch_array($sqlterm)) {; ?>
-
-                                         <option value="<?php print $term['term']; ?>"><?php print $term['term']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Class</label>
-                                 <select id="demo1" type="text" required="required" a value="" class="form-control" name="class">
-                                     <option value="">Select a class</option>
-                                     <?php
-                                        if ($nameFound['class'] !== "") {
-                                            $sqlclass = $conn->query("select class from users where username='$username'");
-                                            while ($nameFound = mysqli_fetch_array($sqlclass)) {
-                                                $classes = explode(',', $nameFound['class']);
-                                                foreach ($classes as $class) {
-                                        ?>
-                                                 <option value="<?php echo $class; ?>"><?php echo $class; ?></option>
-                                             <?php
-                                                }
-                                            }
-                                        } else {
-                                            $sqlclass = $conn->query("select * from class");
-                                            while ($class = mysqli_fetch_array($sqlclass)) {
-                                                ?>
-                                             <option value="<?php echo $class['class']; ?>"><?php echo $class['class']; ?></option>
-                                     <?php
-                                            }
-                                        }
-                                        ?>
-
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Subject</label>
-                                 <select id="demo1" type="text" required="required" a value="" class="form-control" name="subject">
-                                     <option value="">Select a subject</option>
-                                     <?php
-                                        if ($nameFound['subject'] !== "") {
-                                            $sqlSubject = $conn->query("select subject from users where username='$username'");
-                                            while ($nameFound = mysqli_fetch_array($sqlSubject)) {
-                                                $subjects = explode(',', $nameFound['subject']);
-                                                foreach ($subjects as $subject) {
-                                        ?>
-                                                 <option value="<?php echo $subject; ?>"><?php echo $subject; ?></option>
-                                             <?php
-                                                }
-                                            }
-                                        } else {
-                                            $sqlsubject = $conn->query("select subject from subject");
-                                            while ($subject = mysqli_fetch_array($sqlsubject)) { ?>
-                                             <option value="<?php print $subject['subject']; ?>"><?php print $subject['subject']; ?></option>
-                                     <?php
-                                            }
-                                        }
-                                        ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <button class="btn btn-primary" style="float: right;" type="submit" class="btn-submit">Check</button>
-
-                         </div>
-                     </div>
-                 </div>
-             </div><!-- /.modal-content -->
-         </div><!-- /.modal-dialog -->
-     </div><!-- /.modal -->
-
-     </div>
- </form>
-
-
+ 
 
 
 
  <!--- add CBT Question modal --->
 
- <form action="addQues.php" method="" target="_blank">
-     <div class="modal fade addCbtQues" tabindex="-1" role="dialog" id="mySmallModalLabel" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+ <form action="addQues.php" method="">
+     <div class="modal fade examQuestion" tabindex="-1" role="dialog" id="mySmallModalLabel" aria-labelledby="mySmallModalLabel" aria-hidden="true">
          <div class="modal-dialog modal-dialog-centered">
              <div class="modal-content">
                  <div class="modal-header">
-                     <h5 class="modal-title mt-0">Add Question</h5>
+                     <h5 class="modal-title mt-0">Add Exam Questions</h5>
                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                          <span aria-hidden="true">&times;</span>
                      </button>
@@ -460,37 +222,34 @@
                              <div class="form-group">
                                  <label class="control-label">Term</label>
                                  <select id="demo1" type="text" required="required" value="" class="form-control" name="term">
-                                     <option value="">Select a term</option>
-                                     <?php $sqlterm = $conn->query("select * from term");
-                                        while ($term = mysqli_fetch_array($sqlterm)) {; ?>
-
-                                         <option value="<?php print $term['term']; ?>"><?php print $term['term']; ?></option>
-                                     <?php } ?>
+                                 <option value="">Select a term</option>
+                                    
+                                    <option value="First">First Term</option>
+                                    <option value="Second">Second Term</option>
+                                    <option value="Third">Third Term</option>
                                  </select>
 
                              </div>
                          </div>
                      </div>
+
                      <div class="row">
                          <div class="col-12">
                              <div class="form-group">
                                  <label class="control-label">Class</label>
-                                 <select id="demo1" type="text" required="required" a value="" class="form-control" name="class">
+                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="class">
                                      <option value="">Select a class</option>
-                                     <?php
-                                        if ($nameFound['class'] !== "") {
-                                            $sqlclass = $conn->query("select class from users where username='$username'");
-                                            while ($nameFound = mysqli_fetch_array($sqlclass)) {
-                                                $classes = explode(',', $nameFound['class']);
-                                                foreach ($classes as $class) {
+                                     <?php    if ($nameFound['class'] !== "") {
+                                           foreach($teacherClasses as $teacherClass) {
+                                                $classTeachers = explode(',', $teacherClass['class']);
+                                                foreach ($classTeachers  as $classTeacher) {
                                         ?>
-                                                 <option value="<?php echo $class; ?>"><?php echo $class; ?></option>
+                                                 <option value="<?php echo $classTeacher; ?>"><?php echo $classTeacher; ?></option>
                                              <?php
                                                 }
                                             }
                                         } else {
-                                            $sqlclass = $conn->query("select * from class");
-                                            while ($class = mysqli_fetch_array($sqlclass)) {
+                                            foreach($classes as $class)  {
                                                 ?>
                                              <option value="<?php echo $class['class']; ?>"><?php echo $class['class']; ?></option>
                                      <?php
@@ -502,6 +261,7 @@
                              </div>
                          </div>
                      </div>
+
                      <div class="row">
                          <div class="col-12">
                              <div class="form-group">
@@ -527,11 +287,29 @@
                                             }
                                         }
                                         ?>
+
+
                                  </select>
 
                              </div>
                          </div>
                      </div>
+                     <div class="row">
+                         <div class="col-12">
+                             <div class="form-group">
+                                 <label class="control-label">Exam type</label>
+                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="examType">
+                                 <option value="">Select a exam type</option>
+                                    
+                                    <option value="First">First Test</option>
+                                    <option value="Second">Second Test</option>
+                                    <option value="Exam">Exam</option>
+                                 </select>
+
+                             </div>
+                         </div>
+                     </div>
+                    
                      <div class="row">
                          <div class="col-12">
                              <button class="btn btn-primary" style="float: right;" type="submit" class="btn-submit">Check</button>
@@ -545,103 +323,6 @@
 
      </div>
  </form>
-
-
-
-
-
-
-
- <form action="broadSheet2.php" method="get">
-     <div class="modal fade checkbroadsheet2" tabindex="-1" role="dialog" id="mySmallModalLabel" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <h5 class="modal-title mt-0">Check Broadsheet</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                     </button>
-                 </div>
-                 <div class="modal-body">
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Session</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="session">
-                                     <option value="">Select a session</option>
-                                     <?php $sqlsession = $conn->query("select * from session");
-                                        while ($session = mysqli_fetch_array($sqlsession)) {; ?>
-
-                                         <option value="<?php print $session['session']; ?>"><?php print $session['session']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Term</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="term">
-                                     <option value="">Select a term</option>
-                                     <?php $sqlterm = $conn->query("select * from term");
-                                        while ($term = mysqli_fetch_array($sqlterm)) {; ?>
-
-                                         <option value="<?php print $term['term']; ?>"><?php print $term['term']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Class</label>
-                                 <select id="demo1" type="text" required="required" a value="" class="form-control" name="class">
-                                     <option value="">Select a class</option>
-                                     <?php
-                                        if ($nameFound['class'] !== "") {
-                                            $sqlclass = $conn->query("select class from users where username='$username'");
-                                            while ($nameFound = mysqli_fetch_array($sqlclass)) {
-                                                $classes = explode(',', $nameFound['class']);
-                                                foreach ($classes as $class) {
-                                        ?>
-                                                 <option value="<?php echo $class; ?>"><?php echo $class; ?></option>
-                                             <?php
-                                                }
-                                            }
-                                        } else {
-                                            $sqlclass = $conn->query("select * from class");
-                                            while ($class = mysqli_fetch_array($sqlclass)) {
-                                                ?>
-                                             <option value="<?php echo $class['class']; ?>"><?php echo $class['class']; ?></option>
-                                     <?php
-                                            }
-                                        }
-                                        ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-
-                     <div class="row">
-                         <div class="col-12">
-                             <button class="btn btn-primary" style="float: right;" type="submit" class="btn-submit">Check</button>
-
-                         </div>
-                     </div>
-                 </div>
-             </div><!-- /.modal-content -->
-         </div><!-- /.modal-dialog -->
-     </div><!-- /.modal -->
-
-     </div>
- </form>
-
-
 
 
 
@@ -737,294 +418,13 @@
 
 
 
- <form action="score-sheet.php" method="">
-     <div class="modal fade checkscoresheet" tabindex="-1" role="dialog" id="mySmallModalLabel" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <h5 class="modal-title mt-0">Score Sheet</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                     </button>
-                 </div>
-                 <div class="modal-body">
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Session</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="session">
-                                     <option value="">Select a session</option>
-                                     <?php $sqlsession = $conn->query("select * from session");
-                                        while ($session = mysqli_fetch_array($sqlsession)) {; ?>
-
-                                         <option value="<?php print $session['session']; ?>"><?php print $session['session']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Term</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="term">
-                                     <option value="">Select a term</option>
-                                     <?php $sqlterm = $conn->query("select * from term");
-                                        while ($term = mysqli_fetch_array($sqlterm)) {; ?>
-
-                                         <option value="<?php print $term['term']; ?>"><?php print $term['term']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Class</label>
-                                 <select id="demo1" type="text" required="required" a value="" class="form-control" name="class">
-                                     <option value="">Select a class</option>
-                                     <?php
-                                        if ($nameFound['class'] !== "") {
-                                            $sqlclass = $conn->query("select class from users where username='$username'");
-                                            while ($nameFound = mysqli_fetch_array($sqlclass)) {
-                                                $classes = explode(',', $nameFound['class']);
-                                                foreach ($classes as $class) {
-                                        ?>
-                                                 <option value="<?php echo $class; ?>"><?php echo $class; ?></option>
-                                             <?php
-                                                }
-                                            }
-                                        } else {
-                                            $sqlclass = $conn->query("select * from class");
-                                            while ($class = mysqli_fetch_array($sqlclass)) {
-                                                ?>
-                                             <option value="<?php echo $class['class']; ?>"><?php echo $class['class']; ?></option>
-                                     <?php
-                                            }
-                                        }
-                                        ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Subject</label>
-                                 <select id="demo1" type="text" required="required" a value="" class="form-control" name="subject">
-                                     <option value="">Select a subject</option>
-                                     <?php
-                                        if ($nameFound['subject'] !== "") {
-                                            $sqlSubject = $conn->query("select subject from users where username='$username'");
-                                            while ($nameFound = mysqli_fetch_array($sqlSubject)) {
-                                                $subjects = explode(',', $nameFound['subject']);
-                                                foreach ($subjects as $subject) {
-                                        ?>
-                                                 <option value="<?php echo $subject; ?>"><?php echo $subject; ?></option>
-                                             <?php
-                                                }
-                                            }
-                                        } else {
-                                            $sqlsubject = $conn->query("select subject from subject");
-                                            while ($subject = mysqli_fetch_array($sqlsubject)) { ?>
-                                             <option value="<?php print $subject['subject']; ?>"><?php print $subject['subject']; ?></option>
-                                     <?php
-                                            }
-                                        }
-                                        ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <button class="btn btn-primary" style="float: right;" type="submit" class="btn-submit">View Score Sheet</button>
-
-                         </div>
-                     </div>
-                 </div>
-             </div><!-- /.modal-content -->
-         </div><!-- /.modal-dialog -->
-     </div><!-- /.modal -->
-
-     </div>
- </form>
-
-
-
-
- <form action="cbtscores.php" method="">
-     <div class="modal fade cbtscores" tabindex="-1" role="dialog" id="mySmallModalLabel" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <h5 class="modal-title mt-0">CBT SCORE SHEET</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                     </button>
-                 </div>
-                 <div class="modal-body">
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Session</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="session">
-                                     <option value="">Select a session</option>
-                                     <?php $sqlsession = $conn->query("select * from session");
-                                        while ($session = mysqli_fetch_array($sqlsession)) {; ?>
-
-                                         <option value="<?php print $session['session']; ?>"><?php print $session['session']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Term</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="term">
-                                     <option value="">Select a term</option>
-                                     <?php $sqlterm = $conn->query("select * from term");
-                                        while ($term = mysqli_fetch_array($sqlterm)) {; ?>
-
-                                         <option value="<?php print $term['term']; ?>"><?php print $term['term']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Class</label>
-                                 <select id="demo1" type="text" required="required" a value="" class="form-control" name="class">
-                                     <option value="">Select a class</option>
-                                    
-                                            <?php $sqlclass = $conn->query("select * from class");
-                                            while ($class = mysqli_fetch_array($sqlclass)) {
-                                                ?>
-                                             <option value="<?php echo $class['class']; ?>"><?php echo $class['class']; ?></option>
-                                     <?php
-                                            }
-                                        
-                                        ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Subject</label>
-                                 <select id="demo1" type="text" required="required" a value="" class="form-control" name="subject">
-                                     <option value="">Select a subject</option>
-                                     <?php
-                                        if ($nameFound['subject'] !== "") {
-                                            $sqlSubject = $conn->query("select subject from users where username='$username'");
-                                            while ($nameFound = mysqli_fetch_array($sqlSubject)) {
-                                                $subjects = explode(',', $nameFound['subject']);
-                                                foreach ($subjects as $subject) {
-                                        ?>
-                                                 <option value="<?php echo $subject; ?>"><?php echo $subject; ?></option>
-                                             <?php
-                                                }
-                                            }
-                                        } else {
-                                            $sqlsubject = $conn->query("select subject from subject");
-                                            while ($subject = mysqli_fetch_array($sqlsubject)) { ?>
-                                             <option value="<?php print $subject['subject']; ?>"><?php print $subject['subject']; ?></option>
-                                     <?php
-                                            }
-                                        }
-                                        ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <button class="btn btn-primary" style="float: right;" type="submit" class="btn-submit">View CBT Score Sheet</button>
-
-                         </div>
-                     </div>
-                 </div>
-             </div><!-- /.modal-content -->
-         </div><!-- /.modal-dialog -->
-     </div><!-- /.modal -->
-
-     </div>
- </form>
+ 
 
 
 
 
 
- <form action="promote-student.php" method="">
-     <div class="modal fade promote" tabindex="-1" role="dialog" id="mySmallModalLabel" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <h5 class="modal-title mt-0">Promote Student</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                     </button>
-                 </div>
-                 <div class="modal-body">
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">From Session</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="session">
-                                     <option value="">Select a session</option>
-                                     <?php $sqlsession = $conn->query("select * from session");
-                                        while ($session = mysqli_fetch_array($sqlsession)) {; ?>
 
-                                         <option value="<?php print $session['session']; ?>"><?php print $session['session']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">From Class</label>
-                                 <select id="demo1" type="text" required="required" a value="" class="form-control" name="class">
-                                     <option value="">Select a class</option>
-                                     <?php $sqlclass = $conn->query("select * from class");
-                                        while ($class = mysqli_fetch_array($sqlclass)) {; ?>
-
-                                         <option value="<?php print $class['class']; ?>"><?php print $class['class']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <button class="btn btn-primary" style="float: right;" id="submit" class="btn-submit">Check</button>
-
-                         </div>
-                     </div>
-                 </div>
-             </div><!-- /.modal-content -->
-         </div><!-- /.modal-dialog -->
-     </div><!-- /.modal -->
-
-     </div>
- </form>
 
 
  <div class="modal fade delete" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -1054,309 +454,7 @@
 
 
 
- <form action="comment-attendance.php" method="">
-     <div class="modal fade comment" tabindex="-1" role="dialog" id="mySmallModalLabel" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <h5 class="modal-title mt-0">Teacher's comment & Attendance</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                     </button>
-                 </div>
-                 <div class="modal-body">
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Session</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="session">
-                                     <option value="">Select a session</option>
-                                     <?php $sqlsession = $conn->query("select * from session");
-                                        while ($session = mysqli_fetch_array($sqlsession)) {; ?>
-
-                                         <option value="<?php print $session['session']; ?>"><?php print $session['session']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Term</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="term">
-                                     <option value="">Select a term</option>
-                                     <?php $sqlterm = $conn->query("select * from term");
-                                        while ($term = mysqli_fetch_array($sqlterm)) {; ?>
-
-                                         <option value="<?php print $term['term']; ?>"><?php print $term['term']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Class</label>
-                                 <select id="demo1" type="text" required="required" a value="" class="form-control" name="class">
-                                     <option value="">Select a class</option>
-                                     <?php
-                                        if ($nameFound['class'] !== "") {
-                                            $sqlclass = $conn->query("select class from users where username='$username'");
-                                            while ($nameFound = mysqli_fetch_array($sqlclass)) {
-                                                $classes = explode(',', $nameFound['class']);
-                                                foreach ($classes as $class) {
-                                        ?>
-                                                 <option value="<?php echo $class; ?>"><?php echo $class; ?></option>
-                                             <?php
-                                                }
-                                            }
-                                        } else {
-                                            $sqlclass = $conn->query("select * from class");
-                                            while ($class = mysqli_fetch_array($sqlclass)) {
-                                                ?>
-                                             <option value="<?php echo $class['class']; ?>"><?php echo $class['class']; ?></option>
-                                     <?php
-                                            }
-                                        }
-                                        ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <button class="btn btn-primary" type="submit" style="float: right;" id="submit" name="import" class="btn-submit">Show Student</button>
-
-                         </div>
-                     </div>
-                 </div>
-             </div><!-- /.modal-content -->
-         </div><!-- /.modal-dialog -->
-     </div><!-- /.modal -->
-
-     </div>
- </form>
-
-
-
-
-
- <form action="schoolAttendance.php" method="">
-     <div class="modal fade attendance" tabindex="-1" role="dialog" id="mySmallModalLabel" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <h5 class="modal-title mt-0">School Attendance</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                     </button>
-                 </div>
-                 <div class="modal-body">
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Session</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="session">
-                                     <option value="">Select a session</option>
-                                     <?php $sqlsession = $conn->query("select * from session");
-                                        while ($session = mysqli_fetch_array($sqlsession)) {; ?>
-
-                                         <option value="<?php print $session['session']; ?>"><?php print $session['session']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Term</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="term">
-                                     <option value="">Select a term</option>
-                                     <?php $sqlterm = $conn->query("select * from term");
-                                        while ($term = mysqli_fetch_array($sqlterm)) {; ?>
-
-                                         <option value="<?php print $term['term']; ?>"><?php print $term['term']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-
-                     <div class="row">
-                         <div class="col-12">
-                             <button class="btn btn-primary" type="submit" style="float: right;" id="submit" name="import" class="btn-submit">Show Student</button>
-
-                         </div>
-                     </div>
-                 </div>
-             </div><!-- /.modal-content -->
-         </div><!-- /.modal-dialog -->
-     </div><!-- /.modal -->
-
-     </div>
- </form>
-
-
-
-
-
- <form action="clearance.php" method="">
-     <div class="modal fade clearance" tabindex="-1" role="dialog" id="mySmallModalLabel" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <h5 class="modal-title mt-0">Clearance</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                     </button>
-                 </div>
-                 <div class="modal-body">
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Session</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="session">
-                                     <option value="">Select a session</option>
-                                     <?php $sqlsession = $conn->query("select * from session");
-                                        while ($session = mysqli_fetch_array($sqlsession)) {; ?>
-
-                                         <option value="<?php print $session['session']; ?>"><?php print $session['session']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Term</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="term">
-                                     <option value="">Select a term</option>
-                                     <?php $sqlterm = $conn->query("select * from term");
-                                        while ($term = mysqli_fetch_array($sqlterm)) {; ?>
-
-                                         <option value="<?php print $term['term']; ?>"><?php print $term['term']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Class</label>
-                                 <select id="demo1" type="text" required="required" a value="" class="form-control" name="class">
-                                     <option value="">Select a class</option>
-                                     <?php $sqlclass = $conn->query("select * from class");
-                                        while ($class = mysqli_fetch_array($sqlclass)) {; ?>
-
-                                         <option value="<?php print $class['class']; ?>"><?php print $class['class']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <button class="btn btn-primary" type="submit" style="float: right;" id="submit" name="import" class="btn-submit">Show Student</button>
-
-                         </div>
-                     </div>
-                 </div>
-             </div><!-- /.modal-content -->
-         </div><!-- /.modal-dialog -->
-     </div><!-- /.modal -->
-
-     </div>
- </form>
-
-
-
-
- <form action="view-student-report.php" method="">
-     <div class="modal fade student-report" tabindex="-1" role="dialog" id="mySmallModalLabel" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <h5 class="modal-title mt-0">Student Report</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                     </button>
-                 </div>
-                 <div class="modal-body">
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Session</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="session">
-                                     <option value="">Select a session</option>
-                                     <?php $sqlsession = $conn->query("select * from session");
-                                        while ($session = mysqli_fetch_array($sqlsession)) {; ?>
-
-                                         <option value="<?php print $session['session']; ?>"><?php print $session['session']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-
-
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Class</label>
-                                 <select id="demo1" type="text" required="required" a value="" class="form-control" name="class">
-                                     <option value="">Select a class</option>
-                                     <?php
-                                        if ($nameFound['class'] !== "") {
-                                            $sqlclass = $conn->query("select class from users where username='$username'");
-                                            while ($nameFound = mysqli_fetch_array($sqlclass)) {
-                                                $classes = explode(',', $nameFound['class']);
-                                                foreach ($classes as $class) {
-                                        ?>
-                                                 <option value="<?php echo $class; ?>"><?php echo $class; ?></option>
-                                             <?php
-                                                }
-                                            }
-                                        } else {
-                                            $sqlclass = $conn->query("select * from class");
-                                            while ($class = mysqli_fetch_array($sqlclass)) {
-                                                ?>
-                                             <option value="<?php echo $class['class']; ?>"><?php echo $class['class']; ?></option>
-                                     <?php
-                                            }
-                                        }
-                                        ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <button class="btn btn-primary" type="submit" style="float: right;" id="submit" name="import" class="btn-submit">Show Student</button>
-
-                         </div>
-                     </div>
-                 </div>
-             </div><!-- /.modal-content -->
-         </div><!-- /.modal-dialog -->
-     </div><!-- /.modal -->
-
-     </div>
- </form>
+ 
 
 
 
@@ -1454,64 +552,6 @@
 
 
 
- <form action="clearedStudent.php" method="">
-     <div class="modal fade cleared-student" tabindex="-1" role="dialog" id="mySmallModalLabel" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <h5 class="modal-title mt-0">View Cleared Student</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                     </button>
-                 </div>
-                 <div class="modal-body">
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Session</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="session">
-                                     <option value="">Select a session</option>
-                                     <?php $sqlsession = $conn->query("select * from session");
-                                        while ($session = mysqli_fetch_array($sqlsession)) {; ?>
-
-                                         <option value="<?php print $session['session']; ?>"><?php print $session['session']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-
-
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Term</label>
-                                 <select id="demo1" type="text" required="required" a value="" class="form-control" name="term">
-                                     <option value="">Select a term</option>
-                                     <?php $sqlterm = $conn->query("select * from term");
-                                        while ($term = mysqli_fetch_array($sqlterm)) {; ?>
-
-                                         <option value="<?php print $term['term']; ?>"><?php print $term['term']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <button class="btn btn-primary" type="submit" style="float: right;" id="submit" class="btn-submit">Show Cleared Student </button>
-
-                         </div>
-                     </div>
-                 </div>
-             </div><!-- /.modal-content -->
-         </div><!-- /.modal-dialog -->
-     </div><!-- /.modal -->
-
-     </div>
- </form>
 
 
 
@@ -1579,85 +619,7 @@
 
  <!--- EXAMINATION STATUS--->
 
- <form action="examination-status.php" method="" target="_blank">
-     <div class="modal fade examstatus" tabindex="-1" role="dialog" id="mySmallModalLabel" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <h5 class="modal-title mt-0">Exam Status</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                     </button>
-                 </div>
-                 <div class="modal-body">
-
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Term</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="term">
-                                     <option value="">Select a term</option>
-                                     <?php $sqlterm = $conn->query("select * from term");
-                                        while ($term = mysqli_fetch_array($sqlterm)) {; ?>
-
-                                         <option value="<?php print $term['term']; ?>"><?php print $term['term']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Session</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="session">
-                                     <option value="">Select a session</option>
-                                     <?php $sqlsession = $conn->query("select * from session");
-                                        while ($session = mysqli_fetch_array($sqlsession)) {; ?>
-
-                                         <option value="<?php print $session['session']; ?>"><?php print $session['session']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-
-                         <div class="row">
-                             <div class="col-12">
-                                 <div class="form-group">
-                                     <label class="control-label">Class</label>
-                                     <select id="demo1" type="text" required="required" value="" class="form-control" name="class">
-                                         <option value="">Select a class</option>
-                                         <?php $sqlclass = $conn->query("select * from class");
-                                            while ($class = mysqli_fetch_array($sqlclass)) {; ?>
-
-                                             <option value="<?php print $class['class']; ?>"><?php print $class['class']; ?></option>
-                                         <?php } ?>
-                                     </select>
-
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-
-
-                     <div class="row">
-                         <div class="col-12">
-                             <button class="btn btn-primary" style="float: right;" type="submit" class="btn-submit">Check</button>
-
-                         </div>
-                     </div>
-                 </div>
-             </div><!-- /.modal-content -->
-         </div><!-- /.modal-dialog -->
-     </div><!-- /.modal -->
-
-     </div>
- </form>
-
-
+ 
  <form action="allTopics.php" method="">
      <div class="modal fade viewEnote" tabindex="-1" role="dialog" id="mySmallModalLabel" aria-labelledby="mySmallModalLabel" aria-hidden="true">
          <div class="modal-dialog modal-dialog-centered">
@@ -1880,245 +842,12 @@
 
 
 
- <form action="addQues.php" method="">
-     <div class="modal fade examQuestion" tabindex="-1" role="dialog" id="mySmallModalLabel" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <h5 class="modal-title mt-0">Add Exam Questions</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                     </button>
-                 </div>
-                 <div class="modal-body">
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Session</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="session">
-                                     <option value="">Select a session</option>
-                                     <?php $sqlsession = $conn->query("select * from session");
-                                        while ($session = mysqli_fetch_array($sqlsession)) {; ?>
-
-                                         <option value="<?php print $session['session']; ?>"><?php print $session['session']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Term</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="term">
-                                     <option value="">Select a term</option>
-                                     <?php $sqlterm = $conn->query("select * from term");
-                                        while ($term = mysqli_fetch_array($sqlterm)) {; ?>
-
-                                         <option value="<?php print $term['term']; ?>"><?php print $term['term']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Class</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="class">
-                                     <option value="">Select a class</option>
-                                     <?php
-                                      
-                                            $sqlclass = $conn->query("select * from class");
-                                            while ($class = mysqli_fetch_array($sqlclass)) {
-                                                ?>
-                                             <option value="<?php echo $class['class']; ?>"><?php echo $class['class']; ?></option>
-                                     <?php
-                                            }
-                                        
-                                        ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Subject</label>
-                                 <select id="demo1" type="text" required="required" a value="" class="form-control" name="subject">
-                                     <option value="">Select a subject</option>
-                                     <?php
-                                        if ($nameFound['subject'] !== "") {
-                                            $sqlSubject = $conn->query("select subject from users where username='$username'");
-                                            while ($nameFound = mysqli_fetch_array($sqlSubject)) {
-                                                $subjects = explode(',', $nameFound['subject']);
-                                                foreach ($subjects as $subject) {
-                                        ?>
-                                                 <option value="<?php echo $subject; ?>"><?php echo $subject; ?></option>
-                                             <?php
-                                                }
-                                            }
-                                        } else {
-                                            $sqlsubject = $conn->query("select subject from subject");
-                                            while ($subject = mysqli_fetch_array($sqlsubject)) { ?>
-                                             <option value="<?php print $subject['subject']; ?>"><?php print $subject['subject']; ?></option>
-                                     <?php
-                                            }
-                                        }
-                                        ?>
-
-
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                    
-                     <div class="row">
-                         <div class="col-12">
-                             <button class="btn btn-primary" style="float: right;" type="submit" class="btn-submit">Check</button>
-
-                         </div>
-                     </div>
-                 </div>
-             </div><!-- /.modal-content -->
-         </div><!-- /.modal-dialog -->
-     </div><!-- /.modal -->
-
-     </div>
- </form>
 
 
 
 
- <form action="editExamQues.php" method="GET">
-     <div class="modal fade editExamQuestion" tabindex="-1" role="dialog" id="mySmallModalLabel" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <h5 class="modal-title mt-0">Preview Exam Questions</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                     </button>
-                 </div>
-                 <div class="modal-body">
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Session</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="session">
-                                     <option value="">Select a session</option>
-                                     <?php $sqlsession = $conn->query("select * from session");
-                                        while ($session = mysqli_fetch_array($sqlsession)) {; ?>
 
-                                         <option value="<?php print $session['session']; ?>"><?php print $session['session']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Term</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="term">
-                                     <option value="">Select a term</option>
-                                     <?php $sqlterm = $conn->query("select * from term");
-                                        while ($term = mysqli_fetch_array($sqlterm)) {; ?>
-
-                                         <option value="<?php print $term['term']; ?>"><?php print $term['term']; ?></option>
-                                     <?php } ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Class</label>
-                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="class">
-                                     <option value="">Select a class</option>
-                                     <?php
-                                        if ($nameFound['class'] !== "") {
-                                            $sqlclass = $conn->query("select class from users where username='$username'");
-                                            while ($nameFound = mysqli_fetch_array($sqlclass)) {
-                                                $classes = explode(',', $nameFound['class']);
-                                                foreach ($classes as $class) {
-                                        ?>
-                                                 <option value="<?php echo $class; ?>"><?php echo $class; ?></option>
-                                             <?php
-                                                }
-                                            }
-                                        } else {
-                                            $sqlclass = $conn->query("select * from class");
-                                            while ($class = mysqli_fetch_array($sqlclass)) {
-                                                ?>
-                                             <option value="<?php echo $class['class']; ?>"><?php echo $class['class']; ?></option>
-                                     <?php
-                                            }
-                                        }
-                                        ?>
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="form-group">
-                                 <label class="control-label">Subject</label>
-                                 <select id="demo1" type="text" required="required" a value="" class="form-control" name="subject">
-                                     <option value="">Select a subject</option>
-                                     <?php
-                                        if ($nameFound['subject'] !== "") {
-                                            $sqlSubject = $conn->query("select subject from users where username='$username'");
-                                            while ($nameFound = mysqli_fetch_array($sqlSubject)) {
-                                                $subjects = explode(',', $nameFound['subject']);
-                                                foreach ($subjects as $subject) {
-                                        ?>
-                                                 <option value="<?php echo $subject; ?>"><?php echo $subject; ?></option>
-                                             <?php
-                                                }
-                                            }
-                                        } else {
-                                            $sqlsubject = $conn->query("select subject from subject");
-                                            while ($subject = mysqli_fetch_array($sqlsubject)) { ?>
-                                             <option value="<?php print $subject['subject']; ?>"><?php print $subject['subject']; ?></option>
-                                     <?php
-                                            }
-                                        }
-                                        ?>
-
-
-                                 </select>
-
-                             </div>
-                         </div>
-                     </div>
-
-                     <div class="row">
-                         <div class="col-12">
-                             <button class="btn btn-primary" style="float: right;" type="submit" class="btn-submit">Check</button>
-
-                         </div>
-                     </div>
-                 </div>
-             </div><!-- /.modal-content -->
-         </div><!-- /.modal-dialog -->
-     </div><!-- /.modal -->
-
-     </div>
- </form>
-
+ 
  <form action="allSubForExam.php" method="GET">
      <div class="modal fade checkQuestion" tabindex="-1" role="dialog" id="mySmallModalLabel" aria-labelledby="mySmallModalLabel" aria-hidden="true">
          <div class="modal-dialog modal-dialog-centered">

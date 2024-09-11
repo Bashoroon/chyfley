@@ -1,6 +1,6 @@
 <?php 
 include 'db.php';
-$id = $_POST['id'];
+$admissionNo = $_POST['admissionNo'];
 
 
 
@@ -38,10 +38,10 @@ if ($_FILES["profile-pix"]["size"] > 20480) {
      
   }
 
-$sqlUpdate = $conn-> query("update studentusers set passport='$random_digit.$imageFileType' where id='$id'  ") or die(mysqli_error($conn));
+$sqlUpdate = $conn-> query("update studentusers set passport='$random_digit.$imageFileType' where admissionNo='$admissionNo'  ") or die(mysqli_error($conn));
 
 echo "<script>
 alert('Updated Successfully!');
-window.location.href=' edit-student.php?id=$id';
+window.location.href=' edit-student.php?admissionNo=$admissionNo';
 </script>";
  ?>

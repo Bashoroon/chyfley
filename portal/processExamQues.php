@@ -4,23 +4,15 @@ $term  = $_POST['term'];
 $class = $_POST['class'];
 $session = $_POST['session'];
 $subject = $_POST['subject'];
-
 $ques = addslashes($_POST['ques']);
-$A = addslashes($_POST['A']);
-$B = addslashes($_POST['B']);
-$C = addslashes($_POST['C']);
-$D = addslashes($_POST['D']);
-$E = addslashes($_POST['E']);
-$ans = addslashes($_POST['ans']);
-$quesid = uniqid();
+$optionA = addslashes($_POST['optionA']);
+$optionB = addslashes($_POST['optionB']);
+$optionC = addslashes($_POST['optionC']);
+$optionD = addslashes($_POST['optionD']);
+$optionE = addslashes($_POST['optionE']);
+$answer = $_POST['answer'];
+$exam_type = $_POST['exam_type'];
 
-$startDate = $_POST['startDate'];
-$endDate = $_POST['endDate'];
-
-// $topic = addslashes($_POST['topic']);
-$quesid = uniqid();
-
-
-$sqlAddEnote = $conn->query("INSERT INTO questionbank (term, class, session, subject, question, optionA, optionB, optionC, optionD, optionE, answer, startDate, endDate, quesidd) VALUES ('$term', '$class', '$session', '$subject', '$ques', '$A', '$B', '$C', '$D', '$E', '$ans', '$startDate', '$endDate',  '$quesid')") or die(mysqli_error($conn));
-header("location:addQues.php?session=$session&term=$term&class=$class&subject=$subject&startDate=$startDate&endDate=$endDate");
+$sqlAddEnote = $conn->query("INSERT INTO questionbank (term, class, session, subject, question, optionA, optionB, optionC, optionD, optionE, answer,  exam_type) VALUES ('$term', '$class', '$session', '$subject', '$ques', '$optionA', '$optionB', '$optionC', '$optionD', '$optionE', '$answer', '$exam_type')") or die(mysqli_error($conn));
+header("location:addQues.php?session=$session&term=$term&class=$class&subject=$subject&examType=$exam_type");
 ?>

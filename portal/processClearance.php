@@ -10,6 +10,6 @@ foreach ($_POST['id'] as $key => $value) {
 $sqlclear=  $conn->query("insert into clearance(session, term, class, admissionNo) values ('$session', '$term', '$class', '$id')") or die('unable to clear student');  
 
 }
-header("location: clearance.php?session=$session&term=$term&class=$class");
+header("location:clearance.php?session=$session&class=$class&term=$term&load-student=");
  
 ?>

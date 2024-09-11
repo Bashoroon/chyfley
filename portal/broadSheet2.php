@@ -1,7 +1,11 @@
-<?php include 'header.php';
+<?php include 'call_php_function.php';
+include 'header.php';
+if (isset($_GET['session']) && isset($_GET['class'])) {
 $session = $_GET['session'];
-$term = $_GET['term'];
+$term = $_GET['term']; 
 $class = $_GET['class'];
+}
+
 $counter = 0;
 error_reporting(E_ERROR);
 ?>
@@ -72,6 +76,7 @@ error_reporting(E_ERROR);
   <div class="wrapper">
     <div class="container-fluid">
       <!-- Page-Title -->
+       <?php if (isset($_GET['session']) && isset($_GET['class'])) {?>
       <div class="page-title-box">
         <div class="row align-items-center">
           <div class="col-sm-6">
@@ -87,7 +92,74 @@ error_reporting(E_ERROR);
         </div>
         <!-- end row -->
       </div>
+      <?php }?>
+      <form  action="broadSheet2.php" method="GET">
+               
+               <div class="row">
+                   <div class="col-4">
+                       <div class="form-group">
+                           <label class="control-label">From Session</label>
+                           <select id="sessionSelect" type="text" required="required" value="" class="form-control" name="session">
+                               <option value="">Select a session</option>
+                               <?php foreach($sessions as $sessionz){?>
+                                   <option value="<?php print $sessionz['session']; ?>"><?php print $sessionz['session']; ?></option>
+                               <?php } ?>
+                           </select>
 
+                       </div>
+                   </div>
+               
+              
+                   <div class="col-4">
+                       <div class="form-group">
+                           <label class="control-label">From Class</label>
+                           <select id="classSelect" type="text" required="required" a value="" class="form-control" name="class">
+                               <option value="">Select a class</option>
+                               <?php    if ($nameFound['class'] !== "") {
+                                           foreach($teacherClasses as $teacherClass) {
+                                                $classTeachers = explode(',', $teacherClass['class']);
+                                                foreach ($classTeachers  as $classTeacher) {
+                                        ?>
+                                                 <option value="<?php echo $classTeacher; ?>"><?php echo $classTeacher; ?></option>
+                                             <?php
+                                                }
+                                            }
+                                        } else {
+                                            foreach($classes as $clazz)  {
+                                                ?>
+                                             <option value="<?php echo $clazz['class']; ?>"><?php echo $clazz['class']; ?></option>
+                                     <?php
+                                            }
+                                        }
+                                        ?>
+                           </select>
+
+                       </div>
+                   </div>
+                        <div class="col-4">
+                             <div class="form-group">
+                                 <label class="control-label">Term</label>
+                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="term">
+                                     <option value="">Select a term</option>
+                                    
+                                         <option value="First">First Term</option>
+                                         <option value="Second">Second Term</option>
+                                         <option value="Third">Third Term</option>
+                                     
+                                     
+                                 </select>
+
+                             </div>
+                        </div>
+                        
+                </div>
+               <div class="row">
+                   <div class="col-12">
+                       <button class="btn btn-primary" name= "load-student" style="float: right;" id="submit" class="btn-submit">Load Broadsheet</button>
+
+                   </div>
+               </div>
+          </form>
       <table id="broad-sheet" class="minimalistBlack" style=" display: block; white-space: nowrap; overflow:auto;  height: 400px; position: relative;">
         <thead>
 
@@ -126,20 +198,23 @@ error_reporting(E_ERROR);
         <tbody>
 
           <?php
-          $sqlSelectStudent =  $conn->query("SELECT * from promotedstudent where session = '$session' and class = '$class' and deleteStatus != 1");
+          // $sqlSelectStudent =  $conn->query("SELECT * from promotedstudent where session = '$session' and class = '$class' and deleteStatus != 1");
 
-          while ($row = mysqli_fetch_array($sqlSelectStudent)) {
-            $admissionNo = $row['admissionNo'];
-            $sqlFindStu =  $conn->query("SELECT * from studentusers where admissionNo = '$admissionNo'");
+          // while ($row = mysqli_fetch_array($sqlSelectStudent)) {
+          //   $admissionNo = $row['admissionNo'];
+          //   $sqlFindStu =  $conn->query("SELECT * from studentusers where admissionNo = '$admissionNo'");
 
-            $findStudent = mysqli_fetch_array($sqlFindStu);
+          //   $studentName = mysqli_fetch_array($sqlFindStu);
 
+          if (isset($_GET['session']) && isset($_GET['class'])) {
+            foreach( $students as $student){
+              $studentName = $studentController->student_name($student['admissionNo']); 
+              $admissionNo = $student['admissionNo'];
+            $sqlTotalTestExamFirst = $conn->query("SELECT  sum(test+test_two+exam) as totalTestExamFirst from studentscores where session = '".$_GET['session']."' and term = 'First' and class = '$class' and admissionNo='$admissionNo' ");
 
-            $sqlTotalTestExamFirst = $conn->query("SELECT  sum(test+exam) as totalTestExamFirst from studentscores where session = '$session' and term = 'First' and class = '$class' and admissionNo='$admissionNo' ");
+            $sqlTotalTestExamSecond = $conn->query("SELECT  sum(test+test_two+exam) as totalTestExamSecond from studentscores  where session = '$session' and term = 'Second' and class = '$class' and admissionNo='$admissionNo' ");
 
-            $sqlTotalTestExamSecond = $conn->query("SELECT  sum(test+exam) as totalTestExamSecond from studentscores  where session = '$session' and term = 'Second' and class = '$class' and admissionNo='$admissionNo' ");
-
-            $sqlTotalTestExamThird = $conn->query("SELECT  sum(test+exam) as totalTestExamThird from studentscores  where session = '$session' and term = 'Third' and class = '$class' and admissionNo='$admissionNo' ");
+            $sqlTotalTestExamThird = $conn->query("SELECT  sum(test+test_two+exam) as totalTestExamThird from studentscores  where session = '$session' and term = 'Third' and class = '$class' and admissionNo='$admissionNo' ");
 
             $sqlOfferFirst = $conn->query("SELECT * from studentscores where session = '$session' and term = 'First' and class = '$class' and  admissionNo='$admissionNo'");
             $sqlOfferSecond = $conn->query("SELECT * from studentscores where session = '$session' and term = 'Second' and class = '$class' and  admissionNo='$admissionNo'");
@@ -165,7 +240,7 @@ error_reporting(E_ERROR);
           ?>
             <tr>
               <td> <?php print ++$counter; ?></td>
-              <td> <?php print $findStudent['surname']; ?> <span><?php print $findStudent['firstName']; ?></span><span> <?php print $findStudent['lastName']; ?> </span></td>
+              <td> <?php print $studentName['surname']; ?> <span><?php print $studentName['firstName']; ?></span><span> <?php print $studentName['lastName']; ?> </span></td>
               <?php
               $sqlSelectScore =  $conn->query("SELECT subject from studentscores where session = '$session' and class = '$class' group by subject");
               while ($rowz = mysqli_fetch_array($sqlSelectScore)) {
@@ -186,9 +261,9 @@ error_reporting(E_ERROR);
 
                 $studentScoreThird = mysqli_fetch_array($sqlStudentScoreThird);
 
-                $firstTermScore = $studentScore['test'] + $studentScore['exam'];
-                $secondTermScore = $studentScoreSecond['test'] + $studentScoreSecond['exam'];
-                $thirdTermScore = $studentScoreThird['test'] + $studentScoreThird['exam'];
+                $firstTermScore = $studentScore['test'] + $studentScore['test_two'] + $studentScore['exam'];
+                $secondTermScore = $studentScoreSecond['test'] + $studentScoreSecond['test_two'] + $studentScoreSecond['exam'];
+                $thirdTermScore = $studentScoreThird['test']+ $studentScoreThird['test_two'] + $studentScoreThird['exam'];
               ?>
                 <?php if ($term == "First") { ?>
                   <td class="co-name"><?php if ($firstTermScore == "") {
@@ -232,11 +307,11 @@ error_reporting(E_ERROR);
                 <?php } ?>
                 <?php if ($term !== "First") { ?>
                   <td><?php if ($term == "First") {
-                        print $studentScore['test'] + $studentScore['exam'];
+                        print $studentScore['test'] + $studentScore['test_two'] + $studentScore['exam'];
                       } elseif ($term == "Second") {
-                        print $studentScore['test'] + $studentScore['exam'] + $studentScoreSecond['test'] + $studentScoreSecond['exam'];
+                        print $studentScore['test'] + $studentScore['test_two'] + $studentScore['exam'] + $studentScoreSecond['test'] + $studentScoreSecond['test_two'] + $studentScoreSecond['exam'];
                       } elseif ($term == "Third") {
-                        print $studentScore['test'] + $studentScore['exam'] +  $studentScoreSecond['test'] + $studentScoreSecond['exam'] +  $studentScoreThird['test'] + $studentScoreThird['exam'];
+                        print $studentScore['test'] + $studentScore['test_two'] + $studentScore['exam'] +  $studentScoreSecond['test'] + $studentScoreSecond['test_two'] + $studentScoreSecond['exam'] +  $studentScoreThird['test'] + $studentScoreThird['test_two'] + $studentScoreThird['exam'];
                       } ?></td>
               <?php }
               } ?>
@@ -266,7 +341,7 @@ error_reporting(E_ERROR);
 
             </tr>
 
-          <?php  } ?>
+          <?php  } }?>
 
         </tbody>
       </table>

@@ -447,6 +447,25 @@
             });
         });
     </script>
+    <script type="text/javascript">
+    function confirmation() {
+        return confirm('Are you sure you want to do this?');
+    }
+
+
+
+    $(document).ready(function () {
+        // Show the alert with slide-in animation
+        $('.alert-custom').addClass('alert-show').fadeIn();
+
+        // Hide the alert after 5 seconds (5000 milliseconds)
+        setTimeout(function () {
+            $('.alert-custom').fadeOut('slow', function() {
+                $(this).removeClass('alert-show');
+            });
+        }, 5000);
+    });
+</script>
     
         
        

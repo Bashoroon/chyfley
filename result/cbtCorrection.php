@@ -208,7 +208,7 @@ $user = $_SESSION['admissionNo'];
     <!-- Circles which indicate the steps of the form: -->
 
 
-    <?php include '../portal/footer.php'; ?>
+    <?php include 'footer.php'; ?>
 
 
     <script>

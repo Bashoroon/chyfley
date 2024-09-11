@@ -1,4 +1,6 @@
-<?php include 'header.php';?>
+<?php include 'call_php_function.php';
+include 'header.php';
+?>
 <body>
 
 <?php include 'navigationMenu.php';
@@ -29,6 +31,46 @@ $term = $_GET['term'];
                 </div>
                 <!-- end row -->
             </div>
+            <form  action="clearedStudent.php" method="GET">
+               
+               <div class="row">
+               <div class="col-lg-6 col-12 col-md-12 col-sm-12 col-xm-12">
+                       <div class="form-group">
+                           <label class="control-label"> Session</label>
+                           <select id="sessionSelect" type="text" required="required" value="" class="form-control" name="session">
+                               <option value="">Select a session</option>
+                               <?php foreach($sessions as $session){?>
+                                   <option value="<?php print $session['session']; ?>"><?php print $session['session']; ?></option>
+                               <?php } ?>
+                           </select>
+
+                       </div>
+                   </div>
+               
+              
+                   <div class="col-lg-6 col-12 col-md-12 col-sm-12 col-xm-12">
+                             <div class="form-group">
+                                 <label class="control-label">Term</label>
+                                 <select id="demo1" type="text" required="required" value="" class="form-control" name="term">
+                                     <option value="">Select a term</option>
+                                    
+                                         <option value="First">First Term</option>
+                                         <option value="Second">Second Term</option>
+                                         <option value="Third">Third Term</option>
+                                     
+                                     
+                                 </select>
+
+                             </div>
+                        </div>
+               </div>
+               <div class="row">
+                   <div class="col-12">
+                       <button class="btn btn-primary" name="" style="float: right;" id="submit" class="btn-submit">Load Student</button>
+
+                   </div>
+               </div>
+            </form>
             <div class="row">
                 <div class="col-12">
                     <div class="card m-b-30">
@@ -50,8 +92,12 @@ $term = $_GET['term'];
                                 </thead>
 
                                 <tbody>
+
+                                
                                     
-<?php $sqlClearedStudent = $conn->query ("SELECT * from clearance where session = '$session' and term = '$term'");
+<?php 
+ if (isset($_GET['term']) and isset($_GET['term'])){
+$sqlClearedStudent = $conn->query ("SELECT * from clearance where session = '".$_GET['session']."' and term = '".$_GET['term']."'");
         while ($clearedStudent = mysqli_fetch_array($sqlClearedStudent)){;
         $sqlFindStudent = $conn->query ("SELECT * from studentusers where admissionNo='".$clearedStudent['admissionNo']."'");
         $findStudent = mysqli_fetch_array($sqlFindStudent);
@@ -63,7 +109,7 @@ $term = $_GET['term'];
                                     <td><?php print $findStudent['surname'];?> <?php print $findStudent['firstName'];?> <?php print $findStudent['lastName'];?> (<?php print $clearedStudent['class'];?>) </td>
                                     
                                 </tr>
-                                <?php  }?>
+                                <?php } }?>
                                 </tbody>
                             </table>
 

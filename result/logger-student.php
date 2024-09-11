@@ -3,8 +3,8 @@ include 'db.php';
 
 $surname = $_POST['surname']; 
 $password = $_POST['password'];
-$substrPass = substr($password, -4);
-$sqlfound = $conn->query("SELECT * FROM studentusers WHERE surname ='$surname' AND RIGHT(admissionNo, 4) = '$substrPass'");
+//$substrPass = substr($password, -4);
+$sqlfound = $conn->query("SELECT * FROM studentusers WHERE admissionNo ='$surname' AND password = '$password'");
 $found = mysqli_num_rows($sqlfound);
 $role = mysqli_fetch_array($sqlfound);
 $user = $role['admissionNo'];  

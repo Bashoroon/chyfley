@@ -1,4 +1,5 @@
-<?php include 'header.php'; ?>
+<?php include 'call_php_function.php';
+include 'header.php';?>
 
 <body>
     <!-- Navigation Bar-->
@@ -21,6 +22,9 @@
                 </div>
                 <!-- end row -->
             </div>
+            <div class="alert alert-custom alert-<?php echo $responseType === 'success' ? 'success' : 'danger'; ?> alert-slide-in" role="alert">
+    <?php echo $response; ?>
+</div>
             <?php $sqlStudentNo  = $conn->query("SELECT * from studentusers ");
             $studentNo = mysqli_num_rows($sqlStudentNo);
 
@@ -41,7 +45,7 @@
                                 </div>
                                 <div>
 
-                                    <h5 class="font-16"><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".inputScore">INPUT SCORE </a></h5>
+                                    <h5 class="font-16"><a href="inputScore.php" class=" waves-effect waves-light" >INPUT SCORE </a></h5>
                                 </div>
                                 <h5 class="mt-4"><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".inputScore">INPUT SCORE </a></h5>
                                 <div class="progress mt-4" style="height: 4px;">
@@ -59,9 +63,9 @@
                                     <i class="mdi mdi-briefcase-check bg-success text-white"></i>
                                 </div>
                                 <div>
-                                    <h5 class="font-16"><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".checkbroadsheet2">BRAOD SHEET </a></h5>
+                                    <h5 class="font-16"><a href="broadSheet2.php" class=" waves-effect waves-light" >BROAD SHEET </a></h5>
                                 </div>
-                                <h5 class="mt-4"><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".checkbroadsheet2">BRAOD SHEET </a></h5>
+                                <h5 class="mt-4"><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".checkbroadsheet2">BROAD SHEET </a></h5>
                                 <div class="progress mt-4" style="height: 4px;">
                                     <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
@@ -77,7 +81,7 @@
                                     <i class="mdi mdi-tag-text-outline bg-warning text-white"></i>
                                 </div>
                                 <div>
-                                    <h5 class="font-16"><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".checkscoresheet"> VIEW SCORE SHEET </a></h5>
+                                    <h5 class="font-16"><a href="score-sheet.php" class=" waves-effect waves-light"> VIEW SCORE SHEET </a></h5>
                                 </div>
                                 <h5 class="mt-4"><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".checkscoresheet">SCORE SHEET </a></h5>
                                 <div class="progress mt-4" style="height: 4px;">
@@ -95,13 +99,13 @@
                                     <i class="mdi mdi-tag-text-outline bg-warning text-white"></i>
                                 </div>
                                 <div>
-                                    <h5 class="font-16"><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".student-report">VIEW STUDENT REPORT</a></h5>
+                                    <h5 class="font-16"><a href="view-student-report.php" class=" waves-effect waves-light">VIEW STUDENT REPORT</a></h5>
                                 </div>
                                 <h5 class="mt-4"><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".student-report">STUDENT REPORT</a></h5>
                                 <div class="progress mt-4" style="height: 4px;">
                                     <div class="progress-bar bg-warning" role="progressbar" style="width: 68%" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                                <p class="text-muted mt-2 mb-0">Score Sheet<span class="float-right">68%</span></p>
+                                <p class="text-muted mt-2 mb-0">Student Report<span class="float-right">68%</span></p>
                             </div>
                         </div>
                     </div>
@@ -172,9 +176,9 @@
                                     <i class="mdi mdi-buffer bg-danger text-white"></i>
                                 </div>
                                 <div>
-                                    <h5 class="font-16"><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".comment">COMMENT</a></h5>
+                                    <h5 class="font-16"><a href="comment-attendance.php" class=" waves-effect waves-light">COMMENT</a></h5>
                                 </div>
-                                <h5 class="mt-4"><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".comment">COM/ATT</a></h5>
+                                <h5 class="mt-4"><a href="comment-attendance.php" class=" waves-effect waves-light" >COM/ATT</a></h5>
                                 <div class="progress mt-4" style="height: 4px;">
                                     <div class="progress-bar bg-danger" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
@@ -212,9 +216,9 @@
                                     <i class="mdi mdi-briefcase-check bg-success text-white"></i>
                                 </div>
                                 <div>
-                                    <h5 class="font-16"><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".cbtscores">CBT SCORES</a></a></h5>
+                                    <h5 class="font-16"><a href="cbtscores.php" class=" waves-effect waves-light" >CBT SCORES</a></a></h5>
                                 </div>
-                                <h5 class="mt-4"><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".cbtscores">CBT SCORES</a></h5>
+                                <h5 class="mt-4"><a href="cbtscores.php" class=" waves-effect waves-light" >CBT SCORES</a></h5>
                                 <div class="progress mt-4" style="height: 4px;">
                                     <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
@@ -227,107 +231,107 @@
             <?php if ($role == "Admin" || $role == "Sub") { ?>
 
                 <div class="row">
-                    <div class="col-xl-6 col-lg-6 col-6  col-sm-12 col-md-6">
+                    <div class="col-xl-6 col-lg-6 col-12  col-sm-12 col-md-12">
                         <div class="card m-b-30">
                             <div class="card-body">
 
                                 <h4 class="mt-0 header-title">Add Student</h4>
-                                <?php if (isset($_GET['student-exist'])) {
-                                    echo "<h6>Admission ";
-                                    print $_GET['student-exist'];
-                                    echo " already exist. Please try again</h6>";
-                                }
-                                if (isset($_GET['student-added'])) {
-                                    echo "<h6>Admission ";
-                                    print $_GET['student-added'];
-                                    echo " added successfully</h6>";
-                                }
-                                ?>
+                                
 
-                             
-                                <form action="processAdmission.php" method="POST" id="admission">
-                                <div class="tab-content">
-                                    <div class="tab-pane active p-3" id="home-1" role="tabpanel">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                
+
+                                <form method="POST" id="adsmission">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active p-3" id="home-1" role="tabpanel">
+                                            <div class="row">
+                                                <div class="col-12">
+
                                                     <div class="form-group">
                                                         <label class="control-label">Admission Number</label>
                                                         <?php
                                                         $year = date("Y");
                                                         ?>
-                                                        <input id="demo1" type="text" value="CHS/<?php echo substr($year, 2); ?>/" class="form-control" name="admissionNO">
+                                                        <input type="text" value="CHS/<?php echo substr($year, 2); ?>/" class="form-control" name="admissionNo">
                                                     </div>
+                                                </div>
                                             </div>
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Surname</label>
+                                                        <input id="demo1" type="text" required="required" class="form-control" name="surname">
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label class="control-label">First Name</label>
+                                                        <input id="demo1" type="text" required="required" class="form-control" name="firstName">
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Middle Name</label>
+                                                        <input id="demo1" type="text" class="form-control" name="lastName">
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Session</label>
+                                                        <select id="demo1" type="text" name="session" required="required" value="" class="form-control">
+                                                            <option value="">Select a session</option>
+                                                            <?php foreach ($sessions as $sessionz) { ?>
+                                                                <option value="<?php print $sessionz['session']; ?>"><?php print $sessionz['session']; ?></option>
+                                                            <?php } ?>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Class</label>
+                                                        <select id="demo1" type="text" required="required" value="" class="form-control" name="class">
+                                                            <option value="">Select a class</option>
+                                                            <?php if ($nameFound['class'] !== "") {
+                                                                foreach ($teacherClasses as $teacherClass) {
+                                                                    $classTeachers = explode(',', $teacherClass['class']);
+                                                                    foreach ($classTeachers  as $classTeacher) {
+                                                            ?>
+                                                                        <option value="<?php echo $classTeacher; ?>"><?php echo $classTeacher; ?></option>
+                                                                    <?php
+                                                                    }
+                                                                }
+                                                            } else {
+                                                                foreach ($classes as $class) {
+                                                                    ?>
+                                                                    <option value="<?php echo $class['class']; ?>"><?php echo $class['class']; ?></option>
+                                                            <?php
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Gender</label>
+                                                        <select id="demo1" type="text" required="required" value="" class="form-control" name="gender">
+                                                            <option>Select a gender</option>
+
+
+                                                            <option value="M">Male</option>
+                                                            <option value="F">Female</option>
+
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <button type="submit" name="add-student" class="btn btn-primary" style="float: right;">Add Student</button>
+                                            <div id="result_screen" style="font-size: 20px; font-weight: bold; display: none;" class="alert alert-success"></div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <label class="control-label">Surname</label>
-                                                    <input id="demo1" type="text" required="required" class="form-control" name="surname">
-                                                </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <label class="control-label">First Name</label>
-                                                    <input id="demo1" type="text" required="required" class="form-control" name="firstName">
-                                                </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <label class="control-label">Middle Name</label>
-                                                    <input id="demo1" type="text" class="form-control" name="lastName">
-                                                </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <label class="control-label">Session</label>
-                                                    <select id="demo1" type="text" name="session" required="required" value="" class="form-control">
-                                                        <option>Select a session</option>
-                                                        <?php $sqlsession = $conn->query("select * from session");
-                                                        while ($session = mysqli_fetch_array($sqlsession)) {; ?>
-
-                                                            <option value="<?php print $session['session']; ?>"><?php print $session['session']; ?></option>
-                                                        <?php } ?>
-                                                    </select>
-
-                                                </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <label class="control-label">Class</label>
-                                                    <select id="demo1" type="text" required="required" value="" class="form-control" name="class">
-                                                        <option>Select a class</option>
-                                                        <?php $sqlclass = $conn->query("select * from class");
-                                                        while ($class = mysqli_fetch_array($sqlclass)) {; ?>
-
-                                                            <option value="<?php print $class['class']; ?>"><?php print $class['class']; ?></option>
-                                                        <?php } ?>
-                                                    </select>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <label class="control-label">Gender</label>
-                                                    <select id="demo1" type="text" required="required" value="" class="form-control" name="gender">
-                                                        <option>Select a gender</option>
-
-
-                                                        <option value="M">Male</option>
-                                                        <option value="F">Female</option>
-
-                                                    </select>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <button type="submit" class="bnt btn-primary" style="float: right;">Add Student</button>
-                                        <div id="result_screen" style="font-size: 20px; font-weight: bold; display: none;" class="alert alert-success"></div>
                                     </div>
-                                </div>
                                 </form>
 
                                 <center>
@@ -341,10 +345,8 @@
                                                 <select id="demo1" type="text" name="session" class="form-control" required="required">
 
                                                     <option value="">Select a session</option>
-                                                    <?php $sqlsession = $conn->query("select * from session");
-                                                    while ($session = mysqli_fetch_array($sqlsession)) {; ?>
-
-                                                        <option value="<?php print $session['session']; ?>"><?php print $session['session']; ?></option>
+                                                    <?php foreach ($sessions as $sessionz) { ?>
+                                                        <option value="<?php print $sessionz['session']; ?>"><?php print $sessionz['session']; ?></option>
                                                     <?php } ?>
                                                 </select>
 
@@ -352,17 +354,21 @@
 
                                         </div>
                                         <div class="col-6">
-                                            <input type="file" name="file" id="file" accept=".xls,.xlsx" required="required">
-                                            <button type="submit" id="submit" name="upload" class="btn-submit">Upload</button>
-                                        </div>
-                                </form>
-                            </div>
-                            </div>
+                                            <label for="upload">Upload a CSV</label>
+                                            <input type="file" class="form-control" name="file" id="file" accept=".xls,.xlsx" required="required">
 
+                                        </div>
+                                        <button type="submit" id="submit" name="upload" class="btn btn-primary">Upload</button>
+                                    </div>
+                                </form>
+
+                            </div>
                         </div>
+
                     </div>
 
-                    <div class="col-xl-6 col-lg-6 col-6 col-sm-12 col-md-6">
+
+                    <div class="col-xl-6 col-lg-6 col-12 col-sm-12 col-md-12">
                         <div class="card m-b-30">
                             <div class="card-body">
 
@@ -376,7 +382,7 @@
                                 <h4>
                                     <div id="showteacher" class="bg bg-success"></div>
                                 </h4>
-                              
+
                                 <!-- Tab panes -->
                                 <div class="tab-content">
                                     <div class="tab-pane active p-3" id="home-1" role="tabpanel">
@@ -384,7 +390,7 @@
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label class="control-label">Teacher's Name</label>*
-                                                    <form action="processAddTeacher.php" method="POST" id="AddTeacher" enctype="multipart/form-data">
+                                                    <form action="" method="POST" id="AddTeadcher">
                                                         <input id="demo1" type="text" required="required" value="" class="form-control" name="name">
                                                 </div>
                                             </div>
@@ -428,11 +434,10 @@
                                                     <label class="control-label">Assign Class</label>*
                                                     <select id="assignClass" name="class[]" type="text" class="form-control" name="role" multiple>
                                                         <option value="">Select a class</option>
-                                                        <?php $sqlclass = $conn->query("select * from class");
-                                                        while ($class = mysqli_fetch_array($sqlclass)) {; ?>
-
-                                                            <option value="<?php print $class['class']; ?>"><?php print $class['class']; ?></option>
-                                                        <?php } ?>
+                                                            <?php  foreach ($classes as $class) {
+                                                                    ?>
+                                                                    <option value="<?php echo $class['class']; ?>"><?php echo $class['class']; ?></option>
+                                                            <?php  }?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -442,30 +447,29 @@
                                                     <select id="assignSub" name="subject[]" required="required" class="form-control" multiple>
                                                         <option value="">Select a subject</option>
                                                         <?php
-                                                        $sqlsubject = $conn->query("SELECT * FROM subject");
-                                                        while ($subject = mysqli_fetch_array($sqlsubject)) {
-                                                            echo '<option value="' . $subject['subject'] . '">' . $subject['subject'] . '</option>';
-                                                        }
-                                                        ?>
+                                                        foreach($subjects as $subject){?>
+                                                            <option value="<?php print $subject['subject']; ?>"><?php print $subject['subject']; ?></option>
+                                                    <?php }?>
                                                     </select>
                                                 </div>
                                             </div>
 
                                         </div>
-                                        
-                                        <button type="submit" name="image" class="bnt btn-primary" style="float: right;">Save</button>
-                                        <div id="result_screenT" style="font-size: 20px; font-weight: bold; display: none;" class="alert alert-success"></div>
+
+                                        <button type="submit" name="add-teacher" class="btn btn-primary" style="float: right;">Save</button>
+                                        <span  id="result_screen"></span>
+
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-
                     </div>
                 </div>
-            <?php } ?>
         </div>
+    <?php } ?>
+    </div>
     </div>
 
     <!-- Footer -->
