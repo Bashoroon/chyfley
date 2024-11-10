@@ -9,10 +9,8 @@
     $term = $_GET['term'];
     $class = $_GET['class'];
     ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style type="text/css">
-        textarea {
+   <style>
+     textarea {
             -webkit-user-select: none;
             -khtml-user-select: none;
             -moz-user-select: -moz-none;
@@ -20,7 +18,7 @@
             user-select: none;
             overflow: auto;
         }
-    </style>
+   </style>
 </head>
 
 <body>
@@ -137,17 +135,16 @@
     <!-- end wrapper -->
 
     <!-- Footer -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
-    <script>
+    <?php include 'footer.php'; ?>
+    <?php include 'modal.php'; ?>
+    
+    
+
+</body>
+
+</html>
+<script>
         $(document).ready(function() {
             $('form').parsley();
         });
     </script>
-    <?php include 'footer.php'; ?>
-
-</body>
-<?php include 'modal.php'; ?>
-
-</html>
-

@@ -22,7 +22,7 @@ $user = $_SESSION['admissionNo'];
     <title> CHYFLEY SCHOOLS - STUDENT PORTAL </title>
     <meta name="Description" content="Poised to Making Giant Strides">
     <meta name="Author" content="CHYFLEY SCHOOLS">
-	<meta name="keywords" content="CHYFLEY SCHOOLS - Poised to Making Giant Strides">
+	  <meta name="keywords" content="CHYFLEY SCHOOLS - Poised to Making Giant Strides">
     
     <!-- Favicon -->
     <link rel="icon" href="https://portal.chyfleyschools.com.ng/images/chyf_logo.png" type="image/x-icon">

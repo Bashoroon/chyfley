@@ -7,10 +7,13 @@ $subject = $_POST['subject'];
 $admissionNo = $_POST['admissionNo'];
 
 
+
 $quesid = addslashes($_POST['quesid']);
 $studentAns = addslashes($_POST['studentAns']);
 $answer = addslashes($_POST['answer']);
 $exam_type = $_POST['examType'];
+$mydur = addslashes($_POST['myduration']);
+
 
 // $topic = addslashes($_POST['topic']);
 
@@ -18,8 +21,8 @@ $sqlCheck = $conn->query("select * from studentanswers  where quesid='$quesid' A
 $checked = mysqli_num_rows($sqlCheck);
 if ($checked > 0) {
 
-    $sqlUpdate = $conn->query ("update studentanswers set studentAnswer='$studentAns' where quesid='$quesid' and admissionNo = '$admissionNo'");
+    $sqlUpdate = $conn->query ("update studentanswers set studentAnswer='$studentAns', my_duration = '$mydur' where quesid='$quesid' and admissionNo = '$admissionNo' ");
     
 }else{
-$sqlAddEnote = $conn->query("INSERT INTO studentanswers (term, class, session, subject, admissionNo, studentAnswer, answer, quesid, exam_type) VALUES ('$term', '$class', '$session', '$subject', '$admissionNo', '$studentAns', '$answer',  '$quesid', '$exam_type')") or die(mysqli_error($conn));
+$sqlAddEnote = $conn->query("INSERT INTO studentanswers (term, class, session, subject, admissionNo, studentAnswer, answer, quesid, exam_type, my_duration) VALUES ('$term', '$class', '$session', '$subject', '$admissionNo', '$studentAns', '$answer',  '$quesid', '$exam_type', '$mydur' )") or die(mysqli_error($conn));
 }?>

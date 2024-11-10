@@ -1,7 +1,36 @@
 <?php include 'call_php_function.php';
 include 'header.php';
 ?>
+<style>
+    .table-responsive {
+    overflow-x: auto; /* Allows horizontal scrolling on smaller screens */
+    -webkit-overflow-scrolling: touch; /* Enables smooth scrolling on iOS */
+}
 
+@media (max-width: 768px) {
+    #score-sheet td, #score-sheet th {
+        white-space: nowrap; /* Prevents text wrapping in cells */
+    }
+    
+    /* Stack the table rows vertically for better readability on mobile */
+    #score-sheet td, #score-sheet th {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #score-sheet tr {
+        display: block;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #ddd;
+    }
+
+    #score-sheet td:last-child, #score-sheet th:last-child {
+        border-bottom: none;
+    }
+}
+
+</style>
 <body>
     <!-- Navigation Bar-->
 
@@ -66,6 +95,7 @@ include 'header.php';
 
                              </div>
                         </div>
+                        
                         <div class=" col-lg-3 col-12 col-md-12 col-sm-12 col-xm-12">
                              <div class="form-group">
                                  <label class="control-label">Subject</label>
@@ -121,65 +151,50 @@ include 'header.php';
             <?php }?>
 
             <div class="row">
-                <div class="col-12">
-                    <div class="card m-b-30">
-                        <div class="card-body">
+    <div class="col-12">
+        <div class="card m-b-30">
+            <div class="table-responsive">
+                <table id="score-sheet" class="table table-striped table-bordered dt-responsive nowrap">
+                    <thead>
+                        <tr>
+                            <th>Admission</th>
+                            <th>Name</th>
+                            <th>Test</th>
+                            <th>Second Test</th>
+                            <th>Exam</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (isset($_GET['session']) and isset($_GET['term']) and isset($_GET['class'])) { ?>
+                            <?php foreach ($students as $student) {
+                                $studentName = $studentController->student_name($student['admissionNo']);
+                                $admissionNo = $student['admissionNo'];
+                                $cbtScores = $cbtController->cbtscores($admissionNo);
 
-
-
-                            <table id="score-sheet" class="table table-striped table-bordered dt-responsive nowrap">
-                                <thead>
-                                    <tr>
-                                        <th>Admission</th>
-                                        <th>Name</th>
-                                        <th>Test</th>
-                                       
-                                        <th>Action</th>
-
-                                    </tr>
-                                </thead>
-                              
-                                <tbody>
-                                <?php  if (isset($_GET['session']) and isset($_GET['term']) and isset($_GET['class'])){?>
-                                    <?php foreach( $students as $student){
-                                            $studentName = $studentController->student_name($student['admissionNo']); 
-                                         
-                                             $admissionNo = $student['admissionNo'];
-                                      
-                                        $sqlStudentScore =  $conn->query("SELECT * from cbtscores where session='".$_GET['session']."' and class = '".$_GET['class']."' and term='".$_GET['term']."' and admissionNo='$admissionNo' and subject='".$_GET['subject']."'");
-                                        $studentScore = mysqli_fetch_array($sqlStudentScore);
-                                       
-                                        $emptyTest = $studentScore['test'] ?? '';
-                                        
-                                    ?>
-                                        <tr id="">
-                                            <td><?php print $studentName['admissionNo']; ?></td>
-                                            <td><?php print $studentName['surname']; ?> <span><?php print $studentName['firstName']; ?> </span><span class="co-name"><?php print $studentName['lastName']; ?></span></td>
-                                            <input type="hidden" value="<?php print $studentScore['admissionNo']; ?>" name="admissionNo">
-                                            <?php
-                                            if ($emptyTest == "") {
-                                                echo "<td>-</td>";
-                                            } else { ?>
-                                                <td><?php print $studentScore['test']; ?></td>
-                                            <?php } ?>
-
-                                           
-
-                                           
-                                            <td> <?php if (!isset($studentScore['admissionNo'])) {
-                                                    } else { ?><a type="button" class="btn btn-danger" href="deleteCbtScores.php?id=<?php print $studentScore['id']; ?>" onclick="return confirmation()">Delete</a><?php } ?>
-
-
-                                        </tr>
-                                    <?php } } ?>
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-
-                </div>
+                            ?>
+                                <tr>
+                                    <td><?php print $studentName['admissionNo']; ?></td>
+                                    <td><?php print $studentName['surname']; ?> <span><?php print $studentName['firstName']; ?> </span><span class="co-name"><?php print $studentName['lastName']; ?></span></td>
+                                    <input type="hidden" value="<?php print $cbtScores['admissionNo']; ?>" name="admissionNo">
+                                    <td><?php print $cbtScores['test']; ?></td>
+                                    <td><?php print $cbtScores['test_two']; ?></td>
+                                    <td><?php print $cbtScores['exam']; ?></td>
+                                    <td>
+                                        <?php if (isset($cbtScores['admissionNo'])) { ?>
+                                            <a type="button" class="btn btn-secondary" href="editCbtScores.php?id=<?php print $cbtScores['id']; ?>">Edit</a>
+                                        <?php } ?>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        <?php } ?>
+                    </tbody>
+                </table>
             </div>
+        </div>
+    </div>
+</div>
+
         </div> <!-- end col -->
     </div> <!-- end row -->
 
@@ -191,11 +206,7 @@ include 'header.php';
     <!-- Footer -->
     <?php include 'footer.php'; ?>
     <?php include 'modal.php'; ?>
-    <script type="text/javascript">
-        function confirmation() {
-            return confirm('Are you sure you want to do this?');
-        }
-    </script>
+   
 
 </body>
 

@@ -22,6 +22,7 @@ class Attendance
                 $sqlAddStudent = $conn->query("INSERT INTO studentatt (admissionNo, present, comment, session, term, class) VALUES ('$admissionNo', '$present', '$comment', '$session', '$term', '$class')") or die('unable to add attendance or comment');
             }
         }
+        return "<span class='alert alert-success float-right'> Successful</span>";
     }
 
     public function show($admissionNo)
@@ -48,5 +49,16 @@ class Attendance
             ($conn->query($sql) === TRUE)  or die('unable to add a comment');
             return "<span class='alert alert-success float-right'> Comment added</span>";
         }
+    }
+
+    public function show_all(){
+        global $conn;
+        $data = array();
+        $sqlComment = $conn->query("select * from teacherscomment");
+        while ($comment = mysqli_fetch_array($sqlComment)){
+
+            $data[] = $comment;
+        }
+        return $data;
     }
 }

@@ -11,38 +11,19 @@ $questions = $_POST['quesid']; // Retrieve an array of quesid
 $studentAnswers = $_POST['studentAns']; // Retrieve an array of studentAns
 $answers = $_POST['answer']; // Retrieve an array of correct answers
 
-// Iterate through submitted answers
-for ($i = 0; $i < count($questions); $i++) {
-    $quesid = addslashes($questions[$i]);
-    $studentAns = addslashes($studentAnswers[$i]);
-    $answer = addslashes($answers[$i]);
+$quesids = $_POST['quesid']; // Array of question IDs
+$answers = $_POST['answer']; // Array of correct answers
+$studentAnswers = $_POST['studentAns']; // Array of student answers indexed by question
 
-    // Check if the question has been answered
-    if (!empty($studentAns)) {
-        // Use prepared statements to prevent SQL injection
-        $stmt = $conn->prepare("SELECT * FROM studentanswers WHERE quesid = ? AND admissionNo = ?");
-        $stmt->bind_param("ss", $quesid, $admissionNo);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $stmt->close();
+// Loop through and process the submissions
+foreach ($quesids as $index => $quesid) {
+    $correctAnswer = $answers[$index];
+    $studentAnswer = $studentAnswers[$index];
+    
+    // Process each answer
+    // Example: Insert into database, check correctness, etc.
+}
 
-        // Check if the answer already exists
-        if ($result->num_rows > 0) {
-            // Update the existing answer
-            $stmt = $conn->prepare("UPDATE studentanswers SET studentAnswer = ? WHERE quesid = ? AND admissionNo = ?");
-            $stmt->bind_param("sss", $studentAns, $quesid, $admissionNo);
-            $stmt->execute();
-            $stmt->close();
-        } else {
-            // Insert a new answer
-            $stmt = $conn->prepare("INSERT INTO studentanswers (term, class, session, subject, admissionNo, studentAnswer, answer, quesid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssssss", $term, $class, $session, $subject, $admissionNo, $studentAns, $answer, $quesid);
-            $stmt->execute();
-            $stmt->close();
-
-          
-
-        }
        
 echo ("<script LANGUAGE='JavaScript'>
  window.alert('students scores succesfully Added');
@@ -51,8 +32,7 @@ echo ("<script LANGUAGE='JavaScript'>
 </script>");
 
 
-    }
-}
+   
 
 // Close the database connection
 $conn->close();

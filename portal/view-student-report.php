@@ -106,10 +106,7 @@ $class = $_GET['class'];
                                          $sqlStudentReportThird =  $conn->query("SELECT * from studentscores where session = '".$student['session']."' AND class = '".$student['class']."' AND term = 'Third' AND admissionNo = '".$student['admissionNo']."'");
                                                  $studentReportThird = mysqli_fetch_array($sqlStudentReportThird);
 
-                                                   $sqlfindStudentName = $conn->query ("SELECT * from studentusers where admissionNo='".$student['admissionNo']."'");
-
-                                        $findStudentName = mysqli_fetch_array($sqlfindStudentName);
-
+                                                 
                                                
                                         ?>
                                 <tr>

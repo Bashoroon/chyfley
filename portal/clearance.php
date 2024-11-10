@@ -108,11 +108,11 @@ include 'header.php';
                                     ?>
 
                                         <tbody>
-                                            <form action="processClearance.php" method="POST">
+                                            <form  method="POST">
                                                 <?php
                                                $no = 1;
                                                 foreach( $students as $student){
-                                                
+                                                    $admissionNo = $student['admissionNo'];
                                                     // Check if the student is in the clearance table
                                                     $sqlStudentFound = $conn->query("SELECT * FROM clearance WHERE session = '".$student['session']."' AND class = '".$student['class']."' AND term = '".$_GET['term']."' AND admissionNo = '".$student['admissionNo']."'");
                                                     $foundStudent = mysqli_num_rows($sqlStudentFound);
@@ -134,7 +134,8 @@ include 'header.php';
                                                                     <?php print $studentName['lastName']; ?>
                                                                 </span>
                                                             </td>
-                                                            <td><input type="checkbox" name="id[]" value="<?php print $student['admissionNo']; ?>">
+                                                            <td>  <input type="checkbox" class="clearance-checkbox" value="<?php echo $admissionNo; ?>" data-admissionno="<?php echo $admissionNo; ?>">
+                                                            </td><div id="result"></div>
                                                             </td>
 
 
@@ -157,12 +158,12 @@ include 'header.php';
                     </div>
                 </div> <!-- end col -->
             </div> <!-- end row -->  
-            <input type="hidden" value="<?php print $_GET['session'];?>" name="session">
-             <input type="hidden" value="<?php print $_GET['term'];?>" name="term">
-              <input type="hidden" value="<?php print $_GET['class'];?>" name="class">
+            <input type="hidden"  value="<?php print $_GET['session'];?>" name="session" id="session">
+             <input type="hidden" value="<?php print $_GET['term'];?>" name="term" id="term">
+              <input type="hidden" value="<?php print $_GET['class'];?>" name="class" id="clazz">
              
                               </div>        
-                               <button style="margin-left: 300px;" class="btn btn-primary" type="submit">Clear Student</button>
+                               
                           </div>
                     </div> 
                       </form>
@@ -181,4 +182,49 @@ include 'header.php';
 $(".checkAll").click(function(){
     $('input:checkbox').not(this).prop('checked', this.checked);
 });
+
+$(document).ready(function() {
+    $(".clearance-checkbox").change(function() {
+        
+        if ($(this).is(":checked")) {
+            var admissionNo = $(this).data("admissionno"); 
+            var session = $("#session").val();
+            var term = $("#term").val();
+            var clazz = $("#clazz").val();
+            
+            var actionType = $(this).is(":checked") ? "process_clearance" : "delete_clearance";
+         
+            // Send data to the server using AJAX
+            $.ajax({
+                url: "call_php_function.php",
+                type: "POST",
+                data: {
+                     //process_clearance: true,
+                    action: actionType,
+                    admissionNo: admissionNo,
+                    session: session,
+                    term: term,
+                    class: clazz
+                   
+                },
+
+                beforeSend: function() {
+                    // Show loading indicator before sending the request
+                    $("#result").html("<p>Loading...</p>");
+
+                },
+
+                success: function(response) {
+                    // Display the response from the server
+                    $("#result").html(response);
+                   
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // Display an error message
+                    $("#result").html("Error in connection.Please check your connection: " + textStatus);
+                }
+            });
+        }
+        });
+    });
 </script>

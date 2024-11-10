@@ -7,8 +7,8 @@ include 'header.php';
     <?php include 'navigationMenu.php'; ?>
 
     <!-- header-bg -->
-    
-</div>
+
+    </div>
     <div class="wrapper">
         <div class="container-fluid">
             <!-- Page-Title -->
@@ -127,6 +127,9 @@ include 'header.php';
 
                                                     //  check if the attendanc exists
                                                     $attendance = $attendanceController->show($admissionNo);
+                                                    // all comments from the comment bank
+                                                    $comments = $attendanceController->show_all();
+
                                             ?>
                                                 <tr>
                                                     <form method="POST">
@@ -137,16 +140,25 @@ include 'header.php';
                                                         <?php $sqlComment = $conn->query("select * from teacherscomment"); ?>
 
 
-                                                        <td><input class="form-control" style="width: 50px;" type="number" name="present[]"></td>
+                                                        <td><input class="form-control" value="<?php print $attendance['present']; ?>" type="number" name="present[]"></td>
                                                         <td>
-                                                            <select class="form-control" style="width: 50%;" name="comment[]">
-                                                                <option value="">select teacher's comment</option>
-                                                                <?php while ($comment = mysqli_fetch_array($sqlComment)) { ?>
-                                                                    <option <?php if ($attendance['comment'] == $comment['comment']) {
-                                                                                print 'selected';
-                                                                            }; ?> value="<?php print $comment['comment']; ?>"><?php print $comment['comment']; ?></option>
-                                                                <?php  } ?>
+                                                            <select class="form-control" name="comment[]">
+                                                                <option value="" <?php if (empty($attendance['comment'])) { echo "selected";} ?>>Select teacher's comment</option>
+                                                                <?php
+                                                                // Check if $comments is an array and not empty
+                                                                if (!empty($comments) && is_array($comments)) {
+                                                                    foreach ($comments as $comment) {
+                                                                        $selected = ($attendance['comment'] == $comment['comment']) ? "selected" : "";
+                                                                ?>
+                                                                        <option value="<?php echo htmlspecialchars($comment['comment']); ?>" <?php echo $selected; ?>>
+                                                                            <?php echo htmlspecialchars($comment['comment']); ?>
+                                                                        </option>
+                                                                <?php
+                                                                    }
+                                                                }
+                                                                ?>
                                                             </select>
+
                                                         </td>
 
 
@@ -167,9 +179,9 @@ include 'header.php';
                     </div>
                 </div>
                 <div class="col-4">
-                <div class="card m-b-30">
-                    <div class="card-body">
-                       
+                    <div class="card m-b-30">
+                        <div class="card-body">
+
                             <form action="" method="POST">
 
                                 <div class="row">

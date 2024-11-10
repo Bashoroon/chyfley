@@ -41,12 +41,10 @@ include 'header.php'; ?>
                             <h4><?php if (!isset($_GET['id'])) {
                                     print $_GET['session'] . ' ' . $_GET['term'] . ' ' . $_GET['class'] . ' ' . $_GET['subject'];
                                 } ?></h4>
-                            <?php if (isset($_GET['s'])) {
-                                echo "<h5>E-note added successfully<h5>";
-                            } ?>
+                            
                             <h4 class="mt-0 header-title"></h4>
                             <p class="sub-title"></p>
-                            <form action="processExamQues.php" method="POST">
+                            <form  method="POST">
                                 <input type="hidden" name="session" id="inputsession" class="form-control" value="<?php print $_GET['session']; ?>">
                                 <input type="hidden" name="term" id="inputterm" class="form-control" value="<?php print $_GET['term']; ?>">
                                 <input type="hidden" name="class" id="inputclass" class="form-control" value="<?php print $_GET['class']; ?>">
@@ -97,7 +95,7 @@ include 'header.php'; ?>
 
                                 <div class="form-group">
                                     <div>
-                                        <button type="submit" class="btn btn-primary waves-effect waves-light">
+                                        <button type="submit" name="add-ques" class="btn btn-primary waves-effect waves-light">
                                             Submit
                                         </button>
                                         <button type="reset" class="btn btn-secondary waves-effect m-l-5">
@@ -111,7 +109,7 @@ include 'header.php'; ?>
                         <div class="col-lg-6 col-12 col-md-12 col-sm-12 ">
                                 <h5>(Uload CSV)</h5>
                                 <p style="color:red">This is recommended</p>
-                                <form action="uploadQuestion.php" method="POST" name="frmExcelImport" id="frmExcelImport" enctype="multipart/form-data">
+                                <form  method="POST" name="frmExcelImport" id="frmExcelImport" enctype="multipart/form-data">
 
                                     <input type="hidden" name="session" id="inputsession" class="form-control" value="<?php print $_GET['session']; ?>">
                                     <input type="hidden" name="term" id="inputterm" class="form-control" value="<?php print $_GET['term']; ?>">
@@ -120,8 +118,8 @@ include 'header.php'; ?>
                                     <input type="hidden" name="examType" id="inputsubject" class="form-control" value="<?php print $_GET['examType']; ?>">
                                 <div class="row">                                    
                                     <div class="col-12">
-                                        <input type="file" name="file" id="file" accept=".xls,.xlsx" required="required">
-                                        <button type="submit" id="submit" name="upload" class="btn btn-success">Upload</button>
+                                        <input type="file" name="file" id="file" accept=".xls,.xlsx,.csv" required="required">
+                                        <button type="submit" id="submit" name="uploadCVSQues" class="btn btn-success">Upload</button>
                                     </div>
                                 </div>
 
@@ -133,7 +131,7 @@ include 'header.php'; ?>
 
                             <h5>(Upload docx)</h5>
                             <p style="color:red">Alternative</p>
-                                <form action="uploadMS.php" method="POST" name="frmExcelImport" id="frmExcelImport" enctype="multipart/form-data">
+                                <form method="POST" name="frmExcelImport" id="frmExcelImport" enctype="multipart/form-data">
 
 
                                     <input type="hidden" name="session" id="inputsession" class="form-control" value="<?php print $_GET['session']; ?>">
@@ -145,7 +143,7 @@ include 'header.php'; ?>
                                     <div class="row">
                                         <div class="col-12">
                                             <input type="file" name="file" id="file" accept=".docx" required="required">
-                                            <button type="submit" class="btn btn-primary waves-effect waves-light">
+                                            <button type="submit" name="uploadMS"  class="btn btn-primary waves-effect waves-light">
                                                 Submit
                                             </button>
                                         </div>

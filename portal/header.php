@@ -43,8 +43,9 @@
             opacity: 1; /* Fully visible */
         }
     </style>
-    <!-- This alert can be placed anywhere in your code, it will always appear at the top right corner -->
-
+   <div class="alert alert-custom alert-<?php echo $responseType === 'success' ? 'success' : 'danger'; ?> alert-slide-in" role="alert">
+    <?php echo $response; ?>
+</div>
 </head>
 
 

@@ -210,11 +210,11 @@ error_reporting(E_ERROR);
             foreach( $students as $student){
               $studentName = $studentController->student_name($student['admissionNo']); 
               $admissionNo = $student['admissionNo'];
-            $sqlTotalTestExamFirst = $conn->query("SELECT  sum(test+test_two+exam) as totalTestExamFirst from studentscores where session = '".$_GET['session']."' and term = 'First' and class = '$class' and admissionNo='$admissionNo' ");
+            $sqlTotalTestExamFirst = $conn->query("SELECT  sum(test+exam) as totalTestExamFirst from studentscores where session = '".$_GET['session']."' and term = 'First' and class = '$class' and admissionNo='$admissionNo' ");
 
-            $sqlTotalTestExamSecond = $conn->query("SELECT  sum(test+test_two+exam) as totalTestExamSecond from studentscores  where session = '$session' and term = 'Second' and class = '$class' and admissionNo='$admissionNo' ");
+            $sqlTotalTestExamSecond = $conn->query("SELECT  sum(test+exam) as totalTestExamSecond from studentscores  where session = '$session' and term = 'Second' and class = '$class' and admissionNo='$admissionNo' ");
 
-            $sqlTotalTestExamThird = $conn->query("SELECT  sum(test+test_two+exam) as totalTestExamThird from studentscores  where session = '$session' and term = 'Third' and class = '$class' and admissionNo='$admissionNo' ");
+            $sqlTotalTestExamThird = $conn->query("SELECT  sum(test+exam) as totalTestExamThird from studentscores  where session = '$session' and term = 'Third' and class = '$class' and admissionNo='$admissionNo' ");
 
             $sqlOfferFirst = $conn->query("SELECT * from studentscores where session = '$session' and term = 'First' and class = '$class' and  admissionNo='$admissionNo'");
             $sqlOfferSecond = $conn->query("SELECT * from studentscores where session = '$session' and term = 'Second' and class = '$class' and  admissionNo='$admissionNo'");
@@ -261,9 +261,9 @@ error_reporting(E_ERROR);
 
                 $studentScoreThird = mysqli_fetch_array($sqlStudentScoreThird);
 
-                $firstTermScore = $studentScore['test'] + $studentScore['test_two'] + $studentScore['exam'];
-                $secondTermScore = $studentScoreSecond['test'] + $studentScoreSecond['test_two'] + $studentScoreSecond['exam'];
-                $thirdTermScore = $studentScoreThird['test']+ $studentScoreThird['test_two'] + $studentScoreThird['exam'];
+                $firstTermScore = $studentScore['test'] + $studentScore['exam'];
+                $secondTermScore = $studentScoreSecond['test'] + $studentScoreSecond['exam'];
+                $thirdTermScore = $studentScoreThird['test'] + $studentScoreThird['exam'];
               ?>
                 <?php if ($term == "First") { ?>
                   <td class="co-name"><?php if ($firstTermScore == "") {
@@ -307,11 +307,11 @@ error_reporting(E_ERROR);
                 <?php } ?>
                 <?php if ($term !== "First") { ?>
                   <td><?php if ($term == "First") {
-                        print $studentScore['test'] + $studentScore['test_two'] + $studentScore['exam'];
+                        print $studentScore['test'] + $studentScore['exam'];
                       } elseif ($term == "Second") {
-                        print $studentScore['test'] + $studentScore['test_two'] + $studentScore['exam'] + $studentScoreSecond['test'] + $studentScoreSecond['test_two'] + $studentScoreSecond['exam'];
+                        print $studentScore['test'] + $studentScore['exam'] + $studentScoreSecond['test'] + $studentScoreSecond['exam'];
                       } elseif ($term == "Third") {
-                        print $studentScore['test'] + $studentScore['test_two'] + $studentScore['exam'] +  $studentScoreSecond['test'] + $studentScoreSecond['test_two'] + $studentScoreSecond['exam'] +  $studentScoreThird['test'] + $studentScoreThird['test_two'] + $studentScoreThird['exam'];
+                        print $studentScore['test'] + $studentScore['exam'] +  $studentScoreSecond['test'] + $studentScoreSecond['exam'] +  $studentScoreThird['test'] + $studentScoreThird['exam'];
                       } ?></td>
               <?php }
               } ?>

@@ -39,10 +39,10 @@ if($checkedScore > 0) {
     $sqlinputScore = $conn->query ("INSERT INTO cbtscores (session, term, class, admissionNo, subject, test ) VALUES ('$session', '$term', '$class', '$admissionNo', '$subject', '$checkedAns')") or die(mysqli_error($conn));
 
     }elseif($exam_type == 'Second'){
-      $sqlinputScore = $conn->query ("INSERT INTO cbtscores (session, term, class, admissionNo, subject, Second ) VALUES ('$session', '$term', '$class', '$admissionNo', '$subject', '$checkedAns')") or die(mysqli_error($conn));
+      $sqlinputScore = $conn->query ("INSERT INTO cbtscores (session, term, class, admissionNo, subject, test_two ) VALUES ('$session', '$term', '$class', '$admissionNo', '$subject', '$checkedAns')") or die(mysqli_error($conn));
     }
     elseif($exam_type == 'Exam'){
-      $sqlinputScore = $conn->query ("INSERT INTO cbtscores (session, term, class, admissionNo, subject, Exam ) VALUES ('$session', '$term', '$class', '$admissionNo', '$subject', '$checkedAns')") or die(mysqli_error($conn));
+      $sqlinputScore = $conn->query ("INSERT INTO cbtscores (session, term, class, admissionNo, subject, exam ) VALUES ('$session', '$term', '$class', '$admissionNo', '$subject', '$checkedAns')") or die(mysqli_error($conn));
     }
 
 }

@@ -1621,8 +1621,8 @@ button:focus {
 }
 
 .btn-primary {
-  background-color: #30419b;
-  border: 1px solid #30419b;
+  background-color: #007bff;
+  border: 1px solid #007bff;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active,

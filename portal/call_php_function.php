@@ -23,6 +23,10 @@ include __DIR__ . '/src/Controllers/Class.php'; // Ensure this path is correct
 include __DIR__ . '/src/Controllers/Record.php'; // Ensure this path is correct
 include __DIR__ . '/src/Controllers/Staff.php'; // Ensure this path is correct
 include __DIR__ . '/src/Controllers/Attendance.php'; // Ensure this path is correct
+include __DIR__ . '/src/Controllers/Cbt.php'; // Ensure this path is correct
+include __DIR__ . '/src/Controllers/Clearance.php'; // Ensure this path is correct
+require __DIR__ . '/vendor/autoload.php'; // Ensure PHPWord is installed via Composer
+
 
 use Controllers\Authentication\Authentication;
 use Controllers\Subject\Subject;
@@ -32,6 +36,8 @@ use Controllers\Clazz\Clazz;
 use Controllers\Record\Record;
 use Controllers\Staff\Staff;
 use Controllers\Attendance\Attendance;
+use Controllers\Clearance\Clearance;
+use Controllers\Cbt\Cbt;
 
 
 
@@ -48,6 +54,8 @@ $studentController = new Student();
 $recordController = new Record();
 $staffController = new Staff();
 $attendanceController = new Attendance();
+$clearanceController = new Clearance();
+$cbtController = new Cbt();
 
 
 
@@ -136,10 +144,26 @@ if(isset($_POST['add-subject'])){ // check if the form is triggered
 
    // show staff
    $staffs = $staffController->show();
+
+    // Edit staff
+    
+    $id = $_GET['id'] ?? '';
+    $aStaff = $staffController->edit($id);
+    
+    $assignedSubjects = explode(',', $aStaff['subject']); // Split into an array
+    
+    // update staf data
+    if (isset($_POST['update-staff'])) {
+    $response = $staffController->update();
+    }
+
    // update student profile
    if (isset($_POST['update-student'])) {
-    $response = $studentController->update();
+    $response = $staffController->update();
    }
+
+   
+
 
    //disble student 
    if (isset($_POST['disable'])) {
@@ -198,3 +222,33 @@ if(isset($_POST['add-subject'])){ // check if the form is triggered
    if(isset($_POST['add-comment'])){
     $response = $attendanceController->add_comment();
    }
+   // Add Question
+   if(isset($_POST['add-ques'])){
+    $response = $cbtController->add_ques();
+   }
+
+   // Upload Question in CSV
+   if(isset($_POST['uploadCVSQues'])){
+    $response = $cbtController->uploadCSVQuestion();
+   }
+
+   // upload question in Microsoft Word document
+   if(isset($_POST['uploadMS'])){
+   
+    $response = $cbtController->uploadMS();
+   }
+
+   // update CBT socres
+   if(isset($_POST['update-cbt-score'])){
+   
+    $response = $cbtController->update();
+   }
+
+   if ($_POST['action'] === 'process_clearance') {
+    echo $clearanceController->clear_student();
+} elseif ($_POST['action'] === 'delete_clearance') {
+    echo $clearanceController->delete_clearance();
+}
+
+
+   

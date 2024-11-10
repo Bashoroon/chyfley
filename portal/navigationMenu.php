@@ -1,5 +1,7 @@
 <div class="header-bg">
     <!-- Navigation Bar-->
+     <!-- This alert can be placed anywhere in your code, it will always appear at the bottom right corner -->
+
     <header id="topnav">
         <div class="topbar-main" style="background: linear-gradient(90deg, rgba(18,44,127,1) 9%, rgba(177,236,231,1) 29%, rgba(203,203,203,1) 48%, rgba(145,215,138,1) 76%, rgba(212,54,68,1) 100%);">
             <div class="container-fluid">
@@ -90,8 +92,7 @@
                                     <li><a href="broadSheet2.php" class=" waves-effect waves-light" > View Broad Sheet </a></li>
                                     <li><a href="score-sheet.php" class=" waves-effect waves-light">Score Sheet </a></li>
                                     <li><a href="comment-attendance.php" class=" waves-effect waves-light" >Comment/Student Att</a></li>
-                                    <li><a href="view-student-report.php" class=" waves-effect waves-light" >View Student Report</a></li>
-
+                                    
 
 
                                         </ul>
@@ -185,7 +186,7 @@
                                     <li><a href="broadSheet2.php" class=" waves-effect waves-light" > View Broad Sheet </a></li>
                                     <li><a href="score-sheet.php" class=" waves-effect waves-light">Score Sheet </a></li>
                                     <li><a href="comment-attendance.php" class=" waves-effect waves-light" >Comment/Student Att</a></li>
-                                    <li><a href="view-student-report.php" class=" waves-effect waves-light" >View Student Report</a></li>
+                                    <!-- <li><a href="view-student-report.php" class=" waves-effect waves-light" >View Student Report</a></li> -->
 
                                 </ul>
                             </li>

@@ -5,8 +5,6 @@
         </script>';
     }
     $user = $_SESSION['admissionNo'];
-    // Fetch the last submitted timer value for the student from the database
-
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -240,14 +238,6 @@
                                 $sqlCheck = $conn->query("SELECT * FROM studentanswers WHERE quesid='" . $questions['quesid'] . "' AND session='" . $_GET['session'] . "' AND term='" . $_GET['term'] . "' AND class= '" . $_GET['class'] . "' AND subject='" . $_GET['subject'] . "' AND exam_type='" . $_GET['examType'] . "' AND admissionNo= '$user'  ");
                                 $checked = mysqli_fetch_array($sqlCheck);
                                 $questionIndex++; // Increment question index
-
-                                $sql = "SELECT my_duration FROM studentanswers WHERE admissionNo = '$user' and quesid='".$questions['quesid']."' and subject ='".$_GET['subject']."' and exam_type='".$_GET['examType']."' ORDER BY updated_at ASC LIMIT 1";
-                                $result = $conn->query($sql);
-                                $row = $result->fetch_assoc();
-                                $lastDuration = $row['my_duration'] ?? ''; // Default value if no previous value is found
-
-
-                                
     ?>
         <div class="tab" style="width: 100%;">
 
@@ -255,32 +245,36 @@
 
             </div>
             <div class="question"><?php echo $questions['question']; ?></div>
-            <input type="hidden" id="myduration" name="myduration" value="<?php print $checked['my_duration'] ?? ''; ?>">
             <input type="hidden" id="quesid<?php echo $questionIndex; ?>" value="<?php echo $questions['quesid']; ?>" name="quesid">
             <input type="hidden" id="answer<?php echo $questionIndex; ?>" value="<?php echo $questions['answer']; ?>" name="answer">
             <div class="form-check option">
-
-            <input class="form-check-input" value="A" type="radio" name="studentAns<?php echo $questionIndex; ?>" id="studentAns1<?php echo $questionIndex; ?>" 
-             <?php if (isset($checked['studentAnswer']) && $checked['studentAnswer'] == "A") { echo 'checked'; } ?>>
-            <label class="form-check-label" for="studentAns1<?php echo $questionIndex; ?>">
-             <?php echo $questions['optionA']; ?></label>
-
-                
+                <input class="form-check-input " value="A" type="radio" name="studentAns<?php echo $questionIndex; ?>" id="studentAns1<?php echo $questionIndex; ?>" <?php if ($checked['studentAnswer'] == "A") {
+                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                        } ?>>
+                <label class="form-check-label" for="studentAns1<?php echo $questionIndex; ?>">
+                    <?php echo $questions['optionA']; ?>
+                </label>
             </div>
             <div class="form-check option">
-                <input class="form-check-input" value="B" type="radio" name="studentAns<?php echo $questionIndex; ?>" id="studentAns2<?php echo $questionIndex; ?>" <?php if ( isset($checked['studentAnswer']) && $checked['studentAnswer'] == "B") {echo 'checked';} ?>>
+                <input class="form-check-input" value="B" type="radio" name="studentAns<?php echo $questionIndex; ?>" id="studentAns2<?php echo $questionIndex; ?>" <?php if ($checked['studentAnswer'] == "B") {
+                                                                                                                                                                        echo 'checked';
+                                                                                                                                                                    } ?>>
                 <label class="form-check-label" for="studentAns2<?php echo $questionIndex; ?>">
                     <?php echo $questions['optionB']; ?>
                 </label>
             </div>
             <div class="form-check option">
-                <input class="form-check-input" value="C" type="radio" name="studentAns<?php echo $questionIndex; ?>" id="studentAns3<?php echo $questionIndex; ?>" <?php if ( isset($checked['studentAnswer']) && $checked['studentAnswer'] == "C") {echo 'checked';} ?>>
+                <input class="form-check-input" value="C" type="radio" name="studentAns<?php echo $questionIndex; ?>" id="studentAns3<?php echo $questionIndex; ?>" <?php if ($checked['studentAnswer'] == "C") {
+                                                                                                                                                                        echo 'checked';
+                                                                                                                                                                    } ?>>
                 <label class="form-check-label" for="studentAns3<?php echo $questionIndex; ?>">
                     <?php echo $questions['optionC']; ?>
                 </label>
             </div>
             <div class="form-check option">
-                <input class="form-check-input" value="D" type="radio" name="studentAns<?php echo $questionIndex; ?>" id="studentAns4<?php echo $questionIndex; ?>" <?php if ( isset($checked['studentAnswer']) && $checked['studentAnswer'] == "D") {echo 'checked';} ?>>
+                <input class="form-check-input" value="D" type="radio" name="studentAns<?php echo $questionIndex; ?>" id="studentAns4<?php echo $questionIndex; ?>" <?php if ($checked['studentAnswer'] == "D") {
+                                                                                                                                                                        echo 'checked';
+                                                                                                                                                                    } ?>>
                 <label class="form-check-label" for="studentAns4<?php echo $questionIndex; ?>">
                     <?php echo $questions['optionD']; ?>
                 </label>
@@ -402,65 +396,21 @@
     }
 </script>
 <script>
-  // Fetch the last submitted timer value from PHP
-var mydur = "<?php echo $lastDuration; ?>"; // '0h 28m 34s'
+    $(document).ready(function() {
+        $("input[name^='studentAns']").change(function() {
+            var questionIndex = $(this).attr("name").replace("studentAns", "");
 
-// Convert the formatted time string into seconds
-var durationInSeconds = parseTimeToSeconds(mydur);
-
-// If no timer value is set, fallback to a default duration
-if (durationInSeconds <= 0) {
-    durationInSeconds = <?php echo $duration * 60; ?>; // Convert initial duration to seconds
-}
-
-// Start the countdown timer
-function startTimer() {
-    var timerElement = document.getElementById("timer");
-
-    var countdown = setInterval(function() {
-        var hours = Math.floor(durationInSeconds / 3600);
-        var minutes = Math.floor((durationInSeconds % 3600) / 60);
-        var seconds = durationInSeconds % 60;
-
-        // Update the timer element text
-        timerElement.textContent = hours + "h " + minutes + "m " + seconds + "s";
-
-        // Send the updated time to the server when the timer is updated
-        mydur = timerElement.textContent; // Update mydur with the current time
-
-        if (durationInSeconds <= 0) {
-            clearInterval(countdown);
-            document.getElementById("ques").innerHTML = "<h1>Examination completed.</h1><p>Goodluck!</p>";
-            $("#time").hide();
-            $("#timeup").show();
-        } else {
-            $("#ques").show();
-        }
-
-        durationInSeconds--; // Decrease the time by 1 second
-    }, 1000);
-}
-
-// Call the startTimer function to initiate the countdown
-startTimer();
-
-// When the answer is changed, update the mydur value and send it to the server
-$("input[name^='studentAns']").change(function() {
-    var questionIndex = $(this).attr("name").replace("studentAns", "");
-            
-    var mydur = $('#timer').text(); // Get the current time value from the timer
-    var session = $("#session").val();
-    var term = $("#term").val();
-    var clazz = $("#clazz").val();
-    var subject = $("#subject").val();
-    var admissionNo = $("#admissionNo").val();
-    var quesid = $("#quesid" + questionIndex).val();
+            var session = $("#session").val();
+            var term = $("#term").val();
+            var clazz = $("#clazz").val();
+            var subject = $("#subject").val();
+            var admissionNo = $("#admissionNo").val();
+            var quesid = $("#quesid" + questionIndex).val();
             var answer = $("#answer" + questionIndex).val();
             var studentAns = $("input[name='studentAns" + questionIndex + "']:checked").val();
-    var examType = $('#examType').val();
-
-    // Send data to the server using AJAX
-    $.ajax({
+            var examType = $('#examType').val();
+            // Send data to the server using AJAX
+            $.ajax({
                 url: "processStudentAns.php",
                 type: "POST",
                 data: {
@@ -472,9 +422,9 @@ $("input[name^='studentAns']").change(function() {
                     quesid: quesid,
                     studentAns: studentAns,
                     answer: answer,
-                    examType: examType,
-                    myduration: mydur
+                    examType: examType
                 },
+
                 beforeSend: function() {
                     // Show loading indicator before sending the request
                     $("#result").html("<p>Loading...</p>");
@@ -492,6 +442,7 @@ $("input[name^='studentAns']").change(function() {
                     
 
                 },
+
                 success: function(response) {
                     // Display the response from the server
                     $("#result").html(response);
@@ -518,28 +469,89 @@ $("input[name^='studentAns']").change(function() {
                    
                     
                 }
+            });
+        });
     });
-});
-
-// Helper function to parse the time format (e.g., "0h 28m 34s") into seconds
-function parseTimeToSeconds(timeString) {
-    var hours = 0;
-    var minutes = 0;
-    var seconds = 0;
-
-    var match = timeString.match(/(\d+)h (\d+)m (\d+)s/);
-    if (match) {
-        hours = parseInt(match[1], 10);
-        minutes = parseInt(match[2], 10);
-        seconds = parseInt(match[3], 10);
-    }
-
-    return (hours * 3600) + (minutes * 60) + seconds; // Return total time in seconds
-}
-
 </script>
 
+<script>
+    var countDownDate = <?php
+                        date_default_timezone_set('Africa/Lagos');
+                        echo strtotime($endDate) ?> * 1000;
+    var now = <?php echo time() ?> * 1000;
 
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+
+        // Get todays date and time
+        // 1. JavaScript
+        // var now = new Date().getTime();
+        // 2. PHP
+        now = now + 1000;
+
+        // Find the distance between now an the count down date
+        var distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Output the result in an element with id="demo"
+        document.getElementById("time").innerHTML = days + "d " + hours + "h " +
+            minutes + "m " + seconds + "s ";
+
+        // If the count down is over, write some text 
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("ques").innerHTML = "<h1>Examination completed.</h1><p>Goodluck!</p>";
+            $("#time").hide();
+            $("#timeup").show();
+        } else {
+            $("#ques").show();
+        }
+    }, 1000);
+</script>
+<script>
+    var durationInMinutes = <?php echo $duration; ?>; // Duration in minutes
+
+    function startTimer() {
+        var timerElement = document.getElementById("timer");
+
+        var hours, minutes, seconds;
+
+        var durationInSeconds = durationInMinutes * 60; // Convert duration to seconds
+
+        var countdown = setInterval(function() {
+            hours = Math.floor(durationInSeconds / 3600);
+            minutes = Math.floor((durationInSeconds % 3600) / 60);
+            seconds = durationInSeconds % 60;
+
+            timerElement.textContent = hours + "h " + minutes + "m " + seconds + "s";
+
+            if (durationInSeconds <= 0) {
+                clearInterval(countdown);
+                document.getElementById("ques").innerHTML = "<h1>Examination completed.</h1><p>Goodluck!</p>";
+                $("#time").hide();
+                $("#timeup").show();
+            } else {
+                $("#ques").show();
+            }
+
+            durationInSeconds--;
+        }, 1000);
+    }
+
+    // Call the startTimer function when the question is shown
+    startTimer();
+</script>
+
+<script type="text/javascript">
+    function confirmation() {
+        return confirm('Are you sure you want to submit? it is irreversible!');
+    }
+</script>
 
 <script>
     // Optional: JavaScript to make the options interactive

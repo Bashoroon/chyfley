@@ -1,5 +1,5 @@
 <?php include 'call_php_function.php';
-include 'header.php';?>
+include 'header.php'; ?>
 
 <body>
     <!-- Navigation Bar-->
@@ -8,6 +8,7 @@ include 'header.php';?>
     <!-- End Navigation Bar-->
     <div class="wrapper">
         <div class="container-fluid">
+
             <!-- Page-Title -->
             <div class="page-title-box">
                 <div class="row align-items-center">
@@ -23,14 +24,9 @@ include 'header.php';?>
                 <!-- end row -->
             </div>
             <div class="alert alert-custom alert-<?php echo $responseType === 'success' ? 'success' : 'danger'; ?> alert-slide-in" role="alert">
-    <?php echo $response; ?>
-</div>
-            <?php $sqlStudentNo  = $conn->query("SELECT * from studentusers ");
-            $studentNo = mysqli_num_rows($sqlStudentNo);
-
-            $sqlTeachertNo  = $conn->query("SELECT * from users ");
-            $teacherNo = mysqli_num_rows($sqlTeachertNo);
-            ?>
+                <?php echo $response; ?>
+            </div>
+           
 
             <?php
             $role = $_SESSION['role'];
@@ -45,7 +41,7 @@ include 'header.php';?>
                                 </div>
                                 <div>
 
-                                    <h5 class="font-16"><a href="inputScore.php" class=" waves-effect waves-light" >INPUT SCORE </a></h5>
+                                    <h5 class="font-16"><a href="inputScore.php" class=" waves-effect waves-light">INPUT SCORE </a></h5>
                                 </div>
                                 <h5 class="mt-4"><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".inputScore">INPUT SCORE </a></h5>
                                 <div class="progress mt-4" style="height: 4px;">
@@ -63,7 +59,7 @@ include 'header.php';?>
                                     <i class="mdi mdi-briefcase-check bg-success text-white"></i>
                                 </div>
                                 <div>
-                                    <h5 class="font-16"><a href="broadSheet2.php" class=" waves-effect waves-light" >BROAD SHEET </a></h5>
+                                    <h5 class="font-16"><a href="broadSheet2.php" class=" waves-effect waves-light">BROAD SHEET </a></h5>
                                 </div>
                                 <h5 class="mt-4"><a href="" class=" waves-effect waves-light" data-toggle="modal" data-target=".checkbroadsheet2">BROAD SHEET </a></h5>
                                 <div class="progress mt-4" style="height: 4px;">
@@ -178,7 +174,7 @@ include 'header.php';?>
                                 <div>
                                     <h5 class="font-16"><a href="comment-attendance.php" class=" waves-effect waves-light">COMMENT</a></h5>
                                 </div>
-                                <h5 class="mt-4"><a href="comment-attendance.php" class=" waves-effect waves-light" >COM/ATT</a></h5>
+                                <h5 class="mt-4"><a href="comment-attendance.php" class=" waves-effect waves-light">COM/ATT</a></h5>
                                 <div class="progress mt-4" style="height: 4px;">
                                     <div class="progress-bar bg-danger" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
@@ -216,9 +212,9 @@ include 'header.php';?>
                                     <i class="mdi mdi-briefcase-check bg-success text-white"></i>
                                 </div>
                                 <div>
-                                    <h5 class="font-16"><a href="cbtscores.php" class=" waves-effect waves-light" >CBT SCORES</a></a></h5>
+                                    <h5 class="font-16"><a href="cbtscores.php" class=" waves-effect waves-light">CBT SCORES</a></a></h5>
                                 </div>
-                                <h5 class="mt-4"><a href="cbtscores.php" class=" waves-effect waves-light" >CBT SCORES</a></h5>
+                                <h5 class="mt-4"><a href="cbtscores.php" class=" waves-effect waves-light">CBT SCORES</a></h5>
                                 <div class="progress mt-4" style="height: 4px;">
                                     <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
@@ -236,7 +232,7 @@ include 'header.php';?>
                             <div class="card-body">
 
                                 <h4 class="mt-0 header-title">Add Student</h4>
-                                
+
 
 
                                 <form method="POST" id="adsmission">
@@ -434,10 +430,10 @@ include 'header.php';?>
                                                     <label class="control-label">Assign Class</label>*
                                                     <select id="assignClass" name="class[]" type="text" class="form-control" name="role" multiple>
                                                         <option value="">Select a class</option>
-                                                            <?php  foreach ($classes as $class) {
-                                                                    ?>
-                                                                    <option value="<?php echo $class['class']; ?>"><?php echo $class['class']; ?></option>
-                                                            <?php  }?>
+                                                        <?php foreach ($classes as $class) {
+                                                        ?>
+                                                            <option value="<?php echo $class['class']; ?>"><?php echo $class['class']; ?></option>
+                                                        <?php  } ?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -447,9 +443,9 @@ include 'header.php';?>
                                                     <select id="assignSub" name="subject[]" required="required" class="form-control" multiple>
                                                         <option value="">Select a subject</option>
                                                         <?php
-                                                        foreach($subjects as $subject){?>
+                                                        foreach ($subjects as $subject) { ?>
                                                             <option value="<?php print $subject['subject']; ?>"><?php print $subject['subject']; ?></option>
-                                                    <?php }?>
+                                                        <?php } ?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -457,7 +453,7 @@ include 'header.php';?>
                                         </div>
 
                                         <button type="submit" name="add-teacher" class="btn btn-primary" style="float: right;">Save</button>
-                                        <span  id="result_screen"></span>
+                                        <span id="result_screen"></span>
 
                                         </form>
                                     </div>

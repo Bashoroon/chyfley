@@ -152,16 +152,18 @@ include 'call_php_function.php';
                                         </thead>
                                         <?php
                                         if (isset($_GET['session']) and isset($_GET['term']) and isset($_GET['class'])) {
-                                            $sqlques = $conn->query("SELECT * from questionbank where session = '" . $_GET['session'] . "' and class = '" . $_GET['class'] . "' and term = '" . $_GET['term'] . "' and subject = '" . $_GET['subject'] . "'");
+                                            $sqlques = $conn->query("SELECT * from questionbank where session = '" . $_GET['session'] . "' and class = '" . $_GET['class'] . "' and term = '" . $_GET['term'] . "' and subject = '" . $_GET['subject'] . "' and exam_type='".$_GET['examType']."'");
 
                                         ?>
                                             <tbody>
 
-                                                <?php while ($ques = mysqli_fetch_array($sqlques)) {;
+                                                <?php 
+                                                 $no = 1;;
+                                                while ($ques = mysqli_fetch_array($sqlques)) {
 
                                                 ?>
-                                                    <tr id="">
-                                                        <td><?php print $ques['quesid']; ?> </td>
+                                                    <tr >
+                                                        <td><?php print $no++; ?> </td>
                                                         <td><?php print $ques['question']; ?> </td>
 
 

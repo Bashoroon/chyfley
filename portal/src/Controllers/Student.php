@@ -129,4 +129,14 @@ public function disable_student() {
   return "<span class='alert alert-danger float-right'>Student disbaled</span>";
 
 }
+
+// no of student
+public function total_no_of_student(){
+global $conn;
+  $sqlStudentNo  = $conn->query("SELECT * from studentusers ");
+  $studentNo = mysqli_num_rows($sqlStudentNo);
+
+  return $studentNo;
+
+}
 }

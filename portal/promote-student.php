@@ -39,11 +39,9 @@ include 'header.php';
                             <label class="control-label">From Session</label>
                             <select id="sessionSelect" type="text" required="required" value="" class="form-control" name="session">
                                 <option value="">Select a session</option>
-                                <?php $sqlsession = $conn->query("select * from session");
-                                while ($session = mysqli_fetch_array($sqlsession)) {; ?>
-
-                                    <option value="<?php print $session['session']; ?>"><?php print $session['session']; ?></option>
-                                <?php } ?>
+                                <?php foreach($sessions as $sessionz){?>
+                                   <option value="<?php print $sessionz['session']; ?>"><?php print $sessionz['session']; ?></option>
+                               <?php } ?>
                             </select>
 
                         </div>
@@ -55,11 +53,23 @@ include 'header.php';
                             <label class="control-label">From Class</label>
                             <select id="classSelect" type="text" required="required" a value="" class="form-control" name="class">
                                 <option value="">Select a class</option>
-                                <?php $sqlclass = $conn->query("select * from class");
-                                while ($class = mysqli_fetch_array($sqlclass)) {; ?>
-
-                                    <option value="<?php print $class['class']; ?>"><?php print $class['class']; ?></option>
-                                <?php } ?>
+                                <?php    if ($nameFound['class'] !== "") {
+                                           foreach($teacherClasses as $teacherClass) {
+                                                $classTeachers = explode(',', $teacherClass['class']);
+                                                foreach ($classTeachers  as $classTeacher) {
+                                        ?>
+                                                 <option value="<?php echo $classTeacher; ?>"><?php echo $classTeacher; ?></option>
+                                             <?php
+                                                }
+                                            }
+                                        } else {
+                                            foreach($classes as $class)  {
+                                                ?>
+                                             <option value="<?php echo $class['class']; ?>"><?php echo $class['class']; ?></option>
+                                     <?php
+                                            }
+                                        }
+                                        ?>
                             </select>
 
                         </div>
@@ -135,11 +145,9 @@ include 'header.php';
                             <label class="control-label">To Session</label>
                             <select id="sessionSelect" type="text" required="required" value="" class="form-control" name="session">
                                 <option value="">Select a session</option>
-                                <?php $sqlsession = $conn->query("select * from session");
-                                while ($session = mysqli_fetch_array($sqlsession)) {; ?>
-
-                                    <option value="<?php print $session['session']; ?>"><?php print $session['session']; ?></option>
-                                <?php } ?>
+                                <?php foreach($sessions as $sessionz){?>
+                                   <option value="<?php print $sessionz['session']; ?>"><?php print $sessionz['session']; ?></option>
+                               <?php } ?>
                             </select>
 
                         </div>
@@ -151,11 +159,23 @@ include 'header.php';
                             <label class="control-label">To Class</label>
                             <select id="classSelect" type="text" required="required" a value="" class="form-control" name="class">
                                 <option value="">Select a class</option>
-                                <?php $sqlclass = $conn->query("select * from class");
-                                while ($class = mysqli_fetch_array($sqlclass)) {; ?>
-
-                                    <option value="<?php print $class['class']; ?>"><?php print $class['class']; ?></option>
-                                <?php } ?>
+                                <?php    if ($nameFound['class'] !== "") {
+                                           foreach($teacherClasses as $teacherClass) {
+                                                $classTeachers = explode(',', $teacherClass['class']);
+                                                foreach ($classTeachers  as $classTeacher) {
+                                        ?>
+                                                 <option value="<?php echo $classTeacher; ?>"><?php echo $classTeacher; ?></option>
+                                             <?php
+                                                }
+                                            }
+                                        } else {
+                                            foreach($classes as $class)  {
+                                                ?>
+                                             <option value="<?php echo $class['class']; ?>"><?php echo $class['class']; ?></option>
+                                     <?php
+                                            }
+                                        }
+                                        ?>
                             </select>
 
                         </div>

@@ -89,11 +89,7 @@ class Record
             return "<span class='alert alert-danger float-right'> Student scores deleted</span>";
         } else {
             return "<span class='alert alert-danger float-right'> Oops! Something went wrong</span>";
-            //         echo ("<script LANGUAGE='JavaScript'>
-            //       window.alert('Oops! Something went wrong. Couldn't delete score);
-            //        window.location.href='score-sheet.php?session=$session&term=$term&class=$class&subject=$subject';
-
-            //    </script>");
+            
         }
 
         $conn->close();
